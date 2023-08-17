@@ -17,11 +17,42 @@
 </head>
 
 <body>
-  <main class="mt-5">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
     <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav w-100 justify-content-between">
+          <li class="nav-item">
+            <a class="nav-link active" href="index.html">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="categories.html">Categorías</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="sell.html">Vender</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="login.html">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="my-profile.html">Perfil</a>
+          </li>
+        </ul>
       </div>
+    </div>
+  </nav>
+  <main class="mt-5">
+    <div class="container-login">
+        <form action="" class="signin">
+          <img src="img/login.png" alt="Logo" class="login-img">
+          <h1 class="titulo-login">Inicia Sesión</h1>
+          <input type="text" name="username" id="username" class="input-text" placeholder="Username" autocomplete="off">
+          <input type="password" name="password" id="password" class="input-text" placeholder="Password" autocomplete="off">
+          <button type="submit" class="button" id="loginBtn">Login</button>
+        </form>
     </div>
   </main>
   <footer class="text-muted">

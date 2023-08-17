@@ -169,13 +169,82 @@ footer p {
   margin: 50px auto 50px auto;
 }
 
-.signin {
-  width: 100%;
-  max-width: 330px;
-  padding: 15px;
-  margin: auto;
+.main-profile {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
+.mt-5 {
+  display: flex;
+  align-items: center;
+}
+
+.container-login {
+  width: 500px;
+  margin: 0 auto;
+  padding: 10px;
+  background-color: #e4ebeb;
+  border-radius: 10px;
+  text-shadow: 1px 1px 2px grey;
+  box-shadow: 0.2px 0.3px 5px 1.5px #838585;
+}
+.login-img {
+  border-radius: 6px;
+}
+.signin {
+  width: 100%;
+  max-width: 500px;
+  padding: 15px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.titulo-login {
+  text-align: center;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-weight: bold;
+  margin: 20px;
+  color: black;
+  letter-spacing: 2px;
+}
+
+.button{
+  margin-bottom: 0;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-size: 25px;
+  letter-spacing: 2px;
+  font-weight: bold;
+  padding: 6px;
+  border-radius: 5px;
+  background-color: #e86705;
+}
+
+.button:hover{
+  background-color: black;
+  color: white;
+}
+
+.input-text {
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-weight: normal;
+  text-align: center;
+  padding: 15px;
+  background-color: #d5e0e0;
+  border-radius: 5px;
+  border: none;
+  transition: none;
+}
+.input-text::placeholder {
+  color: #252626;
+  letter-spacing: 3px;
+  font-size: 18px;
+}
+.input-text:hover {
+  border: solid #838585;
+}
 #spinner-wrapper {
   position: fixed;
   background-color: rgba(0, 0, 0, 0.5);
