@@ -234,11 +234,13 @@ footer p {
   padding: 6px;
   border-radius: 5px;
   background-color: #e86705;
+  transition: 0.45s;
 }
 
 .button:hover{
   background-color: black;
   color: white;
+  transform:scale(1.1);
 }
 
 .input-text {
@@ -249,7 +251,7 @@ footer p {
   background-color: #d5e0e0;
   border-radius: 5px;
   border: none;
-  transition: none;
+  transition: 0.45s;
 }
 .input-text::placeholder {
   color: #252626;
@@ -258,6 +260,7 @@ footer p {
 }
 .input-text:hover {
   border: solid #838585;
+  transform:scale(1.1);
 }
 #spinner-wrapper {
   position: fixed;
