@@ -157,6 +157,18 @@ footer p {
   }
 }
 
+.product-title {
+  text-align: center;
+  margin: 50px auto 50px auto;
+  font-weight: bold;
+}
+.product-subtitle {
+  text-align: center;
+  font-size: 25px;
+  font-weight: normal;
+  margin: 50px auto 50px auto;
+}
+
 .signin {
   width: 100%;
   max-width: 330px;
