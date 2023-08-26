@@ -1,4 +1,7 @@
 const URL = "https://japceibal.github.io/emercado-api/cats_products/101.json";
+const search = document.getElementById("product-search");
+const article_list = document.getElementById("lista").getElementsByClassName("container");
+const article = document.getElementsByClassName("list-group-item");
 let products = [];
 
 async function getProducts() {
@@ -14,7 +17,20 @@ async function getProducts() {
     }
 }
 
- 
+search.addEventListener("input", function(){
+    const searchTerm = search.value.toLowerCase();
+    // container hace referencia a los artículos, y list al listado
+    for (const container of article_list){
+        const title = container.querySelector('h4').textContent.toLowerCase();
+        const description = container.querySelector('p').textContent.toLowerCase();
+        if (title.includes(searchTerm) || description.includes(searchTerm)) {
+            container.style.display = 'block';
+          } else {
+            container.style.display = 'none';
+          }
+    }
+});
+
 
 
 async function showProducts(array) {
