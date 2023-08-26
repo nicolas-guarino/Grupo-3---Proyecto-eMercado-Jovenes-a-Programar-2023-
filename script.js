@@ -1,4 +1,4 @@
-const showPassword = document.getElementById("#show-password");
+const showPassword = document.getElementById("show-password");
 
 const passwordField = document.getElementById("password");
 

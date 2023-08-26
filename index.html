@@ -1,59 +1,94 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
-    <title>e-Mercado | Regístrate</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>eMercado - Todo lo que busques está aquí</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/styles.css" rel="stylesheet">
 </head>
+
 <body>
-    <div class="split-screen">
-        <div class="left">
-            <section class="copy">
-                <h1>Deja fluir tu imaginación.</h1>
-                <p>En e-mercado está todo eso que estabas buscando!</p>
-            </section>
-        </div>
-
-        <div class="right">
-            <form>
-                <section class="copy">
-                    <h2>Regístrate</h2>
-                    <div class="login-container">
-                        <p>Ya tienes una cuenta? <a href="#">
-                            <strong>Ingresa Aquí</strong></a></p>
-                    </div>
-                </section>
-                <div class="input-container name">
-                    <label for="fname">Nombre completo</label>
-                    <input id="fname" name="fname" type="text">
-                </div>
-
-                
-                <div class="input-container email">
-                    <label for="email">Correo electrónico</label> 
-                    <input id="email" name="email" placeholder="EJ: ejemplo@gmail.com" type="email">
-                </div>
-
-                
-                <div class="input-container password">
-                    <label for="fname">Contraseña</label>
-                    <input id="password" name="password" type="password" placeholder="Debe tener al menos 6 caracteres."> <i class="fa-solid fa-eye" id="show-password"></i>
-                </div>
-
-                    <button class="signup-btn" type="submit">Registrarme</button>
-
-                    <section class="copy legal">
-                        <p><span class="small">
-                            Al continuar, accedes a aceptar nuestra 
-                            <br><a href="#">Política de privacidad</a> &amp; <a href="#">Términos y condiciones</a>.</span></p>
-                    </section>
-            </form> 
-
-        </div>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
+    <div class="container">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav w-100 justify-content-between">
+          <li class="nav-item">
+            <a class="nav-link active" href="index.html">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="categories.html">Categorías</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="sell.html">Vender</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="verUsuario" href="my-profile.html"></a>
+          </li>
+        </ul>
+      </div>
     </div>
-
-    <script src="script.js"></script>
+  </nav>
+  <main>
+    <div class="jumbotron text-center"></div>
+    <div class="album py-5 bg-light">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="card mb-4 shadow-sm custom-card cursor-active" id="autos">
+              <img class="bd-placeholder-img card-img-top" src="img/cars_index.jpg"
+                alt="Imgagen representativa de la categoría 'Autos'">
+              <h3 class="m-3">Autos</h3>
+              <div class="card-body">
+                <p class="card-text">Los mejores precios en autos 0 kilómetro, de alta y media gama.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card mb-4 shadow-sm custom-card cursor-active" id="juguetes">
+              <img class="bd-placeholder-img card-img-top" src="img/toys_index.jpg"
+                alt="Imgagen representativa de la categoría 'Juguetes'">
+              <h3 class="m-3">Juguetes</h3>
+              <div class="card-body">
+                <p class="card-text">Encuentra aquí los mejores precios para niños/as de cualquier edad.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card mb-4 shadow-sm custom-card cursor-active" id="muebles">
+              <img class="bd-placeholder-img card-img-top" src="img/furniture_index.jpg"
+                alt="Imgagen representativa de la categoría 'Muebles'">
+              <h3 class="m-3">Muebles</h3>
+              <div class="card-body">
+                <p class="card-text">Muebles antiguos, nuevos y para ser armados por uno mismo.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <a class="btn btn-light btn-lg btn-block" href="categories.html">Y mucho más!</a>
+        </div>
+      </div>
+    </div>
+  </main>
+  <footer class="text-muted">
+    <div class="container">
+      <p class="float-end">
+        <a href="#">Volver arriba</a>
+      </p>
+      <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a></p>
+    </div>
+  </footer>
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="js/index.js"></script>
+  <script src="js/init.js"></script>
 </body>
+
 </html>
