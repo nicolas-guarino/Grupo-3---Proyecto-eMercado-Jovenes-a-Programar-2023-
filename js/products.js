@@ -1,6 +1,9 @@
 //Cambiamos el nombre a URL base, quitando así la referencia a solo 101.
 
 const URL_BASE = "https://japceibal.github.io/emercado-api/cats_products/";
+const search = document.getElementById("product-search");
+const article_list = document.getElementsByClassName("list-group-item");
+
 let products = [];
 
 async function getProducts() {
@@ -20,8 +23,20 @@ async function getProducts() {
     }
 }
 
+search.addEventListener("input", function(){
+   const searchTerm = search.value.toLowerCase();
+     //container hace referencia a los artículos, y list al listado
+   for (const article of article_list){
+       const title = article.querySelector('h4').textContent.toLowerCase();
+        const description = article.querySelector('p').textContent.toLowerCase();
+       if (title.includes(searchTerm) || description.includes(searchTerm)) {
+          article.style.display = 'block';
+        } else {
+           article.style.display = 'none';
+         }
+   }
+});
  
-
 
 async function showProducts(array) {
     try {
