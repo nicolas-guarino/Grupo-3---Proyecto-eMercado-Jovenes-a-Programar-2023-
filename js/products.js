@@ -1,8 +1,14 @@
-const URL = "https://japceibal.github.io/emercado-api/cats_products/101.json";
+//Cambiamos el nombre a URL base, quitando así la referencia a solo 101.
+
+const URL_BASE = "https://japceibal.github.io/emercado-api/cats_products/";
 let products = [];
 
 async function getProducts() {
     try {
+//Creamos una constante llamada catID, que tome la info desde el localStorage. Y otra constante, que modificara la URL a usar en las funciones, que tomara la categoría a la que el cliente haga click
+        const catID = localStorage.getItem('catID')
+        const URL = `${URL_BASE}${catID}.json`;
+
         let response = await fetch(URL);
         let info = await response.json();
         let array = info.products;
