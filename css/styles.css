@@ -185,10 +185,16 @@ footer p {
 }
 
 #product-search {
+  background: url(https://cdn3.iconfinder.com/data/icons/watchify-v1-0-32px/32/magnifying-glass-search-512.png) no-repeat 0px 5px;
+  background-size: 24px;
   display: block;
   margin: 0 auto;
-  width: 400px;
+  width: 500px;
   height: 35x;
+  border: transparent;
+  border-bottom: solid 2px #ff9448;
+  outline: none;
+  padding: 5px 10px 5px 30px;
 }
 
 
