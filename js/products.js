@@ -22,13 +22,16 @@ async function getProducts() {
         return [];
     }
 }
-
+//Se agrega un escuchador de eventos al elemento "searchInput" El evento "input"  se activa cuadno el contenido del campo de búsqueda cambia.
 search.addEventListener("input", function(){
+    //Se obtiene el valor actual del campo de búsqueda ("searchInput") y lo estamos pasando a minúsculas con "toLowerCase()" para asegurarnos que la comparación no sea sensible a mayúsculas y minúsculas.
    const searchTerm = search.value.toLowerCase();
-     //container hace referencia a los artículos, y list al listado
+   // Iniciamos un bucle "for...of" que va a recorrer cada elemento de "articleList". article hace referencia a los artículos, y article_list al listado.
    for (const article of article_list){
+       //Dentro del bucle, estamos buscando dentro del elemento actual de la iteración (article) un elemento <h4> y un elemento <p>. Luego, estamos obteniendo el texto contenido en estos elementos usando .textContent y lo convierto a minúsculas con .toLowerCase().Y así nos dará el título y la descripción del artículo actual en minúsculas.
        const title = article.querySelector('h4').textContent.toLowerCase();
         const description = article.querySelector('p').textContent.toLowerCase();
+       //Usamos un declaración if para verificar si el término de búsqueda (searchTerm) aparece en el título o la descripción del artículo actual. Si es así, establecemos el estilo display del artículo en "block", lo que significa que se mostrará en la página. Si no se encuentra el término de búsqueda en el título ni en la descripción, establecemos el estilo display en "none", ocultando así el artículo.
        if (title.includes(searchTerm) || description.includes(searchTerm)) {
           article.style.display = 'block';
         } else {
