@@ -14,11 +14,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 
-document.addEventListener('DOMContentLoaded', function() {
-    const usuarioLogeado = localStorage.getItem('usuarioLogeado');
-    if (!usuarioLogeado) {
-      alert('Debes iniciar sesión para acceder a esta página.');
-      window.location.href = 'login.html';
+document.addEventListener("DOMContentLoaded", () => {
+    const usuarioLogueado = localStorage.getItem("usuarioLogueado");
+    const mostrarUsuario = document.getElementById("verUsuario");
+
+    if (usuarioLogueado) {
+        mostrarUsuario.textContent = `Hola: ${usuarioLogueado}`;
+    } else {
+        alert('Debes iniciar sesión para acceder a esta página.');
+        window.location.href = 'login.html';
     }
-  });
-  
+});

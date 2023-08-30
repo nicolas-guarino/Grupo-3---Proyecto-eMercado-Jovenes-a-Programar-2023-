@@ -2,68 +2,66 @@
 <html lang="es">
 
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>eMercado - Todo lo que busques está aquí</title>
-  
-  <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
-  <link href="css/bootstrap.min.css" rel="stylesheet">
-  <link href="css/styles.css" rel="stylesheet">
-  <style>
-    body {
-      background-color: rgb(248, 249, 250);
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <title>e-Mercado | Regístrate</title>
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
-    <div class="container">
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav w-100 justify-content-between">
-          <li class="nav-item">
-            <a class="nav-link active" href="index.html">Inicio</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="categories.html">Categorías</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="sell.html">Vender</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="login.html">Login</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="my-profile.html">Perfil</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-  <main class="mt-5">
     <div class="container-login">
-        <form action="" class="signin">
-          <img src="img/login.png" alt="Logo" class="login-img">
-          <h1 class="titulo-login">Inicia Sesión</h1>
-          <input type="text" name="username" id="username" class="input-text" placeholder="Username" autocomplete="off">
-          <input type="password" name="password" id="password" class="input-text" placeholder="Password" autocomplete="off">
-          <button type="submit" class="button" id="loginBtn">Login</button>
-        </form>
+        <div class="split-screen">
+            <div class="left">
+                <section class="copy">
+                    <h1>Deja fluir tu imaginación.</h1>
+                    <p>En e-mercado está todo eso que estabas buscando!</p>
+                </section>
+            </div>
+
+            <div class="right">
+                <form>
+                    <section class="copy">
+                        <h2>Regístrate</h2>
+                        <div class="login-container">
+                            <p>Ya tienes una cuenta? <a href="#">
+                                    <strong>Ingresa Aquí</strong></a></p>
+                        </div>
+                    </section>
+                    <div class="input-container name">
+                        <label for="fname">Nombre completo</label>
+                        <input id="fname" name="fname" type="text" autocomplete="off">
+                    </div>
+
+
+                    <div class="input-container email">
+                        <label for="email">Correo electrónico</label>
+                        <input id="email" name="email" placeholder="EJ: ejemplo@gmail.com" type="email"
+                            autocomplete="off">
+                    </div>
+
+
+                    <div class="input-container password">
+                        <label for="fname">Contraseña</label>
+                        <input id="password" name="password" type="password"
+                            placeholder="Debe tener al menos 6 caracteres." autocomplete="off"> <i
+                            class="fa-solid fa-eye" id="show-password"></i>
+                    </div>
+
+                    <button class="signup-btn" type="submit" id="registerBtn">Registrarme</button>
+
+                    <section class="copy legal">
+                        <p><span class="small">
+                                Al continuar, accedes a aceptar nuestra
+                                <br><a href="#">Política de privacidad</a> &amp; <a href="#">Términos y
+                                    condiciones</a>.</span></p>
+                    </section>
+                </form>
+
+            </div>
+        </div>
     </div>
-  </main>
-  <footer class="text-muted">
-    <div class="container">
-      <p class="float-end">
-        <a href="#">Volver arriba</a>
-      </p>
-      <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a></p>
-    </div>
-  </footer>
-  <script src="js/login.js"></script>
+    <script src="js/login.js"></script>
 </body>
 
 </html>

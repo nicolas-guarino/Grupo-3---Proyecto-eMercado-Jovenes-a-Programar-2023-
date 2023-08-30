@@ -1,16 +1,27 @@
-const user = document.getElementById('username')
-const pass = document.getElementById('password') 
-const btn = document.getElementById('loginBtn')
+const registerBtn = document.getElementById('registerBtn');
+const showPassword = document.getElementById("show-password");
+const passwordField = document.getElementById("password");
 
+showPassword.addEventListener("click", function(){
+    this.classList.toggle("fa-eye-slash");
+    const type = passwordField.getAttribute("type") === "password" ? "text" : "password";
+    passwordField.setAttribute("type", type)
+})
 
-btn.addEventListener('click', function(e) {
+registerBtn.addEventListener('click', (e) => {
     e.preventDefault();
-    if (user.value === '' || pass.value === '') {
+    const username = document.getElementById('fname').value;
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+
+    if (username === '' || email === '' || password === '') {
         alert('Todos los campos deben estar llenos');
-    } else if (!user.value.includes('@')) {
-        alert('El campo de usuario debe contener "@"');
+    } else if (!email.includes('@')) {
+        alert('El campo de correo electrónico debe contener "@"');
+    } else if (password.length < 6) {
+        alert('La constraseña debe contener al menos 6 caracteres')
     } else {
-        localStorage.setItem('usuarioLogeado', user.value)
+        localStorage.setItem('usuarioLogueado', username);
         window.location.href = 'index.html';
     }
 });
