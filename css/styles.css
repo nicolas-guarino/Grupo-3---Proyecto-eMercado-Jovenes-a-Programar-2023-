@@ -242,14 +242,16 @@ footer p {
 }
 
 .left .copy {
-  color: rgb(255, 255, 255);
+  color: rgba(0, 0, 0, 0.90);
   text-align: center;
   font-smooth: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 .left p{
+  font-size: 1.15rem;
   font-weight: 400;
+  color: black;
 }
 
 .right .copy {
@@ -260,6 +262,7 @@ footer p {
 .right .copy p {
   margin: 1.5em 0;
   font-size: 0.875rem;
+  color: black;
 }
 
 .right form{
