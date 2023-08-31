@@ -41,13 +41,41 @@ search.addEventListener("input", function(){
 });
  
 
-async function showProducts(array) {
+
+async function showProducts(productsArray) {
     try {
         let array = await getProducts();
         let htmlContentToAppend = "";
 
-        for (let i = 0; i < array.length; i++) {
-            let category = array[i];
+         // select en el HTML para elegir el tipo de filtro (por defecto: sin filtro)
+         const filterSelect = document.getElementById("price-filter");
+         let filteredArray = array.slice(); // Array inicial sin filtrar
+ 
+         filterSelect.addEventListener("change", function () {
+             const selectedValue = filterSelect.value;
+             if (selectedValue === "asc") {
+                 // Ordena el array por precio de forma ascendente
+                 filteredArray = array.slice().sort((a, b) => a.cost - b.cost);
+             } else if (selectedValue === "desc") {
+                 // Ordena el array por precio de forma descendente
+                 filteredArray = array.slice().sort((a, b) => b.cost - a.cost);
+             } else {
+                 // Sin filtro, se usa el array original
+                 filteredArray = array.slice();
+             }
+
+             // Muestra productos con el nuevo array filtrado
+             renderProducts(filteredArray);
+ 
+         });
+ 
+         // Función para renderizar los productos en el HTML
+         function renderProducts(products) {
+             htmlContentToAppend = "";
+
+
+        for (let i = 0; i < products.length; i++) {
+            let category = products[i];
             htmlContentToAppend += `
             <div class="list-group-item list-group-item-action">
                 <div class="row">
@@ -66,8 +94,12 @@ async function showProducts(array) {
                 </div>
             </div>`;
         }
-        
         document.getElementById("lista").innerHTML = htmlContentToAppend;
+    }
+
+    // Muestra productos con el nuevo array filtrado
+    renderProducts(array);
+    
     } catch (error) {
         console.error("Error al mostrar los productos:", error);
     }
