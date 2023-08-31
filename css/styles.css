@@ -5,7 +5,9 @@
     --primary-yellow: #e7b511;
 }
 
-
+body {
+  margin: 0;
+}
 
 .jumbotron,
 .card-body,
