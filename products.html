@@ -42,14 +42,14 @@
   <main class="pb-5 container">
     <h2 class="product-title">Productos</h2>
     <p class="product-subtitle">Veras aqui todos los productos de la categoria Autos</p>
-       <!-- Se agregó un select para el filtrado de precios -->
+    
+       <!--Se agregaron botones para aplicar el filtrado de precios-->
+    <div class="btn-group" role="group" aria-label="Price Filter">
+      <button type="button" class="btn btn-outline-warning" id="asc">Menor a Mayor</button>
+      <button type="button" class="btn btn-outline-warning" id="desc">Mayor a Menor</button>
+      <button type="button" class="btn btn-outline-warning" id="none">Sin Filtro</button>
+  </div>
 
-    <label for="price-filter">Ordenar por precio:</label>
-    <select id="price-filter">
-      <option value="none">Sin filtro</option>
-      <option value="asc">Menor a mayor</option>
-      <option value="desc">Mayor a menor</option>
-    </select>
     <input type="search" id="product-search" placeholder="Buscar">
     <div class="container" id="lista">
     </div>
