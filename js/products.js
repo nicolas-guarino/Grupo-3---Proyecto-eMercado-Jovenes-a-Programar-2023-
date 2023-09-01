@@ -72,11 +72,6 @@ async function showProducts(productsArray) {
              renderProducts(filteredArray);
          });
 
-
-             // Muestra productos con el nuevo array filtrado
-             renderProducts(filteredArray);
- 
-         });
  
          // Función para renderizar los productos en el HTML
          function renderProducts(products) {
