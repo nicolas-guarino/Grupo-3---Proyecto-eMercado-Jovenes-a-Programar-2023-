@@ -3,14 +3,9 @@
 const URL_BASE = "https://japceibal.github.io/emercado-api/cats_products/";
 const search = document.getElementById("product-search");
 const article_list = document.getElementsByClassName("list-group-item");
-const filtrar = document.getElementById("rangeFilterCost");
-const precioMin = document.getElementById("rangeFilterCostMin");
-const precioMax = document.getElementById("rangeFilterCostMax");
-const limpiar = document.getElementById("clearRangeFilter");
-const lista = document.getElementById("lista");
 
 let products = [];
-showProducts();
+
 async function getProducts() {
     try {
 //Creamos una constante llamada catID, que tome la info desde el localStorage. Y otra constante, que modificara la URL a usar en las funciones, que tomara la categoría a la que el cliente haga click
@@ -27,13 +22,16 @@ async function getProducts() {
         return [];
     }
 }
-
+//Se agrega un escuchador de eventos al elemento "searchInput" El evento "input"  se activa cuadno el contenido del campo de búsqueda cambia.
 search.addEventListener("input", function(){
+    //Se obtiene el valor actual del campo de búsqueda ("searchInput") y lo estamos pasando a minúsculas con "toLowerCase()" para asegurarnos que la comparación no sea sensible a mayúsculas y minúsculas.
    const searchTerm = search.value.toLowerCase();
-     //container hace referencia a los artículos, y list al listado
+   // Iniciamos un bucle "for...of" que va a recorrer cada elemento de "articleList". article hace referencia a los artículos, y article_list al listado.
    for (const article of article_list){
+       //Dentro del bucle, estamos buscando dentro del elemento actual de la iteración (article) un elemento <h4> y un elemento <p>. Luego, estamos obteniendo el texto contenido en estos elementos usando .textContent y lo convierto a minúsculas con .toLowerCase().Y así nos dará el título y la descripción del artículo actual en minúsculas.
        const title = article.querySelector('h4').textContent.toLowerCase();
         const description = article.querySelector('p').textContent.toLowerCase();
+       //Usamos un declaración if para verificar si el término de búsqueda (searchTerm) aparece en el título o la descripción del artículo actual. Si es así, establecemos el estilo display del artículo en "block", lo que significa que se mostrará en la página. Si no se encuentra el término de búsqueda en el título ni en la descripción, establecemos el estilo display en "none", ocultando así el artículo.
        if (title.includes(searchTerm) || description.includes(searchTerm)) {
           article.style.display = 'block';
         } else {
@@ -41,46 +39,7 @@ search.addEventListener("input", function(){
          }
    }
 });
-
-filtrar.addEventListener("click", function(){
-    filtrarProductos();
-});
-
-limpiar.addEventListener("click", function () {
-    precioMin.value = "";
-    precioMax.value = "";
-
-    showProducts(products);
-});
-
-async function filtrarProductos(){
-        let articles = await getProducts();
-        htmlContentToAppend = "";
-        for (const article of articles){
-            if (article.cost <= precioMax.value && article.cost >= precioMin.value){
-                htmlContentToAppend += `
-                <div class="list-group-item list-group-item-action">
-                    <div class="row">
-                        <div class="col-3">
-                            <img src="` + article.image + `" alt="product image" class="img-thumbnail">
-                        </div>
-                        <div class="col">
-                            <div class="d-flex w-100 justify-content-between">
-                                <div class="mb-1">
-                                    <h4>`+ article.name + " - " + article.currency + " <span>" + article.cost +`</span></h4> 
-                                    <p> `+ article.description +`</p> 
-                                </div>
-                                <small class="text-muted">` + article.soldCount + ` vendidos</small> 
-                            </div>
-                        </div>
-                    </div>
-                </div>`;
-            }
-            lista.innerHTML = htmlContentToAppend;
-    }
-}
-
-
+ 
 
 async function showProducts(array) {
     try {
@@ -98,21 +57,21 @@ async function showProducts(array) {
                     <div class="col">
                         <div class="d-flex w-100 justify-content-between">
                             <div class="mb-1">
-                                <h4>`+ category.name + " - " + category.currency + " <span>" + category.cost +`</span></h4> 
+                                <h4>`+ category.name +`</h4> 
                                 <p> `+ category.description +`</p> 
                             </div>
-                            <small class="text-muted">` + category.soldCount + ` vendidos</small> 
+                            <small class="text-muted">` + category.soldCount + ` artículos</small> 
                         </div>
                     </div>
                 </div>
             </div>`;
         }
         
-        lista.innerHTML = htmlContentToAppend;
+        document.getElementById("lista").innerHTML = htmlContentToAppend;
     } catch (error) {
         console.error("Error al mostrar los productos:", error);
     }
 }
 
 
-
+showProducts();
