@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const mostrarUsuario = document.getElementById("verUsuario");
 
     if (usuarioLogueado) {
-        mostrarUsuario.textContent = `Hola: ${usuarioLogueado}`;
+        mostrarUsuario.innerHTML = `Hola: ${usuarioLogueado}`;
     } else {
         alert('Debes iniciar sesión para acceder a esta página.');
         window.location.href = 'login.html';
