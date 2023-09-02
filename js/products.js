@@ -82,13 +82,44 @@ async function filtrarProductos(){
 
 
 
-async function showProducts(array) {
+async function showProducts(productsArray) {
     try {
         let array = await getProducts();
         let htmlContentToAppend = "";
 
-        for (let i = 0; i < array.length; i++) {
-            let category = array[i];
+        // Botones para filtrar por precio (POR DEFECTO, ESTÁ SIN FILTRO)
+         const priceAscButton = document.getElementById("sortAsc");
+         const priceDescButton = document.getElementById("sortDesc");
+         const priceNoneButton = document.getElementById("sortByCount");
+
+         let filteredArray = array.slice(); // Array inicial sin filtrar
+ 
+         priceAscButton.addEventListener("click", function () {
+             // Ordena el array por precio de forma ascendente
+             filteredArray = array.slice().sort((a, b) => a.cost - b.cost);
+             renderProducts(filteredArray);
+         });
+
+         priceDescButton.addEventListener("click", function () {
+             // Ordena el array por precio de forma descendente
+             filteredArray = array.slice().sort((a, b) => b.cost - a.cost);
+             renderProducts(filteredArray);
+         });
+
+         priceNoneButton.addEventListener("click", function () {
+             // Sin filtro, se usa el array original
+             filteredArray = array.slice();
+             renderProducts(filteredArray);
+         });
+
+ 
+         // Función para renderizar los productos en el HTML
+         function renderProducts(products) {
+             htmlContentToAppend = "";
+
+
+        for (let i = 0; i < products.length; i++) {
+            let category = products[i];
             htmlContentToAppend += `
             <div class="list-group-item list-group-item-action">
                 <div class="row">
@@ -98,17 +129,21 @@ async function showProducts(array) {
                     <div class="col">
                         <div class="d-flex w-100 justify-content-between">
                             <div class="mb-1">
-                                <h4>`+ category.name + " - " + category.currency + " <span>" + category.cost +`</span></h4> 
+                                <h4>`+ category.name +`</h4> 
                                 <p> `+ category.description +`</p> 
                             </div>
-                            <small class="text-muted">` + category.soldCount + ` vendidos</small> 
+                            <small class="text-muted">` + category.soldCount + ` artículos</small> 
                         </div>
                     </div>
                 </div>
             </div>`;
         }
-        
-        lista.innerHTML = htmlContentToAppend;
+        document.getElementById("lista").innerHTML = htmlContentToAppend;
+    }
+
+    // Muestra productos con el nuevo array filtrado
+    renderProducts(array);
+    
     } catch (error) {
         console.error("Error al mostrar los productos:", error);
     }
