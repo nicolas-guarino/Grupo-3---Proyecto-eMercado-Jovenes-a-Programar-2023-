@@ -70,7 +70,7 @@ async function filtrarProductos(){
                                     <h4>`+ article.name + " - " + article.currency + " <span>" + article.cost +`</span></h4> 
                                     <p> `+ article.description +`</p> 
                                 </div>
-                                <small class="text-muted">` + article.soldCount + ` vendidos</small> 
+                                <small class="text-muted">` + article.soldCount + ` vendidos </small> 
                             </div>
                         </div>
                     </div>
