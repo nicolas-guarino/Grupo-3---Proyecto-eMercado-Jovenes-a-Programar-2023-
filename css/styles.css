@@ -1,8 +1,7 @@
-:root{
-    font-size: 100%;
-    font-size: 16px;
-    line-height: 1.5;
-    --primary-yellow: #e7b511;
+:root {  font-size: 100%;
+  font-size: 16px;
+  line-height: 1.5;
+  --primary-yellow: #e7b511;
 }
 
 body {
@@ -33,17 +32,17 @@ nav a {
   user-select: none;
 }
 
-.container h2{
+.container h2 {
   text-align: center;
 }
 
-.container h3{
+.container h3 {
   text-align: center;
-  color:dimgray;
+  color: dimgray;
   font-size: small;
 }
 
-#lista.container{
+#lista.container {
   padding: 3%;
 }
 
@@ -188,6 +187,7 @@ footer p {
   margin: 30px auto 10px auto;
   font-weight: bold;
 }
+
 .product-subtitle {
   text-align: center;
   font-size: 25px;
@@ -221,14 +221,17 @@ footer p {
   font-size: 2.25rem;
   font-weight: 700;
 }
+
 .container-login h2 {
   font-size: 1.5rem;
   font-weight: 700;
 }
+
 .container-login a {
   text-decoration: none;
   color: var(--primary-yellow);
 }
+
 .container-login a:hover {
   text-decoration: underline;
 }
@@ -236,9 +239,10 @@ footer p {
 .small {
   font-size: 80%;
   text-align: center;
+  font-family: sans-serif;
 }
 
-.split-screen{
+.split-screen {
   display: flex;
   flex-direction: column;
 }
@@ -247,33 +251,39 @@ footer p {
   height: 200px;
 }
 
-.left, .right{
+.left,
+.right {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .left {
-  background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.685));
-  background-image: url('../img/man-smiling.jpg');
+  background-image: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)), url('../img/man-smiling.jpg');
   background-size: cover;
 }
 
 .left .copy {
-  color: rgba(0, 0, 0, 0.90);
+  font-family: sans-serif;
+  color: white;
   text-align: center;
   font-smooth: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-.left p{
+.left p {
   font-size: 1.15rem;
   font-weight: 400;
-  color: black;
+  color: white;
+}
+
+label {
+  font-family: sans-serif;
 }
 
 .right .copy {
-  color:black;
+  font-family: sans-serif;
+  color: black;
   text-align: center;
 }
 
@@ -283,22 +293,22 @@ footer p {
   color: black;
 }
 
-.right form{
-  width:328px;
+.right form {
+  width: 328px;
 }
 
 form input[type="text"],
 form input[type="email"],
 form input[type="password"] {
-  display:block;
+  display: block;
   width: 100%;
-  box-sizing:border-box;
+  box-sizing: border-box;
   border-radius: 10px;
   border: 1px solid #c4c4c4;
   padding: 1em;
   margin-bottom: 1.25rem;
   font-size: 0.875rem;
-  
+
 }
 
 label {
@@ -312,8 +322,8 @@ label {
 }
 
 .input-container.password i {
-  position:absolute;
-  top:42px;
+  position: absolute;
+  top: 42px;
   right: 16px;
   cursor: pointer;
   color: lightslategrey;
@@ -321,13 +331,13 @@ label {
 
 
 .signup-btn {
-  display:block;
-  width:100%;
+  display: block;
+  width: 100%;
   background: whitesmoke;
-  color:var(--primary-yellow);
+  color: var(--primary-yellow);
   font-weight: 700;
   border: none;
-  padding:1rem;
+  padding: 1rem;
   border-radius: 8px;
   font-size: 0.75rem;
   text-transform: uppercase;
@@ -338,18 +348,20 @@ label {
 .signup-btn:hover {
   background: var(--primary-yellow);
   color: rgb(255, 255, 255);
-  cursor:pointer;
+  cursor: pointer;
 }
 
-@media screen and (min-width:900px){
+@media screen and (min-width:900px) {
   .split-screen {
-      flex-direction: row;
-      height: 100vh;
+    flex-direction: row;
+    height: 100vh;
   }
-  .left, .right{
-      display: flex;
-      width: 50%;
-      height: auto;
+
+  .left,
+  .right {
+    display: flex;
+    width: 50%;
+    height: auto;
   }
 }
 
@@ -378,7 +390,7 @@ a.custom-card:hover {
   color: orange;
 }
 
-.pb-5 h2{
+.pb-5 h2 {
   text-align: center;
   padding: 10px;
 }
