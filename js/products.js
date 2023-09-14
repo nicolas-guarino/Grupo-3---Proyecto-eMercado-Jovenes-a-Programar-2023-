@@ -97,7 +97,7 @@ async function showProducts(productsArray) {
         // Botones para filtrar por precio (POR DEFECTO, ESTÁ SIN FILTRO)
         const priceAscButton = document.getElementById("sortAsc");
         const priceDescButton = document.getElementById("sortDesc");
-        const priceNoneButton = document.getElementById("sortByCount");
+        const soldDescButton = document.getElementById("sortByCount");
 
         let filteredArray = array.slice(); // Array inicial sin filtrar
 
@@ -113,9 +113,9 @@ async function showProducts(productsArray) {
             renderProducts(filteredArray);
         });
 
-        priceNoneButton.addEventListener("click", function () {
+        soldDescButton.addEventListener("click", function () {
             // Sin filtro, se usa el array original
-            filteredArray = array.slice();
+            filteredArray = array.slice().sort((a, b) => b.soldCount - a.soldCount);
             renderProducts(filteredArray);
         });
 
