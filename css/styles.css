@@ -394,3 +394,26 @@ a.custom-card:hover {
   text-align: center;
   padding: 10px;
 }
+
+#new-comment{
+  margin-bottom: 16px;
+  border: 1px rgb(174, 174, 174) solid;
+  border-radius: 5px; 
+}
+
+#rates {
+  width: 100px;
+  border: 1px rgb(174, 174, 174) solid;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+#comment-submit{
+  margin-top: 16px;
+  color: white;
+  background-color: #f6a265;
+  padding: 5px 10px;
+  border: 2px transparent solid;
+  border-radius: 5px;
+}
+
