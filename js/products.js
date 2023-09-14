@@ -80,6 +80,10 @@ async function filtrarProductos() {
     }
 }
 
+function setProdID(id) {
+    localStorage.setItem("prodID", id);
+    window.location = "product-info.html"
+}
 
 
 async function showProducts(productsArray) {
@@ -121,7 +125,7 @@ async function showProducts(productsArray) {
             for (let i = 0; i < products.length; i++) {
                 let category = products[i];
                 htmlContentToAppend += `
-            <div class="list-group-item list-group-item-action">
+                <div onclick="setProdID(${category.id})" class="list-group-item list-group-item-action">
                 <div class="row">
                     <div class="col-3">
                         <img src="` + category.image + `" alt="product image" class="img-thumbnail">
