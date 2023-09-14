@@ -55,9 +55,9 @@ limpiar.addEventListener("click", function () {
     showProducts(products);
 });
 
-function generateHTML(image, name, currency, cost, desc, soldCount){
+function generateHTML(id, image, name, currency, cost, desc, soldCount){
     return `
-    <div class="list-group-item list-group-item-action">
+    <div onclick="setProdID(${id})" class="list-group-item list-group-item-action">
         <div class="row">
             <div class="col-3">
                 <img src="` + image + `" alt="product image" class="img-thumbnail">
@@ -80,7 +80,7 @@ async function filtrarProductos() {
     htmlContentToAppend = "";
     for (const article of articles) {
         if (article.cost <= precioMax.value && article.cost >= precioMin.value) {
-            htmlContentToAppend += generateHTML(article.image, article.name, article.currency, article.cost, article.description, article.soldCount);
+            htmlContentToAppend += generateHTML(article.id, article.image, article.name, article.currency, article.cost, article.description, article.soldCount);
         }
         lista.innerHTML = htmlContentToAppend;
     }
@@ -131,7 +131,7 @@ async function showProducts() {
 
             for (let i = 0; i < products.length; i++) {
                 let category = products[i];
-                htmlContentToAppend += generateHTML(category.image, category.name, category.currency, category.cost, category.description, category.soldCount);
+                htmlContentToAppend += generateHTML(category.id, category.image, category.name, category.currency, category.cost, category.description, category.soldCount);
             }
             document.getElementById("lista").innerHTML = htmlContentToAppend;
         }
