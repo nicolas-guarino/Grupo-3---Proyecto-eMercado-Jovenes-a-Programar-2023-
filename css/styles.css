@@ -394,3 +394,21 @@ a.custom-card:hover {
   text-align: center;
   padding: 10px;
 }
+
+.containerProduct {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.imgsProductFlex{
+  width: 100%;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+.imgsProduct {
+  border-radius: 10px;
+  object-fit: cover;
+  max-width: 100%;
+  width: 200px;
+}
