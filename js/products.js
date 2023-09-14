@@ -55,28 +55,32 @@ limpiar.addEventListener("click", function () {
     showProducts(products);
 });
 
+function generateHTML(image, name, currency, cost, desc, soldCount){
+    return `
+    <div class="list-group-item list-group-item-action">
+        <div class="row">
+            <div class="col-3">
+                <img src="` + image + `" alt="product image" class="img-thumbnail">
+            </div>
+            <div class="col">
+                <div class="d-flex w-100 justify-content-between">
+                    <div class="mb-1">
+                        <h4>`+ name + " - " + currency + " <span>" + cost + `</span></h4> 
+                        <p> `+ desc + `</p> 
+                    </div>
+                    <small class="text-muted">` + soldCount + ` vendidos </small> 
+                </div>
+            </div>
+        </div>
+    </div>`;
+}
+
 async function filtrarProductos() {
     let articles = await getProducts();
     htmlContentToAppend = "";
     for (const article of articles) {
         if (article.cost <= precioMax.value && article.cost >= precioMin.value) {
-            htmlContentToAppend += `
-                <div class="list-group-item list-group-item-action">
-                    <div class="row">
-                        <div class="col-3">
-                            <img src="` + article.image + `" alt="product image" class="img-thumbnail">
-                        </div>
-                        <div class="col">
-                            <div class="d-flex w-100 justify-content-between">
-                                <div class="mb-1">
-                                    <h4>`+ article.name + " - " + article.currency + " <span>" + article.cost + `</span></h4> 
-                                    <p> `+ article.description + `</p> 
-                                </div>
-                                <small class="text-muted">` + article.soldCount + ` vendidos </small> 
-                            </div>
-                        </div>
-                    </div>
-                </div>`;
+            htmlContentToAppend += generateHTML(article.image, article.name, article.currency, article.cost, article.description, article.soldCount);
         }
         lista.innerHTML = htmlContentToAppend;
     }
@@ -88,7 +92,7 @@ function setProdID(id) {
 }
 
 
-async function showProducts(productsArray) {
+async function showProducts() {
     try {
         let array = await getProducts();
         let htmlContentToAppend = "";
@@ -127,23 +131,7 @@ async function showProducts(productsArray) {
 
             for (let i = 0; i < products.length; i++) {
                 let category = products[i];
-                htmlContentToAppend += `
-                <div onclick="setProdID(${category.id})" class="list-group-item list-group-item-action">
-                <div class="row">
-                    <div class="col-3">
-                        <img src="` + category.image + `" alt="product image" class="img-thumbnail">
-                    </div>
-                    <div class="col">
-                        <div class="d-flex w-100 justify-content-between">
-                            <div class="mb-1">
-                                <h4>`+ category.name + " - " + category.currency + " <span>" + category.cost + `</span></h4> 
-                                <p> `+ category.description + `</p> 
-                            </div>
-                            <small class="text-muted">` + category.soldCount + ` vendidos</small> 
-                        </div>
-                    </div>
-                </div>
-            </div>`;
+                htmlContentToAppend += generateHTML(category.image, category.name, category.currency, category.cost, category.description, category.soldCount);
             }
             document.getElementById("lista").innerHTML = htmlContentToAppend;
         }
