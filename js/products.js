@@ -8,6 +8,7 @@ const precioMin = document.getElementById("rangeFilterCostMin");
 const precioMax = document.getElementById("rangeFilterCostMax");
 const limpiar = document.getElementById("clearRangeFilter");
 const lista = document.getElementById("lista");
+let catName = "";
 
 let products = [];
 showProducts();
@@ -19,6 +20,7 @@ async function getProducts() {
 
         let response = await fetch(URL);
         let info = await response.json();
+        catName = info.catName;
         let array = info.products;
 
         return array;
@@ -91,6 +93,7 @@ async function showProducts(productsArray) {
         let array = await getProducts();
         let htmlContentToAppend = "";
 
+
         // Botones para filtrar por precio (POR DEFECTO, ESTÁ SIN FILTRO)
         const priceAscButton = document.getElementById("sortAsc");
         const priceDescButton = document.getElementById("sortDesc");
@@ -116,11 +119,11 @@ async function showProducts(productsArray) {
             renderProducts(filteredArray);
         });
 
-
         // Función para renderizar los productos en el HTML
         function renderProducts(products) {
             htmlContentToAppend = "";
 
+            document.getElementById("cat-name").innerHTML = catName;
 
             for (let i = 0; i < products.length; i++) {
                 let category = products[i];
