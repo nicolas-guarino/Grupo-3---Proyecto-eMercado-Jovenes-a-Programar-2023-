@@ -55,28 +55,32 @@ limpiar.addEventListener("click", function () {
     showProducts(products);
 });
 
+function generateHTML(id, image, name, currency, cost, desc, soldCount){
+    return `
+    <div onclick="setProdID(${id})" class="list-group-item list-group-item-action">
+        <div class="row">
+            <div class="col-3">
+                <img src="` + image + `" alt="product image" class="img-thumbnail">
+            </div>
+            <div class="col">
+                <div class="d-flex w-100 justify-content-between">
+                    <div class="mb-1">
+                        <h4>`+ name + " - " + currency + " <span>" + cost + `</span></h4> 
+                        <p> `+ desc + `</p> 
+                    </div>
+                    <small class="text-muted">` + soldCount + ` vendidos </small> 
+                </div>
+            </div>
+        </div>
+    </div>`;
+}
+
 async function filtrarProductos() {
     let articles = await getProducts();
     htmlContentToAppend = "";
     for (const article of articles) {
         if (article.cost <= precioMax.value && article.cost >= precioMin.value) {
-            htmlContentToAppend += `
-                <div class="list-group-item list-group-item-action">
-                    <div class="row">
-                        <div class="col-3">
-                            <img src="` + article.image + `" alt="product image" class="img-thumbnail">
-                        </div>
-                        <div class="col">
-                            <div class="d-flex w-100 justify-content-between">
-                                <div class="mb-1">
-                                    <h4>`+ article.name + " - " + article.currency + " <span>" + article.cost + `</span></h4> 
-                                    <p> `+ article.description + `</p> 
-                                </div>
-                                <small class="text-muted">` + article.soldCount + ` vendidos </small> 
-                            </div>
-                        </div>
-                    </div>
-                </div>`;
+            htmlContentToAppend += generateHTML(article.id, article.image, article.name, article.currency, article.cost, article.description, article.soldCount);
         }
         lista.innerHTML = htmlContentToAppend;
     }
@@ -88,7 +92,7 @@ function setProdID(id) {
 }
 
 
-async function showProducts(productsArray) {
+async function showProducts() {
     try {
         let array = await getProducts();
         let htmlContentToAppend = "";
@@ -97,7 +101,7 @@ async function showProducts(productsArray) {
         // Botones para filtrar por precio (POR DEFECTO, ESTÁ SIN FILTRO)
         const priceAscButton = document.getElementById("sortAsc");
         const priceDescButton = document.getElementById("sortDesc");
-        const priceNoneButton = document.getElementById("sortByCount");
+        const soldDescButton = document.getElementById("sortByCount");
 
         let filteredArray = array.slice(); // Array inicial sin filtrar
 
@@ -113,9 +117,9 @@ async function showProducts(productsArray) {
             renderProducts(filteredArray);
         });
 
-        priceNoneButton.addEventListener("click", function () {
+        soldDescButton.addEventListener("click", function () {
             // Sin filtro, se usa el array original
-            filteredArray = array.slice();
+            filteredArray = array.slice().sort((a, b) => b.soldCount - a.soldCount);
             renderProducts(filteredArray);
         });
 
@@ -127,23 +131,7 @@ async function showProducts(productsArray) {
 
             for (let i = 0; i < products.length; i++) {
                 let category = products[i];
-                htmlContentToAppend += `
-                <div onclick="setProdID(${category.id})" class="list-group-item list-group-item-action">
-                <div class="row">
-                    <div class="col-3">
-                        <img src="` + category.image + `" alt="product image" class="img-thumbnail">
-                    </div>
-                    <div class="col">
-                        <div class="d-flex w-100 justify-content-between">
-                            <div class="mb-1">
-                                <h4>`+ category.name + " - " + category.currency + " <span>" + category.cost + `</span></h4> 
-                                <p> `+ category.description + `</p> 
-                            </div>
-                            <small class="text-muted">` + category.soldCount + ` vendidos</small> 
-                        </div>
-                    </div>
-                </div>
-            </div>`;
+                htmlContentToAppend += generateHTML(category.id, category.image, category.name, category.currency, category.cost, category.description, category.soldCount);
             }
             document.getElementById("lista").innerHTML = htmlContentToAppend;
         }
