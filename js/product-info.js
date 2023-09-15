@@ -70,7 +70,7 @@ submitBtn.addEventListener("click", function () {
     const commentElement = document.createElement("div");
     commentElement.className = "comment";
     commentElement.innerHTML = `
-    <p class="pComment"> ${user} ${createStarRating(rating)} </p>
+    <p class="pComments"> ${user} ${createStarRating(rating)} </p>
     <p class="pComment"> ${comment}</p>`;
 
 
@@ -93,7 +93,7 @@ async function getProductComments(prodID) {
             let comment = comments[i];
             let starRating = createStarRating(comment.score);
             productscommentsHTML += `
-                <p class="pComment">${comment.user} - ${comment.dateTime} - ${starRating}</p>
+                <p class="pComments">${comment.user} - ${comment.dateTime} - ${starRating}</p>
                 <p class="pComment">${comment.description}</p>
             `;
         }
