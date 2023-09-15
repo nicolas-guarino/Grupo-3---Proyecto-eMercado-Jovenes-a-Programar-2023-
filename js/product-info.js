@@ -15,10 +15,10 @@ async function getProductDetails(prodID) {
             <p class="pProducts">Precio: ${product.currency} ${product.cost}</p>
             <p class="pProducts">Vendidos: ${product.soldCount}</p>
             <div class="imgsProductFlex">
-            <p><img class="imgsProduct" src="${product.images[1]}"</p>
-            <p><img class="imgsProduct" src="${product.images[0]}"</p>
-            <p><img class="imgsProduct" src="${product.images[2]}"</p>
-            <p><img class="imgsProduct" src="${product.images[3]}"</p>
+            <p><img class="imgsProduct" src="${product.images[1]}"></p>
+            <p><img class="imgsProduct" src="${product.images[0]}"></p>
+            <p><img class="imgsProduct" src="${product.images[2]}"></p>
+            <p><img class="imgsProduct" src="${product.images[3]}"></p>
             <div>
         `;
 
@@ -80,7 +80,7 @@ submitBtn.addEventListener("click", function () {
     ratesSelect.selectedIndex = 0;
 });
 
-//MOSTRAR COMENTARIOS
+
 async function getProductComments(prodID) {
     try {
         const URL_COMMENT = `${URL_COMMENTS}${prodID}.json`;
@@ -93,10 +93,11 @@ async function getProductComments(prodID) {
             let comment = comments[i];
             let starRating = createStarRating(comment.score);
             productscommentsHTML += `
-                <p>${comment.user} - ${comment.dateTime} - ${starRating}</p>
-                <p>${comment.description}</p>
+                <p class="pComment">${comment.user} - ${comment.dateTime} - ${starRating}</p>
+                <p class="pComment">${comment.description}</p>
             `;
         }
+
 
         document.getElementById("container-comments").innerHTML = productscommentsHTML;
     } catch (error) {
