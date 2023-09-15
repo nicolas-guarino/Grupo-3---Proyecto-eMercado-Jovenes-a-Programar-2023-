@@ -79,3 +79,38 @@ submitBtn.addEventListener("click", function () {
     newComment.value = "";
     ratesSelect.selectedIndex = 0;
 });
+
+//MOSTRAR COMENTARIOS
+async function getProductComments(prodID) {
+    try {
+        const URL_COMMENT = `${URL_COMMENTS}${prodID}.json`;
+        let response = await fetch(URL_COMMENT);
+        let comments = await response.json();
+
+        let productscommentsHTML = "";
+
+        for (let i = 0; i < comments.length; i++) {
+            let comment = comments[i];
+            let starRating = createStarRating(comment.score);
+            productscommentsHTML += `
+                <p>${comment.user} - ${comment.dateTime} - ${starRating}</p>
+                <p>${comment.description}</p>
+            `;
+        }
+
+        document.getElementById("container-comments").innerHTML = productscommentsHTML;
+    } catch (error) {
+        console.error("Error al obtener los comentarios del producto:", error);
+        document.getElementById("container-comments").innerHTML = "<p>Error al obtener los comentarios del producto.</p>";
+    }
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    const prodID = localStorage.getItem("prodID");
+
+    if (prodID !== null) {
+        getProductComments(prodID);
+    } else {
+        document.getElementById("container-comments").innerHTML = "<p>No se ha seleccionado ningún producto.</p>";
+    }
+});
