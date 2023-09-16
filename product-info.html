@@ -43,25 +43,28 @@
 
     </div>
 
-    <div class="containerProduct" id="container-comments">
-      <h4>Comentarios</h4>
+    <div class="containerProduct">
+      <h4 class="commentsTitle">Comentarios</h4>
+      <div id="container-comments">
+        
+      </div>
     </div>
 
     <div class="containerProduct">
       <div class="prod-newComment" id="prod-newComment">
       </div>
-      <h4>Comentar</h3>
-        <p>Tu opinión:</p>
+      <h4 class="commentsTitle">Comentar</h3>
+        <p class="commentSubtitle">Tu opinión:</p>
         <textarea id="new-comment" rows="5" cols="50"></textarea>
-        <p>Tu puntuación:</p>
-        <select name="rate" id="rates">
+        <p class="commentSubtitle">Tu puntuación:</p>
+        <select class="rates" name="rate" id="rates">
           <option value="1">1</option>
           <option value="2">2</option>
           <option value="3">3</option>
           <option value="4">4</option>
           <option value="5">5</option>
-        </select><br>
-        <input type="button" id="comment-submit" value="Enviar">
+        </select>
+        <p><input type="button" id="comment-submit" value="Enviar">
     </div>
 
   </main>

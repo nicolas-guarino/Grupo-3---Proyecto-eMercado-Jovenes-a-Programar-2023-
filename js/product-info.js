@@ -10,10 +10,11 @@ async function getProductDetails(prodID) {
 
 
         let productHTML = `
-            <h2>${product.name}</h2>
-            <p class="pProducts">Descripción: ${product.description}</p>
-            <p class="pProducts">Precio: ${product.currency} ${product.cost}</p>
-            <p class="pProducts">Vendidos: ${product.soldCount}</p>
+            <h1 class="pTitle">${product.name}</h1>
+            <p class="pProducts"><span>Precio:</span> ${product.currency} ${product.cost}</p>
+            <p class="pProducts"><span>Descripción:</span> ${product.description}</p>
+            <p class="pProducts"><span>Categoria:</span> ${product.category}</p>
+            <p class="pProducts"><span>Vendidos:</span> ${product.soldCount}</p>
             <div class="imgsProductFlex">
             <p><img class="imgsProduct" src="${product.images[1]}"></p>
             <p><img class="imgsProduct" src="${product.images[0]}"></p>
@@ -66,13 +67,25 @@ submitBtn.addEventListener("click", function () {
     const comment = newComment.value;
     const rating = parseInt(ratesSelect.value);
 
+    const date = new Date(); // Obtenemos la Fecha Actual creando un nuevo objeto Date
+    const year = date.getFullYear(); // Obtenemos el Año
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // Obtenemos el mes y usamos .padStart(2, '0') para que el minimo de la cadena sea 2 digitos en caso de tener un solo digito se añade un 0 adelante.
+    const day = String(date.getDate()).padStart(2, '0'); // Obtenemos el dia
+    const hours = String(date.getHours()).padStart(2, '0'); // Obtenemos la hora
+    const minutes = String(date.getMinutes()).padStart(2, '0'); // Obtenemos los minutos
+    const seconds = String(date.getSeconds()).padStart(2, '0'); // Obtenemos los segundos
+
+    const formattedDate = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`; // Creamos el string de la fecha formateada
+
 
     const commentElement = document.createElement("div");
     commentElement.className = "comment";
     commentElement.innerHTML = `
-    <p class="pComments"> ${user} ${createStarRating(rating)} </p>
-    <p class="pComment"> ${comment}</p>`;
-
+    <div class="commentsContainer">
+        <p class="pComment"> ${user} - ${formattedDate} - ${createStarRating(rating)} </p>
+        <p class="pComment"> ${comment}</p>
+    </div>    
+    `;
 
     prodNewComment.appendChild(commentElement);
 
@@ -93,8 +106,10 @@ async function getProductComments(prodID) {
             let comment = comments[i];
             let starRating = createStarRating(comment.score);
             productscommentsHTML += `
-                <p class="pComments">${comment.user} - ${comment.dateTime} - ${starRating}</p>
+            <div class="commentsContainer">
+                <p class="pComment">${comment.user} - ${comment.dateTime} - ${starRating}</p>
                 <p class="pComment">${comment.description}</p>
+                </div>
             `;
         }
 

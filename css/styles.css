@@ -408,7 +408,10 @@ a.custom-card:hover {
 }
 
 #comment-submit{
+  font-size: 20px;
+  font-family: sans-serif;
   margin-top: 16px;
+  padding: 5px;
   color: white;
   background-color: #f6a265;
   padding: 5px 10px;
@@ -416,33 +419,59 @@ a.custom-card:hover {
   border-radius: 5px;
 }
 .containerProduct {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  width: 90%;
+  margin: 0 auto;
 }
 .imgsProductFlex{
   max-width: 100%;
-  width: 950px;
   display: flex;
-  gap: 20px;
-  justify-content: center;
-}
-.pComments{
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 20px;
-  margin-bottom: 20px; 
-  padding-bottom: 20px; 
-  margin: 0;
+  gap: 30px;
+  justify-content: start;
 }
 .pComment{
   font-family: Arial, Helvetica, sans-serif;
   font-size: 20px;
-  margin-bottom: 20px; 
-  padding-bottom: 20px; 
-  border-bottom: 1px solid #ddd; 
+  margin: 0;
 }
 .imgsProduct {
   max-width: 100%;
-  width: 200px;
+  width: 400px;
+  border-radius: 5px;
+  border: 1px solid gray;
+}
+.pTitle {
+  font-size: 45px;
+  color: black;
+  padding: 5px;
+  border-bottom: 1px solid gray;
+}
+.pProducts{
+  font-family: sans-serif;
+  font-size: 20px;
+}
+.pProducts span {
+  font-size: 25px;
+  font-weight: bold;
+  color: black;
+}
+.commentsTitle {
+  font-size: 30px;
+  font-family: sans-serif;
+  color: black;
+  margin-top: 15px;
+}
+.commentsContainer {
+  background-color: white;
+  margin: 0;
+  border: 1px solid #d1cbcb;
+  padding: 10px;
+}
+.commentSubtitle {
+  font-family: sans-serif;
+  font-size: 25px;
+  color: black;
+  margin-top: 0;
+}
+.rates{
+  font-size: 20px;
 }

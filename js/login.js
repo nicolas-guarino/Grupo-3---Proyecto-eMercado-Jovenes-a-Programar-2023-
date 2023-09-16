@@ -20,8 +20,8 @@ registerBtn.addEventListener('click', (e) => {
         alert('Todos los campos deben estar llenos');
     } else if (!email.includes('@')) {
         alert('El campo de correo electrónico debe contener "@"');
-    // } else if (password.length < 6) {
-    //     alert('La constraseña debe contener al menos 6 caracteres')
+    } else if (password.length < 6) {
+        alert('La constraseña debe contener al menos 6 caracteres')
     } else {
         localStorage.setItem('usuarioLogueado', username);
         window.location.href = 'index.html';
