@@ -112,7 +112,7 @@ async function getProductComments(prodID) {
                 </div>
             `;
         }
-
+        
 
         document.getElementById("container-comments").innerHTML = productscommentsHTML;
     } catch (error) {

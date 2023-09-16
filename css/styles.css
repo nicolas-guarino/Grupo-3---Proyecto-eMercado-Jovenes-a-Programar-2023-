@@ -396,6 +396,9 @@ a.custom-card:hover {
 }
 #new-comment{
   margin-bottom: 16px;
+  font-family: sans-serif;
+  font-size: 20px;
+  padding: 10px;
   border: 1px rgb(174, 174, 174) solid;
   border-radius: 5px; 
 }
