@@ -13,17 +13,15 @@ registerBtn.addEventListener('click', (e) => {
     const username = document.getElementById('fname').value;
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
-     const recaptchaResponse = grecaptcha.getResponse();
+    // const recaptchaResponse = grecaptcha.getResponse();
 
 
     if (username === '' || email === '' || password === '') {
         alert('Todos los campos deben estar llenos');
     } else if (!email.includes('@')) {
         alert('El campo de correo electrónico debe contener "@"');
-    } else if (password.length < 6) {
-        alert('La constraseña debe contener al menos 6 caracteres')
-         } else if (!recaptchaResponse) {
-        alert('Por favor, complete la verificación "No soy un robot"');
+    // } else if (password.length < 6) {
+    //     alert('La constraseña debe contener al menos 6 caracteres')
     } else {
         localStorage.setItem('usuarioLogueado', username);
         window.location.href = 'index.html';
