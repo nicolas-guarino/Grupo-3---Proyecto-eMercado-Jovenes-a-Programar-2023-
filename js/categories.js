@@ -140,4 +140,13 @@ document.addEventListener("DOMContentLoaded", function(e){
 
         showCategoriesList();
     });
+
+        const loggedUser = localStorage.getItem("loggedUser");
+    
+        if (loggedUser) {
+            userDisplayed.innerHTML = `Hola: ${loggedUser}`;
+        } else {
+            alert('Debes iniciar sesión para acceder a esta página.');
+            window.location.href = 'login.html';
+        }
 });

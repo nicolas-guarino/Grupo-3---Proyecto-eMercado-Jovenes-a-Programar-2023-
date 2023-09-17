@@ -24,11 +24,11 @@ async function getProductDetails(prodID) {
             </div>
         `;
 
-        document.getElementById("contenedor-info").innerHTML = productHTML;
+        document.getElementById("containerInfo").innerHTML = productHTML;
     } catch (error) {
         console.error("Error al obtener los detalles del producto:", error);
 
-        document.getElementById("contenedor-info").innerHTML = "<p>Error al obtener los detalles del producto.</p>";
+        document.getElementById("containerInfo").innerHTML = "<p>Error al obtener los detalles del producto.</p>";
     }
 }
 
@@ -130,4 +130,14 @@ document.addEventListener("DOMContentLoaded", function () {
     } else {
         document.getElementById("container-comments").innerHTML = "<p>No se ha seleccionado ningún producto.</p>";
     }
+
+        const loggedUser = localStorage.getItem("loggedUser");
+        const displayUser = document.getElementById("userDisplayed");
+    
+        if (loggedUser) {
+            userDisplayed.innerHTML = `Hola: ${loggedUser}`;
+        } else {
+            alert('Debes iniciar sesión para acceder a esta página.');
+            window.location.href = 'login.html';
+        }
 });

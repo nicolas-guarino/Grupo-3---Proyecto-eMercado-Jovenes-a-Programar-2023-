@@ -15,11 +15,11 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 document.addEventListener("DOMContentLoaded", () => {
-    const usuarioLogueado = localStorage.getItem("usuarioLogueado");
-    const mostrarUsuario = document.getElementById("verUsuario");
+    const loggedUser = localStorage.getItem("loggedUser");
+    const displayUser = document.getElementById("userDisplayed");
 
-    if (usuarioLogueado) {
-        mostrarUsuario.innerHTML = `Hola: ${usuarioLogueado}`;
+    if (loggedUser) {
+        userDisplayed.innerHTML = `Hola: ${loggedUser}`;
     } else {
         alert('Debes iniciar sesión para acceder a esta página.');
         window.location.href = 'login.html';

@@ -23,7 +23,7 @@ registerBtn.addEventListener('click', (e) => {
     } else if (password.length < 6) {
         alert('La constraseña debe contener al menos 6 caracteres')
     } else {
-        localStorage.setItem('usuarioLogueado', username);
+        localStorage.setItem('loggedUser', username);
         window.location.href = 'index.html';
     }
 });
