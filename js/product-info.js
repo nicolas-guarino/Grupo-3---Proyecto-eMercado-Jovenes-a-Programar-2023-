@@ -20,7 +20,7 @@ async function getProductDetails(prodID) {
             <p><img class="imgsProduct" src="${product.images[0]}"></p>
             <p><img class="imgsProduct" src="${product.images[2]}"></p>
             <p><img class="imgsProduct" src="${product.images[3]}"></p>
-            <div>
+            </div>
         `;
 
         document.getElementById("contenedor-info").innerHTML = productHTML;
