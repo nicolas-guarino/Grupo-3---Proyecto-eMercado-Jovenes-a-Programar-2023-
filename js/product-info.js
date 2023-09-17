@@ -2,6 +2,7 @@ const URL_BASE = "https://japceibal.github.io/emercado-api/products/"
 const URL_COMMENTS = "https://japceibal.github.io/emercado-api/products_comments/";
 
 const user = localStorage.getItem('usuarioLogueado')
+
 async function getProductDetails(prodID) {
     try {
         const URL = `${URL_BASE}${prodID}.json`;
