@@ -39,3 +39,22 @@ let getJSONData = function(url){
         return result;
     });
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+  const loggedUser = localStorage.getItem("loggedUser");
+  const displayUser = document.getElementById("userDisplayed");
+  const logoutBtn = document.getElementById('logoutBtn');
+
+
+  if (loggedUser) {
+      displayUser.innerHTML = `User: ${loggedUser}`;
+  } else {
+      alert('Debes iniciar sesión para acceder a esta página.');
+      window.location.href = 'login.html';
+  }
+
+  logoutBtn.addEventListener('click', function () {
+      localStorage.removeItem('loggedUser');
+      window.location.href = 'index.html';
+  });
+});

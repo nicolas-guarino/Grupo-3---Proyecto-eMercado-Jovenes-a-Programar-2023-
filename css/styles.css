@@ -478,3 +478,7 @@ a.custom-card:hover {
 .rates{
   font-size: 20px;
 }
+
+.dropdown-menu-dark {
+  background-color: #212529;
+}

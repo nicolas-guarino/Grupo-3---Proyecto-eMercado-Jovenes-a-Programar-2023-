@@ -13,7 +13,6 @@ registerBtn.addEventListener('click', (e) => {
     const username = document.getElementById('fname').value;
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
-    // const recaptchaResponse = grecaptcha.getResponse();
 
 
     if (username === '' || email === '' || password === '') {
