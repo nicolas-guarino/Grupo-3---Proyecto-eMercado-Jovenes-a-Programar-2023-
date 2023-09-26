@@ -1,6 +1,9 @@
 const URL_BASE = "https://japceibal.github.io/emercado-api/products/"
 const URL_COMMENTS = "https://japceibal.github.io/emercado-api/products_comments/";
-
+const newComment = document.getElementById("new-comment");
+const ratesSelect = document.getElementById("rates");
+const submitBtn = document.getElementById("comment-submit");
+const prodNewComment = document.getElementById("prod-newComment");
 const user = localStorage.getItem('loggedUser')
 
 async function getProductDetails(prodID) {
@@ -32,23 +35,6 @@ async function getProductDetails(prodID) {
     }
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-    const prodID = localStorage.getItem("prodID");
-
-
-    if (prodID !== null) {
-        getProductDetails(prodID);
-    } else {
-        document.getElementById("contenedor-info").innerHTML = "<p>No se ha seleccionado ningún producto.</p>";
-    }
-});
-
-
-
-const newComment = document.getElementById("new-comment");
-const ratesSelect = document.getElementById("rates");
-const submitBtn = document.getElementById("comment-submit");
-const prodNewComment = document.getElementById("prod-newComment");
 
 function createStarRating(rating) {
     const maxRating = 5;
@@ -61,6 +47,11 @@ function createStarRating(rating) {
         }
     }
     return starHTML;
+}
+
+function redirectRelProd(prodID){
+    localStorage.setItem("prodID", prodID);
+    window.location = "product-info.html"
 }
 
 submitBtn.addEventListener("click", function () {
@@ -122,9 +113,37 @@ async function getProductComments(prodID) {
     }
 }
 
+async function getRelatedProducts(catID, prodID){
+    try {
+        const URL = `https://japceibal.github.io/emercado-api/cats_products/${catID}.json`;
+
+        let response = await fetch(URL);
+        let info = await response.json();
+        let relprods = info.products;
+        let relProdsHTML = "";
+        for (let i = 0; i < relprods.length; i++) {
+            if (relprods[i].id != prodID){
+                console.log(relprods[i].id);
+                relProdsHTML += ` <div id="relProd" onclick="redirectRelProd(${relprods[i].id})"><p><img id="imgRelProds" src="${relprods[i].image}"> ${relprods[i].name}</p></div>`
+            }
+           
+        }
+
+        document.getElementById("relatedContainer").innerHTML = relProdsHTML;
+    } catch (error) {
+        console.error("Error al obtener los productos:", error);
+        return [];
+    }
+}
+
+
 document.addEventListener("DOMContentLoaded", function () {
     const prodID = localStorage.getItem("prodID");
+    const catID = localStorage.getItem("catID");
 
+    getProductDetails(prodID);
+    getRelatedProducts(catID, prodID);
+    
     if (prodID !== null) {
         getProductComments(prodID);
     } else {
