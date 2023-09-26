@@ -479,6 +479,7 @@ a.custom-card:hover {
   font-size: 20px;
 }
 
+
 #imgRelProds {
   max-width: 100%;
 }
@@ -494,4 +495,8 @@ a.custom-card:hover {
   display: flex;
   justify-content: start;
   gap: 30px;
+
+.dropdown-menu-dark {
+  background-color: #212529;
+
 }

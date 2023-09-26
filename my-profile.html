@@ -44,16 +44,25 @@
           <li class="nav-item">
             <a class="nav-link" href="sell.html">Vender</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" id="userDisplayed" href="my-profile.html"></a>
-          </li>
+          <div class="dropdown">
+            <a class="nav-link dropdown-toggle nav-item" href="#" role="button" id="userDisplayed"
+              data-bs-toggle="dropdown" aria-expanded="false">
+            </a>
+
+            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+              <li><a class="dropdown-item" href="cart.html">Carrito</a></li>
+              <li><a class="dropdown-item" href="my-profile.html">Perfil</a></li>
+              <li><button id="logoutBtn" class="button dropdown-item">Cerrar Sesión</button></li>
+            </ul>
+          </div>
         </ul>
       </div>
     </div>
   </nav>
-  <main class="main-profile">
-    <div class="container-profile">
-      <button id="logoutBtn" class="button">Cerrar Sesión</button>
+  <main>
+    <div class="container">
+      <div class="alert alert-danger text-center" role="alert">
+        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
       </div>
     </div>
   </main>
