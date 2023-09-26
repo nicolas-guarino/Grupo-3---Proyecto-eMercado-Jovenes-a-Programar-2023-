@@ -116,7 +116,7 @@ async function getRelatedProducts(catID){
         let info = await response.json();
         let relprods = info.products;
 
-        let relProdsHTML = "";
+        let relProdsHTML = "<h4>Productos relacionados</h4>";
 
         for (let i = 0; i < relprods.length; i++) {
             relProdsHTML += ` <img class="imgRelProds" src="${relprods[i].image}"> <p>${relprods[i].name}</p>`
