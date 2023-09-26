@@ -140,9 +140,10 @@ async function getRelatedProducts(catID, prodID){
 document.addEventListener("DOMContentLoaded", function () {
     const prodID = localStorage.getItem("prodID");
     const catID = localStorage.getItem("catID");
-    getRelatedProducts(catID, prodID);
-    getProductDetails(prodID);
 
+    getProductDetails(prodID);
+    getRelatedProducts(catID, prodID);
+    
     if (prodID !== null) {
         getProductComments(prodID);
     } else {
