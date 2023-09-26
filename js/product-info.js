@@ -49,6 +49,11 @@ function createStarRating(rating) {
     return starHTML;
 }
 
+function redirectRelProd(prodID){
+    localStorage.setItem("prodID", prodID);
+    window.location = "product-info.html"
+}
+
 submitBtn.addEventListener("click", function () {
 
     const comment = newComment.value;
@@ -108,18 +113,20 @@ async function getProductComments(prodID) {
     }
 }
 
-async function getRelatedProducts(catID){
+async function getRelatedProducts(catID, prodID){
     try {
         const URL = `https://japceibal.github.io/emercado-api/cats_products/${catID}.json`;
 
         let response = await fetch(URL);
         let info = await response.json();
         let relprods = info.products;
-
-        let relProdsHTML = "<h4>Productos relacionados</h4>";
-
+        let relProdsHTML = "";
         for (let i = 0; i < relprods.length; i++) {
-            relProdsHTML += ` <div id="relProd"><p><img id="imgRelProds" src="${relprods[i].image}"> ${relprods[i].name}</p></div>`
+            if (relprods[i].id != prodID){
+                console.log(relprods[i].id);
+                relProdsHTML += ` <div id="relProd" onclick="redirectRelProd(${relprods[i].id})"><p><img id="imgRelProds" src="${relprods[i].image}"> ${relprods[i].name}</p></div>`
+            }
+           
         }
 
         document.getElementById("relatedContainer").innerHTML = relProdsHTML;
@@ -133,7 +140,7 @@ async function getRelatedProducts(catID){
 document.addEventListener("DOMContentLoaded", function () {
     const prodID = localStorage.getItem("prodID");
     const catID = localStorage.getItem("catID");
-    getRelatedProducts(catID);
+    getRelatedProducts(catID, prodID);
     getProductDetails(prodID);
 
     if (prodID !== null) {
