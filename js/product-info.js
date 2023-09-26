@@ -119,7 +119,7 @@ async function getRelatedProducts(catID){
         let relProdsHTML = "<h4>Productos relacionados</h4>";
 
         for (let i = 0; i < relprods.length; i++) {
-            relProdsHTML += ` <img class="imgRelProds" src="${relprods[i].image}"> <p>${relprods[i].name}</p>`
+            relProdsHTML += ` <div id="relProd"><p><img id="imgRelProds" src="${relprods[i].image}"> ${relprods[i].name}</p></div>`
         }
 
         document.getElementById("relatedContainer").innerHTML = relProdsHTML;
@@ -134,6 +134,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const prodID = localStorage.getItem("prodID");
     const catID = localStorage.getItem("catID");
     getRelatedProducts(catID);
+    getProductDetails(prodID);
 
     if (prodID !== null) {
         getProductComments(prodID);

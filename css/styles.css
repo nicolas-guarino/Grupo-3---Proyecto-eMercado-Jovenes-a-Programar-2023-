@@ -478,3 +478,20 @@ a.custom-card:hover {
 .rates{
   font-size: 20px;
 }
+
+#imgRelProds {
+  max-width: 100%;
+}
+
+#relProd{
+  width: 200px;
+  height: 150px;
+  border: 1px solid rgb(172, 172, 172);
+  text-align: center;
+}
+
+#relatedContainer{
+  display: flex;
+  justify-content: start;
+  gap: 30px;
+}
