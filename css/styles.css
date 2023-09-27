@@ -483,6 +483,48 @@ a.custom-card:hover {
   background-color: #212529;
 }
 
+input[type="checkbox"] {
+  position: relative;
+  width: 40px;
+  height: 20px;
+  background-color: #434343;
+  appearance: none;
+  outline: none;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: 0.5s ease;
+}
+
+input[type="checkbox"]:checked {
+  background-color: orange;
+}
+
+input[type="checkbox"]::before {
+  content: "";
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  background-color: #f2f2f2;
+  border-radius: 50%;
+  top: 2px;
+  left: 2px;
+  transition: 0.7s ease;
+}
+
+input[type="checkbox"]:checked::before {
+  transform: translateX(20px);
+}
+
+.dark {
+  background-color: #252525;
+  color: #f2f2f2;
+}
+
+.night {
+  display: flex;
+  justify-content: space-between;
+  align-content: flex-start;
+
 #imgRelProds {
   max-width: 100%;
 }
@@ -502,5 +544,4 @@ a.custom-card:hover {
 
 .dropdown-menu-dark {
   background-color: #212529;
-
 }
