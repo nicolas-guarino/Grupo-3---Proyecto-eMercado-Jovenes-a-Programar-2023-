@@ -483,46 +483,6 @@ a.custom-card:hover {
   background-color: #212529;
 }
 
-.switch {
-  width: 60px;
-  height: 30px;
-  padding: 0 5px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  position: relative;
-  border-radius: 100px;
-  border: none;
-  background: orange;
-}
-
-.switch i {
-  font-size: 1rem;
-  color: #fff;
-}
-
-.spanSwitch::before {
-  content: "";
-  position: absolute;
-  height: 25px;
-  width: 25px;
-  border-radius: 50%;
-  background: #fff;
-  left: 0;
-  right: unset;
-  display: block;
-}
-
-.switch.active {
-  background: rgb(12, 12, 76);
-  color: #000;
-}
-
-.spanSwitch.active {
-  right: 0;
-  left: unset;
-}
-
 input[type="checkbox"] {
   position: relative;
   width: 40px;
@@ -564,4 +524,24 @@ input[type="checkbox"]:checked::before {
   display: flex;
   justify-content: space-between;
   align-content: flex-start;
+
+#imgRelProds {
+  max-width: 100%;
+}
+
+#relProd{
+  width: 200px;
+  height: 150px;
+  border: 1px solid rgb(172, 172, 172);
+  text-align: center;
+}
+
+#relatedContainer{
+  display: flex;
+  justify-content: start;
+  gap: 30px;
+}
+
+.dropdown-menu-dark {
+  background-color: #212529;
 }
