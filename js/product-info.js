@@ -20,12 +20,23 @@ async function getProductDetails(prodID) {
             <p class="pProducts"><span>Descripción:</span> ${product.description}</p>
             <p class="pProducts"><span>Categoria:</span> ${product.category}</p>
             <p class="pProducts"><span>Vendidos:</span> ${product.soldCount}</p>
-            <div class="imgsProductFlex">
-            <p><img class="imgsProduct" src="${product.images[1]}"></p>
-            <p><img class="imgsProduct" src="${product.images[0]}"></p>
-            <p><img class="imgsProduct" src="${product.images[2]}"></p>
-            <p><img class="imgsProduct" src="${product.images[3]}"></p>
-            </div>
+            
+            <div id="carouselExampleControls" class="carousel carousel-dark slide" data-bs-ride="carousel">
+                <div class="carousel-inner imgsProductFlex">
+                    <div class="carousel-item active">
+                        <img class="d-block imgsProduct" src="${product.images[0]}" alt="imgsProduct" >
+                    </div>
+                    <div class="carousel-item">
+                        <img class="d-block imgsProduct" src="${product.images[1]}" alt="imgsProduct" >
+                    </div>
+                    <div class="carousel-item">
+                        <img class="d-block imgsProduct" src="${product.images[2]}" alt="imgsProduct" >
+                    </div>
+                    
+                    <div class="carousel-item">
+                        <img class="d-block imgsProduct" src="${product.images[3]}" alt="imgsProduct" >
+                    </div>
+                </div>
         `;
 
         document.getElementById("containerInfo").innerHTML = productHTML;
