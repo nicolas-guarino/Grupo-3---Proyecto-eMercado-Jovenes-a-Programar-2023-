@@ -16,21 +16,35 @@ async function getProductDetails(prodID) {
             <p class="pProducts"><span>Descripción:</span> ${product.description}</p>
             <p class="pProducts"><span>Categoria:</span> ${product.category}</p>
             <p class="pProducts"><span>Vendidos:</span> ${product.soldCount}</p>
-            <div class="imgsProductFlex">
-            <p><img class="imgsProduct" src="${product.images[1]}"></p>
-            <p><img class="imgsProduct" src="${product.images[0]}"></p>
-            <p><img class="imgsProduct" src="${product.images[2]}"></p>
-            <p><img class="imgsProduct" src="${product.images[3]}"></p>
+
+
+            <div id="carouselExampleControls" class="carousel carousel-dark slide" data-bs-ride="carousel">
+                <div class="carousel-inner imgsProductFlex">
+                    <div class="carousel-item active">
+                        <img class="d-block imgsProduct" src="${product.images[0]}" alt="imgsProduct" >
+                    </div>
+                    <div class="carousel-item">
+                        <img class="d-block imgsProduct" src="${product.images[1]}" alt="imgsProduct" >
+                    </div>
+                    <div class="carousel-item">
+                        <img class="d-block imgsProduct" src="${product.images[2]}" alt="imgsProduct" >
+                    </div>
+                    
+                    <div class="carousel-item">
+                        <img class="d-block imgsProduct" src="${product.images[3]}" alt="imgsProduct" >
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
             </div>
-        `;
-// Activa el carrusel de Bootstrap
-document.addEventListener('DOMContentLoaded', function () {
-    var myCarousel = new bootstrap.Carousel(document.querySelector('#carouselSlides'), {
-      interval: 3000, // Cambia el intervalo de desplazamiento en milisegundos
-      pause: 'hover' // Pausa el carrusel al pasar el mouse arriba
-    });
-  });
-  
+        ` ;
+
         document.getElementById("containerInfo").innerHTML = productHTML;
     } catch (error) {
         console.error("Error al obtener los detalles del producto:", error);
@@ -120,7 +134,7 @@ async function getProductComments(prodID) {
                 </div>
             `;
         }
-        
+
 
         document.getElementById("container-comments").innerHTML = productscommentsHTML;
     } catch (error) {
@@ -137,14 +151,4 @@ document.addEventListener("DOMContentLoaded", function () {
     } else {
         document.getElementById("container-comments").innerHTML = "<p>No se ha seleccionado ningún producto.</p>";
     }
-
-        const loggedUser = localStorage.getItem("loggedUser");
-        const displayUser = document.getElementById("userDisplayed");
-    
-        if (loggedUser) {
-            userDisplayed.innerHTML = `Hola: ${loggedUser}`;
-        } else {
-            alert('Debes iniciar sesión para acceder a esta página.');
-            window.location.href = 'login.html';
-        }
 });
