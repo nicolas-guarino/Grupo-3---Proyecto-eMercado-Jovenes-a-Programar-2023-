@@ -1,7 +1,9 @@
 let main_body = document.body;
+let checkbox = document.getElementById("checkitem");
 
 function enableDarkMode() {
    main_body.classList.toggle("dark");
+   localStorage.setItem("checkbox-status", checkbox.checked);
 
    //En caso de querer confirmar si el checkbox está "checked"
    if (document.getElementById("checkitem").checked) {
@@ -16,6 +18,14 @@ function enableDarkMode() {
     } else {
      localStorage.setItem("dark-mode", "false");
     }
+}
+
+// Obtenemos el estado del checkbox guardado en localStorage
+const checkboxStatus = localStorage.getItem("checkbox-status");
+if (checkboxStatus === "true") {
+  checkbox.checked = true;
+} else {
+  checkbox.checked = false;
 }
 
 //Obtener el modo actual
