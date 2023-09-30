@@ -441,6 +441,7 @@ a.custom-card:hover {
   width: 400px;
   border-radius: 5px;
   border: 1px solid gray;
+  margin: 15px auto;
 }
 .pTitle {
   font-size: 45px;
@@ -524,7 +525,7 @@ input[type="checkbox"]:checked::before {
   display: flex;
   justify-content: space-between;
   align-content: flex-start;
-
+}
 #imgRelProds {
   max-width: 100%;
 }
