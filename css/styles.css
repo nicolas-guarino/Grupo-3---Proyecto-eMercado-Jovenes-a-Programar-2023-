@@ -438,7 +438,8 @@ a.custom-card:hover {
 }
 .imgsProduct {
   max-width: 100%;
-  width: 400px;
+  width: 640px;
+  height: 360px;
   border-radius: 5px;
   border: 1px solid gray;
   margin: 15px auto;
