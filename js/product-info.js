@@ -5,14 +5,13 @@ const ratesSelect = document.getElementById("rates");
 const submitBtn = document.getElementById("comment-submit");
 const prodNewComment = document.getElementById("prod-newComment");
 const user = localStorage.getItem('loggedUser');
-let relProds = [];
 
 async function getProductDetails(prodID) {
     try {
         const URL = `${URL_BASE}${prodID}.json`;
         let response = await fetch(URL);
         let product = await response.json();
-        relProds = product.relatedProducts;
+        let relProds = product.relatedProducts;
 
         let productHTML = `
             <h1 class="pTitle">${product.name}</h1>
@@ -49,7 +48,7 @@ async function getProductDetails(prodID) {
         `;
 
         document.getElementById("containerInfo").innerHTML = productHTML;
-        getRelatedProducts();
+        getRelatedProducts(relProds);
     } catch (error) {
         console.error("Error al obtener los detalles del producto:", error);
 
@@ -76,7 +75,7 @@ function redirectRelProd(prodID){
     window.location = "product-info.html"
 }
 
-function getRelatedProducts(){
+function getRelatedProducts(relProds){
     let relProdsHTML = "";
     for (let i = 0; i < relProds.length; i++) {
             relProdsHTML += ` <div id="relProd" onclick="redirectRelProd(${relProds[i].id})"><p><img id="imgRelProds" src="${relProds[i].image}"> ${relProds[i].name}</p></div>`
