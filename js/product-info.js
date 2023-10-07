@@ -13,6 +13,20 @@ async function getProductDetails(prodID) {
         let product = await response.json();
         let relProds = product.relatedProducts;
 
+        // Array con las imagenes
+        const productImages = product.images;
+
+        let carouselImages = '';
+
+        // Bucle que recorre el array y genera el codigo html para las imagenes del carousel, se le coloca la clase 'active' al elemento 0 del array
+        for (let i = 0; i < productImages.length; i++) {
+            carouselImages += `
+                <div class="carousel-item ${i === 0 ? 'active' : ''}">
+                    <img class="d-block imgsProduct" src="${productImages[i]}" alt="imgsProduct">
+                </div>
+            `;
+        }
+
         let productHTML = `
             <h1 class="pTitle">${product.name}</h1>
             <p class="pProducts"><span>Precio:</span> ${product.currency} ${product.cost}</p>
@@ -22,19 +36,7 @@ async function getProductDetails(prodID) {
             
             <div id="carouselExampleControls" class="carousel carousel-dark slide" data-bs-ride="carousel">
                 <div class="carousel-inner imgsProductFlex">
-                    <div class="carousel-item active">
-                        <img class="d-block imgsProduct" src="${product.images[0]}" alt="imgsProduct" >
-                    </div>
-                    <div class="carousel-item">
-                        <img class="d-block imgsProduct" src="${product.images[1]}" alt="imgsProduct" >
-                    </div>
-                    <div class="carousel-item">
-                        <img class="d-block imgsProduct" src="${product.images[2]}" alt="imgsProduct" >
-                    </div>
-                    
-                    <div class="carousel-item">
-                        <img class="d-block imgsProduct" src="${product.images[3]}" alt="imgsProduct" >
-                    </div>
+                    ${carouselImages}
                 </div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
