@@ -564,19 +564,19 @@ input[type="checkbox"]:checked::before {
 #containerCart{
   display: flex;
   justify-content: center;
-  align-items: center;
-  flex-direction: column;
+  font-family: 'Verdana', serif !important;
+
 }
 #containerCartList{
   padding-top: 30px;
-  width: 300px;
-  margin: 0 auto; 
-
+  width: 50%;
+  margin: 0 auto;
 }
 
 
 #cartList{
-  width: 250%;
+  width: 100%;
+  font-family: 'Verdana', serif !important;
 }
 
 #cartList th{
