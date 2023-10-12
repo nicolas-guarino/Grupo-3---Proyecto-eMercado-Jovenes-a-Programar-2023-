@@ -547,3 +547,40 @@ input[type="checkbox"]:checked::before {
 .dropdown-menu-dark {
   background-color: #212529;
 }
+
+#containerCart{
+  display: flex;
+  justify-content: center;
+  font-family: 'Verdana', serif !important;
+
+}
+#containerCartList{
+  padding-top: 30px;
+  width: 50%;
+  margin: 0 auto;
+}
+
+
+#cartList{
+  width: 100%;
+  font-family: 'Verdana', serif !important;
+}
+
+#cartList th{
+  border-bottom: 1px solid black;
+}
+
+td{
+  border-style: none;
+  padding-top: 10px;
+  padding-bottom: 20px;
+}
+.cartImg{
+  width: 90px;
+  border-radius: 2px;
+
+}
+
+.cartCant{
+  width: 40px;
+}
