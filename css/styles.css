@@ -536,7 +536,6 @@ input[type="checkbox"]:checked::before {
 
 /* Productos relacionados*/
 
->>>>>>> Stashed changes
 #imgRelProds {
   max-width: 100%;
 }
@@ -552,31 +551,35 @@ input[type="checkbox"]:checked::before {
   display: flex;
   justify-content: start;
   gap: 30px;
+}
 
-<<<<<<< Updated upstream
 .dropdown-menu-dark {
   background-color: #212529;
 
 }
-=======
+
 
 /* Carrito */
 
 #containerCart{
-  margin-left: auto;
-  margin-right: auto;
-  width: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+#containerCartList{
+  padding-top: 30px;
+  width: 300px;
+  margin: 0 auto; 
+
 }
 
+
 #cartList{
-  text-align: center;
-  width: 60%;
-  margin-left: auto;
-  margin-right: auto;
+  width: 250%;
 }
 
 #cartList th{
-  border-spacing: 0px;
   border-bottom: 1px solid black;
 }
 
@@ -587,12 +590,11 @@ td{
 }
 .cartImg{
   width: 90px;
-  border-radius: 1px;
-  border-style: none;
+  border-radius: 2px;
+
 }
 
 .cartCant{
   width: 40px;
-
 }
->>>>>>> Stashed changes
+

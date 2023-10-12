@@ -38,6 +38,9 @@
               <li><a class="dropdown-item" href="cart.html">Carrito</a></li>
               <li><a class="dropdown-item" href="my-profile.html">Perfil</a></li>
               <li><button id="logoutBtn" class="button dropdown-item">Cerrar Sesión</button></li>
+              <li>
+                <label class="night"><input id="checkitem" type="checkbox" onclick="enableDarkMode()"/>Modo nocturno</label>
+              </li>
             </ul>
           </div>
         </ul>
@@ -45,10 +48,10 @@
     </div>
   </nav>
   <main>
-    <div class="container">
+    <div id="containerCart">
       <h2>Carrito de compras</h4>
 
-      <div id="containerCart">
+      <div id="containerCartList">
               <h4>Artículos a comprar</h2>
         <table id="cartList" >
           <tr>
