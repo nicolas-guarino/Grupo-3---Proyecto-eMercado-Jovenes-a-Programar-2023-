@@ -16,6 +16,7 @@ async function getProductDetails(prodID) {
 
         let productHTML = `
             <h1 class="pTitle">${product.name}</h1>
+            <button class="buy-button">Comprar</button>
             <p class="pProducts"><span>Precio:</span> ${product.currency} ${product.cost}</p>
             <p class="pProducts"><span>Descripción:</span> ${product.description}</p>
             <p class="pProducts"><span>Categoria:</span> ${product.category}</p>
