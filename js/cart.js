@@ -12,11 +12,20 @@ async function getCartItems(){
       <td><img src="${cart_items[0].image}" width="80px" class="cartImg"></td>
       <td>${cart_items[0].name}</td>
       <td>${cart_items[0].currency} ${cart_items[0].unitCost}</td>
-      <td><input type="number" value="${cart_items[0].count}" class="cartCant"></td>
+      <td><input type="number" id="cartCount" value="${cart_items[0].count}" class="cartCant"></td>
       <td id ="cartSub${cart_items[0].id}">${cart_items[0].currency} ${(cart_items[0].unitCost * cart_items[0].count)}</td>
     </tr>
     </table>`;
     document.getElementById("cartList").innerHTML += cartHTML;
+
+     const cant = document.getElementById(`cartCount`);
+     const subTotal = document.getElementById(`cartSub${cart_items[0].id}`);
+     
+     cant.addEventListener('input', function() {
+       const count = cant.value;
+       const unitCost = cart_items[0].unitCost;
+       subTotal.textContent = `${cart_items[0].currency} ${count * unitCost}`;
+     });
   } catch (error) {
     console.error("Error al obtener los detalles del producto:", error);
 }
