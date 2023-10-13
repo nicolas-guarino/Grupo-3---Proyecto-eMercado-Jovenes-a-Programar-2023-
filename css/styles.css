@@ -65,8 +65,9 @@ nav a {
   background-repeat: no-repeat; 
   color: black; font-weight: bold; } 
 
-@media (max-width: 768px) { 
-  .jumbotron { 
+@media screen and (max-width: 768px) {
+  .jumbotron {
+    min-width: 100%;
     height: 15vh; 
     background-size: cover; 
     padding-top: 2rem; 
