@@ -603,3 +603,12 @@ td{
 #direccion{
   font-size: 18px;
 }
+
+.containerform {
+  width: 50%;
+  margin: 0 auto;
+}
+.containerform2 {
+  display: flex;
+  gap: 20px;
+}
