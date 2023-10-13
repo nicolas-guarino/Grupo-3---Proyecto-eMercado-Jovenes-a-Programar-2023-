@@ -585,3 +585,15 @@ td{
 .cartCant{
   width: 40px;
 }
+
+.buy-button{
+  background-color: rgb(70, 126, 87);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  font-size: 16px;
+  position: absolute;
+  top: 65px; 
+  right: 90px
+}
