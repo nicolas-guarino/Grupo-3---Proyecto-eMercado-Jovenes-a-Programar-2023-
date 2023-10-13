@@ -75,6 +75,7 @@ nav a {
 @media (max-width: 768px) {
   .jumbotron {
     width: 50%;
+    background-size: contain;
   }
 }
 
