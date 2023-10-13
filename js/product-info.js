@@ -1,30 +1,56 @@
 const URL_BASE = "https://japceibal.github.io/emercado-api/products/"
 const URL_COMMENTS = "https://japceibal.github.io/emercado-api/products_comments/";
-
-const user = localStorage.getItem('loggedUser')
+const newComment = document.getElementById("new-comment");
+const ratesSelect = document.getElementById("rates");
+const submitBtn = document.getElementById("comment-submit");
+const prodNewComment = document.getElementById("prod-newComment");
+const user = localStorage.getItem('loggedUser');
+let relProds = [];
 
 async function getProductDetails(prodID) {
     try {
         const URL = `${URL_BASE}${prodID}.json`;
         let response = await fetch(URL);
         let product = await response.json();
-
+        relProds = product.relatedProducts;
 
         let productHTML = `
             <h1 class="pTitle">${product.name}</h1>
+            <button class="buy-button">Comprar</button>
             <p class="pProducts"><span>Precio:</span> ${product.currency} ${product.cost}</p>
             <p class="pProducts"><span>Descripción:</span> ${product.description}</p>
             <p class="pProducts"><span>Categoria:</span> ${product.category}</p>
             <p class="pProducts"><span>Vendidos:</span> ${product.soldCount}</p>
-            <div class="imgsProductFlex">
-            <p><img class="imgsProduct" src="${product.images[1]}"></p>
-            <p><img class="imgsProduct" src="${product.images[0]}"></p>
-            <p><img class="imgsProduct" src="${product.images[2]}"></p>
-            <p><img class="imgsProduct" src="${product.images[3]}"></p>
+            
+            <div id="carouselExampleControls" class="carousel carousel-dark slide" data-bs-ride="carousel">
+                <div class="carousel-inner imgsProductFlex">
+                    <div class="carousel-item active">
+                        <img class="d-block imgsProduct" src="${product.images[0]}" alt="imgsProduct" >
+                    </div>
+                    <div class="carousel-item">
+                        <img class="d-block imgsProduct" src="${product.images[1]}" alt="imgsProduct" >
+                    </div>
+                    <div class="carousel-item">
+                        <img class="d-block imgsProduct" src="${product.images[2]}" alt="imgsProduct" >
+                    </div>
+                    
+                    <div class="carousel-item">
+                        <img class="d-block imgsProduct" src="${product.images[3]}" alt="imgsProduct" >
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
             </div>
         `;
 
         document.getElementById("containerInfo").innerHTML = productHTML;
+        getRelatedProducts();
     } catch (error) {
         console.error("Error al obtener los detalles del producto:", error);
 
@@ -32,23 +58,6 @@ async function getProductDetails(prodID) {
     }
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-    const prodID = localStorage.getItem("prodID");
-
-
-    if (prodID !== null) {
-        getProductDetails(prodID);
-    } else {
-        document.getElementById("contenedor-info").innerHTML = "<p>No se ha seleccionado ningún producto.</p>";
-    }
-});
-
-
-
-const newComment = document.getElementById("new-comment");
-const ratesSelect = document.getElementById("rates");
-const submitBtn = document.getElementById("comment-submit");
-const prodNewComment = document.getElementById("prod-newComment");
 
 function createStarRating(rating) {
     const maxRating = 5;
@@ -61,6 +70,20 @@ function createStarRating(rating) {
         }
     }
     return starHTML;
+}
+
+function redirectRelProd(prodID){
+    localStorage.setItem("prodID", prodID);
+    window.location = "product-info.html"
+}
+
+function getRelatedProducts(){
+    let relProdsHTML = "";
+    for (let i = 0; i < relProds.length; i++) {
+            relProdsHTML += ` <div id="relProd" onclick="redirectRelProd(${relProds[i].id})"><p><img id="imgRelProds" src="${relProds[i].image}"> ${relProds[i].name}</p></div>`
+       
+    }
+    document.getElementById("relatedContainer").innerHTML = relProdsHTML;
 }
 
 submitBtn.addEventListener("click", function () {
@@ -122,10 +145,14 @@ async function getProductComments(prodID) {
     }
 }
 
+
+
 document.addEventListener("DOMContentLoaded", function () {
     const prodID = localStorage.getItem("prodID");
 
+    
     if (prodID !== null) {
+        getProductDetails(prodID);
         getProductComments(prodID);
     } else {
         document.getElementById("container-comments").innerHTML = "<p>No se ha seleccionado ningún producto.</p>";
