@@ -427,6 +427,13 @@ a.custom-card:hover {
   width: 90%;
   margin: 0 auto;
 }
+
+@media (max-width: 768px) {
+.containerProduct {
+    font-size: 16px;
+  }
+}
+
 .imgsProductFlex{
   max-width: 100%;
   display: flex;
@@ -597,6 +604,13 @@ td{
   position: absolute;
   top: 65px; 
   right: 90px
+}
+
+@media (max-width: 768px) {
+.buy-button {
+  padding: 4px 8px;
+  font-size: 14px;
+  }
 }
 
 .shipping {
