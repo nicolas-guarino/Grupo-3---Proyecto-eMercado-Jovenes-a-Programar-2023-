@@ -464,7 +464,7 @@ a.custom-card:hover {
 
 @media (max-width: 768px) {
 .pTitle {
-    font-size: 16px;
+    font-size: 18px;
   }
 }
 .pProducts{
@@ -473,8 +473,8 @@ a.custom-card:hover {
 }
 
 @media (max-width: 768px) {
-.pTitle {
-    font-size: 15px;
+.pProducts {
+    font-size: 16px;
   }
 }
 
@@ -486,7 +486,15 @@ a.custom-card:hover {
 
 @media (max-width: 768px) {
 .pTitle span{
-    font-size: 15px;
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 768px) {
+.pProducts span {
+  font-size: 16px;
+  font-weight: bold;
+  color: black;
   }
 }
 
@@ -632,6 +640,9 @@ td{
 .buy-button {
   padding: 4px 8px;
   font-size: 14px;
+  position: absolute;
+  top: 35px; 
+  right: 10px
   }
 }
 
