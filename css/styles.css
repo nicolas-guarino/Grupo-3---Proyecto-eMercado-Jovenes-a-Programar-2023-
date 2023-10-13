@@ -72,6 +72,12 @@ nav a {
   }
 }
 
+@media (max-width: 768px) {
+  .jumbotron {
+    width: 50%;
+  }
+}
+
 .jumbotron p:last-child {
   margin-bottom: 0;
 }
