@@ -445,6 +445,8 @@ a.custom-card:hover {
   font-size: 20px;
   margin: 0;
 }
+
+
 .imgsProduct {
   max-width: 100%;
   width: 640px;
@@ -459,15 +461,35 @@ a.custom-card:hover {
   padding: 5px;
   border-bottom: 1px solid gray;
 }
+
+@media (max-width: 768px) {
+.pTitle {
+    font-size: 16px;
+  }
+}
 .pProducts{
   font-family: sans-serif;
   font-size: 20px;
 }
+
+@media (max-width: 768px) {
+.pTitle {
+    font-size: 15px;
+  }
+}
+
 .pProducts span {
   font-size: 25px;
   font-weight: bold;
   color: black;
 }
+
+@media (max-width: 768px) {
+.pTitle span{
+    font-size: 15px;
+  }
+}
+
 .commentsTitle {
   font-size: 30px;
   font-family: sans-serif;
