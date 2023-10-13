@@ -1,62 +1,61 @@
 let main_body = document.body;
 let checkbox = document.getElementById("checkitem");
+     
+// Realizamos una solicitud a la URL del JSON y trabajamos con los datos
+fetch("https://japceibal.github.io/emercado-api/user_cart/25801.json")
+  .then((response) => response.json())
+  .then((data) => {
+    const cartList = document.getElementById("cartList");
+    cartList.innerHTML = "";
 
-async function getCartItems() {
-  try {
-    let response = await fetch("https://japceibal.github.io/emercado-api/user_cart/25801.json");
-    let info = await response.json();
-    let cart_items = info.articles;
+    data.articles.forEach((article, index) => {
+      // Generamos una fila para cada artículo
+      let cartHTML = `
+        <tr>
+          <td><img src="${article.image}" width="80px" class="cartImg"></td>
+          <td>${article.name}</td>
+          <td>${article.currency} ${article.unitCost}</td>
+          <td><input type="number" id="cartCount${index}" value="${article.count}" class="cartCant" data-index="${index}"></td>
+          <td id="cartSub${index}">${article.currency} ${article.unitCost * article.count}</td>
+        </tr>
+      `;
 
-    let cartHTML = `
-    <tr>
-      <td><img src="${cart_items[0].image}" width="80px" class="cartImg"></td>
-      <td>${cart_items[0].name}</td>
-      <td>${cart_items[0].currency} ${cart_items[0].unitCost}</td>
-      <td><input type="number" id="cartCount" value="${cart_items[0].count}" class="cartCant"></td>
-      <td id ="cartSub${cart_items[0].id}">${cart_items[0].currency} ${(cart_items[0].unitCost * cart_items[0].count)}</td>
-    </tr>
-    </table>`;
-    document.getElementById("cartList").innerHTML += cartHTML;
+      cartList.innerHTML += cartHTML;
 
-    const cant = document.getElementById(`cartCount`);
-    const subTotal = document.getElementById(`cartSub${cart_items[0].id}`);
+      const cant = document.getElementById(`cartCount${index}`);
+      const subTotal = document.getElementById(`cartSub${index}`);
 
-    cant.addEventListener('input', function () {
-      let count = parseInt(cant.value);
-      if (count < 0) {
-        count = 0;
-      }
-      const unitCost = cart_items[0].unitCost;
-      subTotal.textContent = `${cart_items[0].currency} ${count * unitCost}`;
-      cant.value = count;
+      // Desarrollamos un controlador de eventos para los campos de cantidad
+      cant.addEventListener("input", function () {
+        const count = parseInt(cant.value, 10);
+        const unitCost = parseFloat(article.unitCost);
+        subTotal.textContent = `${article.currency} ${count * unitCost}`;
+        data.articles[index].count = count; // Aquí se actualiza la cantidad en el objeto JSON
+      });
     });
-  } catch (error) {
+  })
+  .catch((error) => {
     console.error("Error al obtener los detalles del producto:", error);
-  }
-}
-
-document.addEventListener("DOMContentLoaded", function () {
-  getCartItems();
-});
+  });
 
 
 function enableDarkMode() {
-  main_body.classList.toggle("dark");
-  localStorage.setItem("checkbox-status", checkbox.checked);
+   main_body.classList.toggle("dark");
+   localStorage.setItem("checkbox-status", checkbox.checked);
 
-  //En caso de querer confirmar si el checkbox está "checked"
-  if (document.getElementById("checkitem").checked) {
-    console.log("checked");
-  } else {
-    console.log("Not checked");
-  }
+   //En caso de querer confirmar si el checkbox está "checked"
+   if (document.getElementById("checkitem").checked) {
+     console.log("checked");
+   } else {
+     console.log("Not checked");
+   }
 
-  //Guardamos el modo en localStorage
-  if (main_body.classList.contains("dark")) {
-    localStorage.setItem("dark-mode", "true");
-  } else {
-    localStorage.setItem("dark-mode", "false");
-  }
+    //Guardamos el modo en localStorage
+    if (main_body.classList.contains("dark")) {
+     localStorage.setItem("dark-mode", "true");
+    } else {
+     localStorage.setItem("dark-mode", "false");
+    }
 }
 
 // Obtenemos el estado del checkbox guardado en localStorage
