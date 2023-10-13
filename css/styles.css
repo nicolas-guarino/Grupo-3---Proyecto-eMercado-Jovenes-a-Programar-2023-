@@ -622,7 +622,7 @@ td{
 }
 
 #shippingType {
-  display: block
+  display: block;
   margin-left: 15px;
   padding: 10px;
 }
