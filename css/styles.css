@@ -636,8 +636,6 @@ td{
 }
 
 .shipping {
-  display: flex;
-  justify-content: center;
   padding-top: 30px;
   width: 50%;
   margin: 0 auto
@@ -645,7 +643,6 @@ td{
 
 #shippingType {
   display: block;
-  margin-left: 15px;
   padding: 10px;
 }
 
@@ -666,5 +663,5 @@ td{
 }
 .containerform2 {
   display: flex;
-  gap: 20px;
+  gap: 25px;
 }
