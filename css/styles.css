@@ -65,13 +65,14 @@ nav a {
   background-repeat: no-repeat; 
   color: black; font-weight: bold; } 
 
-@media (max-width: 768px) { 
-  .jumbotron { 
-    max-width: 100%; 
+@media screen and (max-width: 768px) {
+  .jumbotron {
+    min-width: 100%;
     height: 15vh; 
     background-size: cover; 
     padding-top: 2rem; 
-    padding-bottom: 2rem; } }
+    padding-bottom: 2rem; } 
+}
 
 .jumbotron p:last-child {
   margin-bottom: 0;
@@ -621,4 +622,13 @@ td{
 }
 #direccion{
   font-size: 18px;
+}
+
+.containerform {
+  width: 50%;
+  margin: 0 auto;
+}
+.containerform2 {
+  display: flex;
+  gap: 20px;
 }
