@@ -597,6 +597,25 @@ td{
   top: 65px; 
   right: 90px
 }
+
+.shipping {
+  display: flex;
+  justify-content: center;
+  padding-top: 30px;
+  width: 50%;
+  margin: 0 auto
+}
+
+#shippingType {
+  display: block
+  margin-left: 15px;
+  padding: 10px;
+}
+
+#address {
+  padding: 10px;
+}
+
 #envio{
   font-size: 18px;
 }
