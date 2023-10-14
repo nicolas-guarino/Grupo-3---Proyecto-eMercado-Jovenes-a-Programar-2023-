@@ -158,3 +158,30 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("container-comments").innerHTML = "<p>No se ha seleccionado ningún producto.</p>";
     }
 });
+
+ 
+// Sección para agregar producto al carrito
+
+    document.getElementById("addToCart").addEventListener("click", function () {
+        const prodID = localStorage.getItem("prodID");
+        if (prodID !== null) {
+            // Aquí obtenemos información del producto
+            const URL = `${URL_BASE}${prodID}.json`;
+            fetch(URL)
+                .then((response) => response.json())
+                .then((article) => {
+                    // Agregamos el producto al carrito
+                    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+                    cart.push(article);
+                    localStorage.setItem("cart", JSON.stringify(cart));
+                      // Redirige al usuario a la página del carrito
+                     window.location.href = "cart.html";
+                    // Desplegamos un mensaje de confirmación
+                    document.getElementById("addToCartMessage").style.display = "block";
+                })
+                .catch((error) => {
+                    console.error("Error al obtener detalles del producto:", error);
+                });
+        }
+    });
+
