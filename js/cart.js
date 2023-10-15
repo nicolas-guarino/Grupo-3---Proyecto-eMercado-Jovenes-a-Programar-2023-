@@ -1,21 +1,22 @@
 let main_body = document.body;
 let checkbox = document.getElementById("checkitem");
-     
-// Función para actualizar el carrito y mostrar la lista en cart.html
-function updateCart(cart) {
-  const cartList = document.getElementById("cartList");
 
-  if(cartList) {
-  cartList.innerHTML = "";
-  
+ 
+// Función para actualizar el carrito y mostrar la lista en cart.html
+function updateCart() {
 // Realizamos una solicitud a la URL del JSON y trabajamos con los datos
 fetch("https://japceibal.github.io/emercado-api/user_cart/25801.json")
   .then((response) => response.json())
   .then((data) => {
+
+   // Limpia la tabla antes de agregar productos
     const cartList = document.getElementById("cartList");
     cartList.innerHTML = "";
 
-    data.articles.forEach((article, index) => {
+    const userCart= data.articles;  // Actualizamos la lista del carrito del usuario
+
+
+    userCart.forEach((article, index) => {
       // Generamos una fila para cada artículo
       let cartHTML = `
         <tr>
@@ -37,33 +38,34 @@ fetch("https://japceibal.github.io/emercado-api/user_cart/25801.json")
         const count = parseInt(cant.value, 10);
         const unitCost = parseFloat(article.unitCost);
         subTotal.textContent = `${article.currency} ${count * unitCost}`;
-        data.articles[index].count = count; // Aquí se actualiza la cantidad en el objeto JSON
+        userCart[index].count = count; // Aquí se actualiza la cantidad en el objeto JSON
         updateTotalCost();
       });
-         totalCost += article.cost;
     });
   })
   .catch((error) => {
     console.error("Error al obtener los detalles del producto:", error);
   });
-  }
-}
+ }
+//}
 
-function updateTotalCost() {
-  let totalCost = 0;
-  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+//Función para calular el total de la compra
+function updateTotalCost(newTotal) {
+  let newTotalCost = 0;
 
   cart.forEach((product) => {
-    totalCost += product.cost * (product.count || 1);
+    newTotalCost += product.cost * (product.count || 1);
   });
 
-  // Actualiza el contenido del elemento con id "totalCost"
+  // Actualiza el contenido del elemento con id "totalCost" con el nuevo total
   const totalCostElement = document.getElementById("totalCost");
   if (totalCostElement) {
-    totalCostElement.textContent = `Total: ${totalCost.toFixed(2)}`;
+    totalCostElement.textContent = `Total: ${newTotal.toFixed(2)}`;
   }
 }
-//Función para aplicar el "dark-mode"
+  
+ 
+// Función para aplicar el "dark mode" al carrito
 function enableDarkMode() {
    main_body.classList.toggle("dark");
    localStorage.setItem("checkbox-status", checkbox.checked);
@@ -91,12 +93,13 @@ if (checkboxStatus === "true") {
   checkbox.checked = false;
 }
 
-//Obtener el modo actual
+//Obtenemos el modo actual
 if (localStorage.getItem("dark-mode") === "true") {
   main_body.classList.add("dark");
 } else {
   main_body.classList.remove("dark");
 }
+
 enableDarkMode;
 
 // Obtenemos la lista de productos del localStorage
@@ -106,13 +109,18 @@ const cart = JSON.parse(localStorage.getItem("cart")) || [];
 const cartList = document.getElementById("cartList");
 
 // Limpiamos la tabla antes de agregar los productos
-cartList.innerHTML = "";
+//cartList.innerHTML = "";
 
 // Esta variable sirve para calcular el costo total
 let totalCost = 0;
 
 // Recorremos la lista de productos en el carrito
 cart.forEach((product, index) => {
+
+   // Verifica si la cantidad no está definida o es NaN
+   if (typeof product.count === 'undefined' || isNaN(product.count)) {
+    product.count = 1; // Establece la cantidad inicial en 1
+  }
   // Creamos una nueva fila para el producto
   const row = document.createElement("tr");
   row.innerHTML = `
@@ -134,19 +142,18 @@ cart.forEach((product, index) => {
     const count = parseInt(cant.value, 10);
     const unitCost = parseFloat(product.cost);
     subTotal.textContent = `${product.currency} ${count * unitCost}`;
+   
+      // Recalcula el total de la compra basado en los nuevos subtotales
+  let newTotalCost = 0;
+  cart.forEach((p) => {
+    newTotalCost += p.cost * p.count;
+  });
+
+  updateTotalCost(newTotalCost); // Llama a la función para actualizar el costo total de la compra
 
     // Actualizamos la cantidad en el objeto JSON del producto
     cart[index].count = count;
 
-    // Actualizamos el costo total
-    updateTotalCost();
   });
 
-  // Aquí se calcula el costo total para este producto
-  const productCost = product.cost * product.count;
-  totalCost += productCost;
 });
-
-
-
-enableDarkMode;
