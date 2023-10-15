@@ -13,11 +13,16 @@ async function getCartItems() {
     preloadedItem = info.articles;
 
     cart.unshift(preloadedItem[0]);
+
     for (let i = 0; i < localCart.length; i++) {
-      cart.push(localCart[i]);
-
+      const existingArticle = cart.find((item) => item.id === localCart[i].id);
+      if (existingArticle) {
+        existingArticle.cartCount += 1;
+      } else {
+        localCart[i].cartCount = 1;
+        cart.push(localCart[i]);
+      }
     }
-
 
     let cartHTML = `
     <tr>
@@ -54,6 +59,7 @@ async function getCartItems() {
       const newUnitCost= cart[0].unitCost;
       
       cartSubtotal.textContent = `${cart[0].currency} ${newCount * newUnitCost}`;
+      updateTotalCost();
     });
 
 
