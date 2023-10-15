@@ -15,9 +15,10 @@ async function getCartItems() {
     cart.unshift(preloadedItem[0]);
     for (let i = 0; i < localCart.length; i++) {
       cart.push(localCart[i]);
-    }
- 
 
+    }
+
+    
     let cartHTML = `
     <tr>
       <td><img src="${cart[0].image}" width="80px" class="cartImg"></td>
@@ -44,8 +45,8 @@ async function getCartItems() {
     function updateSubtotal(event) {
       const input = event.target;
       const index = input.getAttribute('data-index');
-      const cant = document.getElementById(cartCount${cart[index].id});
- const subTotal = document.getElementById(cartSub${cart[index].id});
+      const cant = document.getElementById(`cartCount${cart[index].id}`);
+      const subTotal = document.getElementById(`cartSub${cart[index].id}`);
 
       let count = parseInt(cant.value);
       if (count < 0) {
@@ -53,14 +54,14 @@ async function getCartItems() {
       }
       const unitCost = cart[index].cost;
 
-      subTotal.textContent = ${cart[index].currency} ${count * unitCost};
+      subTotal.textContent = `${cart[index].currency} ${count * unitCost}`;
       cant.value = count;
 
       updateTotalCost()
     }
 
     for (let i = 1; i < cart.length; i++) {
-      const cant = document.getElementById(cartCount${cart[i].id});
+      const cant = document.getElementById(`cartCount${cart[i].id}`);
       cant.addEventListener('input', updateSubtotal);
     }
 
@@ -76,15 +77,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
 function updateTotalCost() {
   let newTotalCost = 0;
-for (let i = 0; i < cart.length; i++) {
-    const subTotalElement = document.getElementById(cartSub${cart[i].id});
+  for (let i = 0; i < cart.length; i++) {
+    const subTotalElement = document.getElementById(`cartSub${cart[i].id}`);
     const subTotalValue = parseFloat(subTotalElement.textContent.replace(`${cart[i].currency} `, ''));
     newTotalCost += subTotalValue;
   }
   totalCost = newTotalCost;
 
   const totalCostHtml = document.getElementById("totalCost");
-  totalCostHtml.textContent = Total: $${newTotalCost.toFixed(2)};
+  totalCostHtml.textContent = `Total: $${newTotalCost.toFixed(2)}`;
 }
 
 updateTotalCost();
@@ -102,6 +103,7 @@ function enableDarkMode() {
   } else {
     console.log("Not checked");
   }
+
   //Guardamos el modo en localStorage
   if (main_body.classList.contains("dark")) {
     localStorage.setItem("dark-mode", "true");
