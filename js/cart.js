@@ -1,6 +1,6 @@
 const cartList = document.getElementById("cartList");
 let cart = [];
-let localCart = JSON.parse(localStorage.getItem("cart"));
+let localCart = JSON.parse(localStorage.getItem("cart")) || [];
 let preloadedItem = [];
 let main_body = document.body;
 let checkbox = document.getElementById("checkitem");
