@@ -18,7 +18,7 @@ async function getCartItems() {
 
     }
 
-    
+
     let cartHTML = `
     <tr>
       <td><img src="${cart[0].image}" width="80px" class="cartImg"></td>
@@ -41,6 +41,21 @@ async function getCartItems() {
 
     cartHTML += "</table>";
     document.getElementById("cartList").innerHTML += cartHTML;
+
+
+    const cartCount = document.getElementById('cartCount');
+
+    cartCount.addEventListener('input', function () {
+      const cartSubtotal = document.getElementById(`cartSub${cart[0].id}`);
+      let newCount = parseInt(cartCount.value);
+      if(newCount < 0){
+        newCount = 0;
+      }
+      const newUnitCost= cart[0].unitCost;
+      
+      cartSubtotal.textContent = `${cart[0].currency} ${newCount * newUnitCost}`;
+    });
+
 
     function updateSubtotal(event) {
       const input = event.target;
