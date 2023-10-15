@@ -40,7 +40,8 @@
               <li><a class="dropdown-item" href="my-profile.html">Perfil</a></li>
               <li><button id="logoutBtn" class="button dropdown-item">Cerrar Sesión</button></li>
               <li>
-                <label class="night"><input id="checkitem" type="checkbox" onclick="enableDarkMode()"/>Modo nocturno</label>
+                <label class="night"><input id="checkitem" type="checkbox" onclick="enableDarkMode()" />Modo
+                  nocturno</label>
               </li>
             </ul>
           </div>
@@ -52,7 +53,7 @@
     <h2 class="text-center">Carrito de compras</h2>
     <h4 class="text-center">Artículos a comprar</h4>
     <div id="containerCart">
-      <div id="containerCartList">
+      <div id="containerCartList container">
         <table id="cartList">
           <tr>
             <th>&nbsp;</th>
@@ -65,7 +66,38 @@
       </div>
        <p id="totalCost">Total: $0.00</p>
     </div>
+    <div class="shipping">
+      <h5 id="envio">Tipo de envío:</h5>
+      <div id="shippingType">
+        <input type="radio" name="envio" value="Premium 2 a 5 días"> Premium 2 a 5 días(15%) <br>
+        <input type="radio" name="envio" value="Express 5 a 8 días"> Express 5 a 8 días(7%) <br>
+        <input type="radio" name="envio" value="Standard 12 a 15 días"> Standard 12 a 15 días(5%) <br>
+      </div>
+      <br>
+    </div>
+    <div class="containerform">
+      <h6 id="direccion">Dirección de envío:</h6>
+      <div class="containerform2">
+        <div>
+          <label class="form-label fs-6" for="calle">Calle:</label>
+          <input class="form-control" type="text" id="calle" placeholder="Nombre de la calle">
+          <br>
+          <br>
+          <label class="form-label fs-6" for="esquina">Esquina:</label>
+          <input class="form-control" type="text" id="esquina" placeholder="Esquina de la dirección">
+          <br>
+          <br>
+        </div>
+        <div>
+          <label class="form-label fs-6" for="numero">Número:</label>
+          <input class="form-control" type="text" id="numero" placeholder="Número de la dirección">
+        </div>
+      </div>
+    </div>
+    </div>
   </main>
+
+
   <footer class="text-muted">
     <div class="container">
       <p class="float-end">
@@ -83,6 +115,7 @@
       <div></div>
     </div>
   </div>
+
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/init.js"></script>
   <script src="js/cart.js"></script>
