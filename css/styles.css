@@ -685,7 +685,7 @@ td{
 }
 @media(max-width: 500px){
   .shipping {
-    width: 100%;
+    width: 95%;
   }
 }
 
@@ -720,6 +720,6 @@ td{
 }
 @media(max-width: 500px){
   .containerform {
-    width: 100%;
+    width: 95%;
   }
 }
