@@ -678,6 +678,16 @@ td{
   width: 50%;
   margin: 0 auto
 }
+@media(max-width: 786px){
+  .shipping {
+    width: 65%;
+  }
+}
+@media(max-width: 500px){
+  .shipping {
+    width: 100%;
+  }
+}
 
 #shippingType {
   display: block;
@@ -702,4 +712,14 @@ td{
 .containerform2 {
   display: flex;
   gap: 25px;
+}
+@media(max-width: 786px){
+  .containerform {
+    width: 65%;
+  }
+}
+@media(max-width: 500px){
+  .containerform {
+    width: 100%;
+  }
 }
