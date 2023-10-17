@@ -678,6 +678,25 @@ td{
   width: 50%;
   margin: 0 auto
 }
+
+.containerfinish {
+  display: flex;
+  justify-content: center;
+}
+
+#finishBtn {
+  background-color: #212529;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  font-size: 16px;
+}
+
+#finishBtn:hover {
+  background-color: #e7b511;
+}
+
 @media(max-width: 786px){
   .shipping {
     width: 65%;
@@ -723,3 +742,4 @@ td{
     width: 95%;
   }
 }
+
