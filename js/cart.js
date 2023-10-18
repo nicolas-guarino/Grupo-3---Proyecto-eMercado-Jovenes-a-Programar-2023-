@@ -31,7 +31,8 @@ async function getCartItems() {
       <td>${cart[0].currency} ${cart[0].unitCost}</td>
       <td><input type="number" id="cartCount" value="${cart[0].count}" class="cartCant"></td>
       <td id ="cartSub${cart[0].id}">${cart[0].currency} ${(cart[0].unitCost * cart[0].count)}</td>
-    </tr>`;
+      <td><button class="btn btn-danger btn-sm" onclick="deleteProds(0)">Eliminar</button></td> </tr>`; //agregamos botón de Borrar que se despliegue al lado del producto
+
 
     for (let i = 1; i < cart.length; i++) {
       cartHTML += `
@@ -41,7 +42,7 @@ async function getCartItems() {
       <td>${cart[i].currency} ${cart[i].cost}</td>
       <td><input type="number" id="cartCount${cart[i].id}" value="${1}" class="cartCant" data-index="${i}"></td>
       <td id ="cartSub${cart[i].id}">${cart[i].currency} ${(cart[i].cost)}</td>
-    </tr>`;
+    <td><button class="btn btn-danger btn-sm" onclick="deleteProds(0)">Eliminar</button></td> </tr>`; //agregamos botón de Borrar que se despliegue al lado del producto
     }
 
     cartHTML += "</table>";
@@ -108,10 +109,51 @@ function updateTotalCost() {
   const totalCostHtml = document.getElementById("totalCost");
   totalCostHtml.textContent = `Total: $${newTotalCost.toFixed(2)}`;
 }
-
 updateTotalCost();
 
+function deleteProds(index) {
+  if (index >= 0 && index < cart.length) {
+    cart.splice(index, 1);  // Eliminamos el artículo del carrito
+    updateCartList();      // Aquí se actualiza la lista de carrito en el HTML
+    updateTotalCost();     // Actualizamos el costo total
+    saveCartToLocalStorage(); // Actualizamos también el carrito en el almacenamiento local
+  }
+}
 
+function updateCartList() {
+  let cartHTML = "<tr><th>&nbsp;</th><th>Nombre</th><th>Costo</th><th>Cantidad</th><th>Subtotal</th></tr>";
+
+  for (let i = 0; i < cart.length; i++) {
+    cartHTML += `
+      <tr>
+        <td><img src="${cart[i].image}" width="80px" class="cartImg"></td>
+        <td>${cart[i].name}</td>
+        <td>${cart[i].currency} ${cart[i].unitCost}</td>
+        <td><input type="number" value="${cart[i].count}" class="cartCant" oninput="updateCartItemQuantity(${i})"></td>
+        <td id="cartSub${cart[i].id}">${cart[i].currency} ${(cart[i].unitCost * cart[i].count)}</td>
+        <td><button class="btn btn-danger btn-sm" onclick="deleteProds(${i})">Eliminar</button></td>
+      </tr>
+    `;
+  }
+
+}
+
+function updateCartItemQuantity(index) {
+  const input = document.querySelectorAll('.cartCant')[index];
+  const newCount = parseInt(input.value);
+  if (newCount < 0) {
+    newCount = 0;
+  }
+  cart[index].count = newCount;
+  const subtotalElement = document.getElementById(`cartSub${cart[index].id}`);
+  subtotalElement.textContent = `${cart[index].currency} ${(cart[index].unitCost * newCount)}`;
+  updateTotalCost();
+  saveCartToLocalStorage();
+}
+
+function saveCartToLocalStorage() {
+  localStorage.setItem('cart', JSON.stringify(cart));
+}
 
 //Función para aplicar el "dark-mode"
 function enableDarkMode() {
