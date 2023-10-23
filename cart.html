@@ -49,9 +49,10 @@
       </div>
     </div>
   </nav>
-  <main>
+  <main> 
     <h2 class="text-center">Carrito de compras</h2>
     <h4 class="text-center">Artículos a comprar</h4>
+    <form class="needs-validation" novalidate> 
     <div id="containerCart">
       <div id="containerCartList container">
         <table id="cartList">
@@ -79,18 +80,40 @@
       <h6 id="direccion">Dirección de envío:</h6>
       <div class="containerform2">
         <div>
-          <label class="form-label fs-6" for="calle">Calle:</label>
-          <input class="form-control" type="text" id="calle" placeholder="Nombre de la calle" required title="Ingrese una calle" required>
+          <div>
+            <label class="form-label fs-6" for="calle">Calle:</label>
+            <input class="form-control" type="text" id="calle" placeholder="Nombre de la calle" required title="Ingrese una calle" required>
+              <div class="valid-feedback">
+              Todo bien!
+              </div>
+              <div class="invalid-feedback">
+              Debe ingresar una calle.
+              </div>
+          </div>
           <br>
           <br>
-          <label class="form-label fs-6" for="esquina">Esquina:</label>
-          <input class="form-control" type="text" id="esquina" placeholder="Esquina de la dirección" required title="Ingrese una esquina" required>
+          <div>
+            <label class="form-label fs-6" for="esquina">Esquina:</label>
+            <input class="form-control" type="text" id="esquina" placeholder="Esquina de la dirección" required title="Ingrese una esquina" required>
+              <div class="valid-feedback">
+              Todo bien!
+              </div>
+              <div class="invalid-feedback">
+              Debe ingresar una esquina.
+              </div>
+            </div>
           <br>
           <br>
         </div>
         <div>
           <label class="form-label fs-6" for="numero">Número:</label>
           <input class="form-control" type="text" id="numero" placeholder="Número de la dirección" required title="Ingrese un número" required>
+            <div class="valid-feedback">
+            Todo bien!
+            </div>
+            <div class="invalid-feedback">
+            Debe ingresar un número.
+            </div>
         </div>
       </div>
     </div>
@@ -101,9 +124,10 @@
   </div>
     
     <div class="containerfinish">
-      <button type="button" id="finishBtn">Finalizar compra</button>
+      <button class="btn btn-primary" type="submit">Finalizar compra</button>
     </div>
     </div>
+  </form>
   </main>
 
 

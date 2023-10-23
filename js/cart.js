@@ -6,6 +6,7 @@ let main_body = document.body;
 let checkbox = document.getElementById("checkitem");
 let totalCost = 0;
 
+
 async function getCartItems() {
   try {
     let response = await fetch("https://japceibal.github.io/emercado-api/user_cart/25801.json");
@@ -148,3 +149,26 @@ if (localStorage.getItem("dark-mode") === "true") {
   main_body.classList.remove("dark");
 }
 enableDarkMode;
+
+//Función y validaciones para finalizar compra
+// Example starter JavaScript for disabling form submissions if there are invalid fields
+(function () {
+  'use strict'
+
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  var forms = document.querySelectorAll('.needs-validation')
+
+  // Loop over them and prevent submission
+  Array.prototype.slice.call(forms)
+    .forEach(function (form) {
+      form.addEventListener('submit', function (event) {
+        if (!form.checkValidity()) {
+          event.preventDefault()
+          event.stopPropagation()
+        }
+
+        form.classList.add('was-validated')
+      }, false)
+    })
+})()
+
