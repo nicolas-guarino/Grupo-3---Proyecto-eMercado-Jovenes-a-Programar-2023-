@@ -5,7 +5,7 @@ let preloadedItem = [];
 let main_body = document.body;
 let checkbox = document.getElementById("checkitem");
 let totalCost = 0;
-
+const conversionRate = 43; // 1 USD = 43 UYU
 
 async function getCartItems() {
   try {
@@ -19,7 +19,11 @@ async function getCartItems() {
       const existingArticle = cart.find((item) => item.id === localCart[i].id);
       if (existingArticle) {
         existingArticle.cartCount += 1;
-      } else {
+      } // Verifica si la moneda del producto es UYU y realiza la conversión a USD
+      if (cart[i].currency === "UYU") {
+        cart[i].unitCost / conversionRate;
+        cart[i].currency = "USD";
+      }else {
         localCart[i].cartCount = 1;
         cart.push(localCart[i]);
       }
@@ -98,16 +102,37 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 function updateTotalCost() {
-  let newTotalCost = 0;
+   let subtotalGeneral = 0;
+
   for (let i = 0; i < cart.length; i++) {
     const subTotalElement = document.getElementById(`cartSub${cart[i].id}`);
     const subTotalValue = parseFloat(subTotalElement.textContent.replace(`${cart[i].currency} `, ''));
-    newTotalCost += subTotalValue;
+    subtotalGeneral += subTotalValue;
   }
-  totalCost = newTotalCost;
 
-  const totalCostHtml = document.getElementById("totalCost");
-  totalCostHtml.textContent = `Total: $${newTotalCost.toFixed(2)}`;
+  const shippingType = document.querySelector('input[name="envio"]:checked');
+  let shippingPercentage = 0;
+  
+  if (shippingType) {
+    if (shippingType.value === "Premium 2 a 5 días") {
+      shippingPercentage = 15;
+    } else if (shippingType.value === "Express 5 a 8 días") {
+      shippingPercentage = 7;
+    } else if (shippingType.value === "Standard 12 a 15 días") {
+      shippingPercentage = 5;
+    }
+  }
+
+  const shippingCost = (subtotalGeneral * shippingPercentage) / 100;
+  const totalToPay = subtotalGeneral + shippingCost;
+
+  const subtotalGeneralHtml = document.getElementById("subtotalGeneral");
+  const shippingCostHtml = document.getElementById("shippingCost");
+  const totalToPayHtml = document.getElementById("totalToPay");
+
+  subtotalGeneralHtml.textContent = `$${subtotalGeneral.toFixed(2)}`;
+  shippingCostHtml.textContent = `$${shippingCost.toFixed(2)}`;
+  totalToPayHtml.textContent = `$${totalToPay.toFixed(2)}`;
 }
 
 updateTotalCost();
