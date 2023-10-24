@@ -749,3 +749,11 @@ td{
   margin: 0 auto
 }
 
+/*área de los totales y subtotales*/
+
+.totals{
+    padding-top: 30px;
+    width: 50%;
+    margin: 0 auto;
+}
+
