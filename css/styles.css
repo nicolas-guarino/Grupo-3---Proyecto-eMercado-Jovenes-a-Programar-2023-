@@ -749,3 +749,27 @@ td{
   margin: 0 auto
 }
 
+.modal-body{
+  font-style: arial;
+}
+
+#formaDePago{
+  font-size: 20px;
+}
+
+.modal-title{
+  font-size: 20px;
+}
+
+
+#expirationDate{
+  width:30%;
+}
+
+#cvv{
+  width:40%;
+}
+
+#accountNumber{
+  width:40%;
+}
