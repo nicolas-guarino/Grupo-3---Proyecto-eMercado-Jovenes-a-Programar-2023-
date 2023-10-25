@@ -154,20 +154,27 @@
               </div>
 
 
+<label for="expirationDate">Vencimiento (MM/AA):</label>
+              <input type="text" id="expirationDate" name="expirationDate" required>
+              <label for="cvv">Código de seg:</label>
+              <input type="text" id="cvv" name="cvv" required>
+            </div>
+            <div class="bankTransfer">
+              <input type="radio" id="transfer" name="paymentMethod" value="transfer">  Transferencia bancaria
+              <hr>
+              <label for="accountNumber">Número de cuenta:</label>
+              <input type="text" id="accountNumber" name="accountNumber" required>
+            </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-      
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
     
     <div class="containerfinish">
       <button class="btn btn-primary" type="submit">Finalizar compra</button>
