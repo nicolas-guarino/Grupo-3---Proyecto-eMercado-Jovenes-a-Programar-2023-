@@ -125,9 +125,49 @@
     </div>
 
 <div class="paymethod">
-  <h6>Forma de pago</h6>
-  <p>No ha seleccionado <a href="Seleccionar">Seleccionar</a></p>
+  <p id="formaDePago">Forma de pago</p>
+  <p>No ha seleccionado  <a href="#paymentModal" data-bs-toggle="modal">Seleccionar</a></p>
   </div>
+      
+  <div class="modal" id="paymentModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h7 class="modal-title">Forma de pago</h7>
+          
+        </div>
+        <div class="modal-body">
+      
+        <form id="paymentForm">
+          <input type="radio" id="cardNumber" name="cardNumber" value="cardNumber" required> Tarjeta de crédito
+            <hr>
+            <div class="creditCard">
+              <div class="row">
+              <div class="col">
+                <label for="cardNumber">Número de Tarjeta:</label>
+               
+        
+              </div>
+              <div class="col">
+            <input type="text" class="form-control" id="cardNumber" name="cardNumber" required>
+               </div>
+              </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
     
     <div class="containerfinish">
       <button class="btn btn-primary" type="submit">Finalizar compra</button>
