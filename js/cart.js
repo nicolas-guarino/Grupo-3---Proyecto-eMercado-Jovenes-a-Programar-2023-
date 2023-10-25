@@ -186,3 +186,9 @@ const creditCardRadio = document.getElementById("creditCard");
     }
   });
 
+transferRadio.addEventListener("change", () => {
+    if (transferRadio.checked) {
+      cardFields.forEach((field) => (field.disabled = true));
+      transferField.disabled = false;
+    }
+  }); 
