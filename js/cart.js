@@ -172,3 +172,17 @@ enableDarkMode;
     })
 })()
 
+
+const creditCardRadio = document.getElementById("creditCard");
+  const transferRadio = document.getElementById("transfer");
+  const cardFields = document.querySelectorAll(".creditCard input[type='text']");
+  const transferField = document.getElementById("accountNumber");
+
+  // Add change event listeners to the radio buttons
+  creditCardRadio.addEventListener("change", () => {
+    if (creditCardRadio.checked) {
+      cardFields.forEach((field) => (field.disabled = false));
+      transferField.disabled = true;
+    }
+  });
+
