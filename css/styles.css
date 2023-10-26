@@ -300,17 +300,7 @@ label {
 
 form input[type="text"],
 form input[type="email"],
-form input[type="password"] {
-  display: block;
-  width: 100%;
-  box-sizing: border-box;
-  border-radius: 10px;
-  border: 1px solid #c4c4c4;
-  padding: 1em;
-  margin-bottom: 1.25rem;
-  font-size: 0.875rem;
-
-}
+form input[type="password"],
 #numero {
   display: block;
   width: 100%;
