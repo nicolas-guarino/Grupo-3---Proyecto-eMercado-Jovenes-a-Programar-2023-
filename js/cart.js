@@ -30,7 +30,7 @@ async function getCartItems() {
       <td><img src="${cart[0].image}" width="80px" class="cartImg"></td>
       <td>${cart[0].name}</td>
       <td>${cart[0].currency} ${cart[0].unitCost}</td>
-      <td><input type="number" id="cartCount" value="${cart[0].count}" class="cartCant"></td>
+      <td><input type="number" id="cartCount" min="1" value="${cart[0].count}" class="cartCant" required></td>
       <td id ="cartSub${cart[0].id}">${cart[0].currency} ${(cart[0].unitCost * cart[0].count)}</td>
     </tr>`;
 
@@ -40,7 +40,7 @@ async function getCartItems() {
       <td><img src="${cart[i].images[0]}" width="80px" class="cartImg"></td>
       <td>${cart[i].name}</td>
       <td>${cart[i].currency} ${cart[i].cost}</td>
-      <td><input type="number" id="cartCount${cart[i].id}" value="${1}" class="cartCant" data-index="${i}"></td>
+      <td><input type="number" id="cartCount${cart[i].id}" value="${1}" class="cartCant" data-index="${i}" min="1" required></td>
       <td id ="cartSub${cart[i].id}">${cart[i].currency} ${(cart[i].cost)}</td>
     </tr>`;
     }
