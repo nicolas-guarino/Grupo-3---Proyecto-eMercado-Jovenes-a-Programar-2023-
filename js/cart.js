@@ -174,20 +174,26 @@ enableDarkMode;
 
 const creditCardRadio = document.getElementById("creditCard");
 const transferRadio = document.getElementById("bankTransfer");
-const cardFields = document.querySelectorAll("#paymentModal #paymentForm .creditCard input[type='text']");
+const card = document.getElementById("card");
+const code = document.getElementById("code");
+const date = document.getElementById("date");
 const transferField = document.getElementById("cardNumber");
 
 // Add change event listeners to the radio buttons
 creditCardRadio.addEventListener("change", () => {
   if (creditCardRadio.checked) {
-    cardFields.forEach((field) => (field.disabled = false));
     transferField.disabled = true;
+    card.disabled = false;
+    code.disabled = false;
+    date.disabled = false;
   }
 });
 
 transferRadio.addEventListener("change", () => {
   if (transferRadio.checked) {
-    cardFields.forEach((field) => (field.disabled = true));
+    card.disabled = true;
+    code.disabled = true;
+    date.disabled = true;
     transferField.disabled = false;
   }
 });
