@@ -150,28 +150,6 @@ if (localStorage.getItem("dark-mode") === "true") {
 }
 enableDarkMode;
 
-//Función y validaciones para finalizar compra
-// Example starter JavaScript for disabling form submissions if there are invalid fields
-(function () {
-  'use strict'
-
-  // Fetch all the forms we want to apply custom Bootstrap validation styles to
-  var forms = document.querySelectorAll('.needs-validation')
-
-  // Loop over them and prevent submission
-  Array.prototype.slice.call(forms)
-    .forEach(function (form) {
-      form.addEventListener('submit', function (event) {
-        if (!form.checkValidity()) {
-          event.preventDefault()
-          event.stopPropagation()
-        }
-
-        form.classList.add('was-validated')
-      }, false)
-    })
-})()
-
 const creditCardRadio = document.getElementById("creditCard");
 const transferRadio = document.getElementById("bankTransfer");
 const cardFields = document.querySelectorAll("#paymentModal #paymentForm .creditCard input[type='text']");
@@ -191,4 +169,32 @@ transferRadio.addEventListener("change", () => {
     transferField.disabled = false;
   }
 });
+
+//Función y validaciones para finalizar compra
+// Example starter JavaScript for disabling form submissions if there are invalid fields
+(function () {
+  'use strict'
+
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  var forms = document.querySelectorAll('.needs-validation');
+  var successAlert = document.getElementById('success-alert');
+
+  // Loop over them and prevent submission
+  Array.prototype.slice.call(forms)
+    .forEach(function (form) {
+      form.addEventListener('submit', function (event) {
+        if (!form.checkValidity()) {
+          event.preventDefault()
+          event.stopPropagation()
+        } else {
+          successAlert.style.display = 'block' ;
+          
+        }
+
+        form.classList.add('was-validated')
+      }, false)
+    })
+})();
+
+
 

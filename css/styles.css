@@ -733,6 +733,12 @@ td{
   display: flex;
   gap: 25px;
 }
+
+#success-alert.show {
+  display: block;
+  transition: opacity 5s ease-in-out;
+}
+
 @media(max-width: 786px){
   .containerform {
     width: 65%;
