@@ -36,6 +36,7 @@ async function getCartItems() {
       <td>${cart[0].currency} ${cart[0].unitCost}</td>
       <td><input type="number" id="cartCount" min="1" value="${cart[0].count}" class="cartCant" required></td>
       <td id ="cartSub${cart[0].id}">${cart[0].currency} ${(cart[0].unitCost * cart[0].count)}</td>
+       <td><button class="btn btn-danger remove-item" data-index="${i}">Eliminar</button></td>
     </tr>`;
 
     for (let i = 1; i < cart.length; i++) {
@@ -47,12 +48,48 @@ async function getCartItems() {
       <td>${cart[i].currency} ${cart[i].cost}</td>
       <td><input type="number" id="cartCount${cart[i].id}" value="${1}" class="cartCant" data-index="${i}" min="1" required></td>
       <td id ="cartSub${cart[i].id}">${cart[i].currency} ${(cart[i].cost)}</td>
+       <td><button class="btn btn-danger remove-item" data-index="${i}">Eliminar</button></td>
     </tr>`;
     }
 
     cartHTML += "</table>";
     document.getElementById("cartList").innerHTML += cartHTML;
 
+    // Esto se activa después de generar la tabla del carrito.
+const removeButtons = document.querySelectorAll(".remove-item");
+
+removeButtons.forEach((button) => {
+  button.addEventListener("click", (event) => {
+    const index = event.target.getAttribute("data-index");
+    removeItemFromCart(index);
+  });
+});
+
+function removeItemFromCart(index) {
+  // Aquí se elimina el artículo del carrito en la posición 'index'
+  cart.splice(index, 1);
+
+  // Actualizamos la visualización del carrito
+  updateCartDisplay();
+
+  // Aquí actualizamos el total
+  updateTotalCost();
+}
+
+function updateCartDisplay() {
+    for (let i = 1; i < cart.length; i++) {
+      
+      cartHTML += `
+    <tr>
+      <td><img src="${cart[i].images[0]}" width="80px" class="cartImg"></td>
+      <td>${cart[i].name}</td>
+      <td>${cart[i].currency} ${cart[i].cost}</td>
+      <td><input type="number" id="cartCount${cart[i].id}" value="${1}" class="cartCant" data-index="${i}" min="1" required></td>
+      <td id ="cartSub${cart[i].id}">${cart[i].currency} ${(cart[i].cost)}</td>
+       <td><button class="btn btn-danger remove-item" data-index="${i}">Eliminar</button></td>
+    </tr>`;
+    }
+}
 
     const cartCount = document.getElementById('cartCount');
 
