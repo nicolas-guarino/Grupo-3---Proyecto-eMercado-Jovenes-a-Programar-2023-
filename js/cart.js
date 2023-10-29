@@ -168,33 +168,37 @@ function updateTotalCost() {
 updateTotalCost();
 
 //área de validaciones de los checkbox de envío
-const shippingType = document.querySelector('input[name="envio"]:checked');
-let shippingPercentage = 0;
+const shippingType = document.querySelectorAll('input[name="envio"]');
 
-if (shippingType) {
-  if (shippingType.value === "Premium 2 a 5 días") {
-    shippingPercentage = 15;
-  } else if (shippingType.value === "Express 5 a 8 días") {
-    shippingPercentage = 7;
-  } else if (shippingType.value === "Standard 12 a 15 días") {
-    shippingPercentage = 5;
-  }
+shippingType.forEach(function (radio) {
+  radio.addEventListener('change', function () {
+    if (radio.checked) {
+      if (radio.value === "Premium 2 a 5 días") {
+        shippingPercentage = 15;
+      } else if (radio.value === "Express 5 a 8 días") {
+        shippingPercentage = 7;
+      } else if (radio.value === "Standard 12 a 15 días") {
+        shippingPercentage = 5;
+      }
+
+      shippingCost = (newTotalCost * shippingPercentage) / 100;
+      totalToPay = newTotalCost + shippingCost;
+
+      // Actualiza los elementos HTML con los nuevos valores
+      updateShippingCost();
+    }
+  });
+});
+function updateShippingCost() {
+  const shippingCostHtml = document.getElementById("shippingCost");
+  const totalToPayHtml = document.getElementById("totalToPay");
+
+  shippingCostHtml.textContent = `$${shippingCost.toFixed(2)}`;
+  totalToPayHtml.textContent = `$${totalToPay.toFixed(2)}`;
 }
 
-const shippingCost = (newTotalCost * shippingPercentage) / 100;
-const totalToPay = newTotalCost + shippingCost;
-
-
-//const subtotalGeneralHtml = document.getElementById("subtotalGeneral");
-const shippingCostHtml = document.getElementById("shippingCost");
-const totalToPayHtml = document.getElementById("totalToPay");
-
-//subtotalGeneralHtml.textContent = `$${subtotalGeneral.toFixed(2)}`;
-shippingCostHtml.textContent = `$${shippingCost.toFixed(2)}`;
-totalToPayHtml.textContent = `$${totalToPay.toFixed(2)}`;
-
+updateShippingCost()
 updateTotalCost();
-
 //Función para aplicar el "dark-mode"
 function enableDarkMode() {
   main_body.classList.toggle("dark");
