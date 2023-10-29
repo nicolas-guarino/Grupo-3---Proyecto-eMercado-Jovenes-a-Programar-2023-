@@ -56,35 +56,6 @@ async function getCartItems() {
     cartHTML += "</table>";
     document.getElementById("cartList").innerHTML += cartHTML;
 
-function removeItemFromCart(index) {
-  // Aquí se elimina el artículo del carrito en la posición 'index'
-  cart.splice(index, 1);
-
-  // Actualizamos la visualización del carrito
-  updateCartDisplay();
-
-  // Aquí actualizamos el total
-  updateTotalCost();
-
-  //Aquí se actualiza el almacenamiento local
-  updateLocalStorage();
-}
-
-function updateCartDisplay() {
-    for (let i = 1; i < cart.length; i++) {
-      
-      cartHTML += `
-    <tr>
-      <td><img src="${cart[i].images[0]}" width="80px" class="cartImg"></td>
-      <td>${cart[i].name}</td>
-      <td>${cart[i].currency} ${cart[i].cost}</td>
-      <td><input type="number" id="cartCount${cart[i].id}" value="${1}" class="cartCant" data-index="${i}" min="1" required></td>
-      <td id ="cartSub${cart[i].id}">${cart[i].currency} ${(cart[i].cost)}</td>
-       <td><button class="btn btn-danger remove-item" data-index="${i}">Eliminar</button></td>
-    </tr>`;
-    }
-}
-
     const cartCount = document.getElementById('cartCount');
 
     cartCount.addEventListener('input', function () {
@@ -127,6 +98,36 @@ function updateCartDisplay() {
     console.error("Error al obtener los detalles del producto:", error);
   }
 }
+
+function removeItemFromCart(index) {
+  // Aquí se elimina el artículo del carrito en la posición 'index'
+  cart.splice(index, 1);
+
+  // Actualizamos la visualización del carrito
+  updateCartDisplay();
+
+  // Aquí actualizamos el total
+  updateTotalCost();
+
+  //Aquí se actualiza el almacenamiento local
+  updateLocalStorage();
+}
+
+function updateCartDisplay() {
+    for (let i = 1; i < cart.length; i++) {
+      
+      cartHTML += `
+    <tr>
+      <td><img src="${cart[i].images[0]}" width="80px" class="cartImg"></td>
+      <td>${cart[i].name}</td>
+      <td>${cart[i].currency} ${cart[i].cost}</td>
+      <td><input type="number" id="cartCount${cart[i].id}" value="${1}" class="cartCant" data-index="${i}" min="1" required></td>
+      <td id ="cartSub${cart[i].id}">${cart[i].currency} ${(cart[i].cost)}</td>
+       <td><button class="btn btn-danger remove-item" data-index="${i}">Eliminar</button></td>
+    </tr>`;
+    }
+}
+
 
 document.addEventListener("DOMContentLoaded", function () {
   getCartItems();
