@@ -148,7 +148,7 @@ function updateTotalCost() {
   }
   totalCost = newTotalCost;
 
-  const totalCostHtml = document.getElementById("totalCost");
+  const totalCostHtml = document.getElementById("subtotalGeneral");
   totalCostHtml.textContent = `Total: $${newTotalCost.toFixed(2)}`;
 }
 
