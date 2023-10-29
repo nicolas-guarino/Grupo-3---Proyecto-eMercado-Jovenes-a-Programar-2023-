@@ -22,7 +22,7 @@ async function getCartItems() {
         existingArticle.cartCount += 1;
       } else {
         if (localCart[i].currency === "UYU") {
-          localCart[i].currency = "USD"; 
+          localCart[i].currency = "USD";
           localCart[i].cost = Math.round(localCart[i].cost / conversionRate);
         }
         localCart[i].cartCount = 1;
@@ -41,9 +41,9 @@ async function getCartItems() {
     </tr>`;
 
     for (let i = 1; i < cart.length; i++) {
-      
+
       cartHTML += `
-    <tr>
+    <tr id="cartRow${cart[i].id}">
       <td><img src="${cart[i].images[0]}" width="80px" class="cartImg"></td>
       <td>${cart[i].name}</td>
       <td>${cart[i].currency} ${cart[i].cost}</td>
@@ -56,16 +56,28 @@ async function getCartItems() {
     cartHTML += "</table>";
     document.getElementById("cartList").innerHTML += cartHTML;
 
+
+    const removeButtons = document.querySelectorAll(".remove-item");
+
+    removeButtons.forEach((button) => {
+      button.addEventListener("click", (event) => {
+        const index = event.target.getAttribute("data-index");
+
+        // Elimina la fila de la tabla con el índice correspondiente
+        removeItemFromCart(index);
+      });
+    });
+
     const cartCount = document.getElementById('cartCount');
 
     cartCount.addEventListener('input', function () {
       const cartSubtotal = document.getElementById(`cartSub${cart[0].id}`);
       let newCount = parseInt(cartCount.value);
-      if(newCount < 0){
+      if (newCount < 0) {
         newCount = 0;
       }
-      const newUnitCost= cart[0].unitCost;
-      
+      const newUnitCost = cart[0].unitCost;
+
       cartSubtotal.textContent = `${cart[0].currency} ${newCount * newUnitCost}`;
       updateTotalCost();
     });
@@ -100,24 +112,25 @@ async function getCartItems() {
 }
 
 function removeItemFromCart(index) {
-  // Aquí se elimina el artículo del carrito en la posición 'index'
-  cart.splice(index, 1);
+  // Verifica que el índice sea válido
+  if (index >= 0 && index < cart.length) {
+    // Elimina la fila de la tabla
+    const row = document.getElementById(`cartRow${cart[index].id}`);
+    if (row) {
+      row.remove();
 
-  // Actualizamos la visualización del carrito
-  updateCartDisplay();
+      cart.splice(index, 1);
 
-  // Aquí actualizamos el total
-  updateTotalCost();
-
-  //Aquí se actualiza el almacenamiento local
-  updateLocalStorage();
+      updateTotalCost();
+    }
+  }
 }
 
 function updateCartDisplay() {
-    for (let i = 1; i < cart.length; i++) {
-      
-      cartHTML += `
-    <tr>
+  for (let i = 1; i < cart.length; i++) {
+
+    cartHTML += `
+    <tr id="cartRow${cart[i].id}">
       <td><img src="${cart[i].images[0]}" width="80px" class="cartImg"></td>
       <td>${cart[i].name}</td>
       <td>${cart[i].currency} ${cart[i].cost}</td>
@@ -125,7 +138,7 @@ function updateCartDisplay() {
       <td id ="cartSub${cart[i].id}">${cart[i].currency} ${(cart[i].cost)}</td>
        <td><button class="btn btn-danger remove-item" data-index="${i}">Eliminar</button></td>
     </tr>`;
-    }
+  }
 }
 
 
@@ -133,19 +146,6 @@ document.addEventListener("DOMContentLoaded", function () {
   getCartItems();
 });
 
-function updateLocalStorage() {
-  localStorage.setItem("cart", JSON.stringify(cart));
-}
-
-  // Esto se activa después de generar la tabla del carrito.
-const removeButtons = document.querySelectorAll(".remove-item");
-
-removeButtons.forEach((button) => {
-  button.addEventListener("click", (event) => {
-    const index = event.target.getAttribute("data-index");
-    removeItemFromCart(index);
-  });
-});
 
 function updateTotalCost() {
   newTotalCost = 0;
@@ -158,38 +158,35 @@ function updateTotalCost() {
 
   const totalCostHtml = document.getElementById("subtotalGeneral");
   totalCostHtml.textContent = `Total: $${newTotalCost.toFixed(2)}`;
-
-    // Actualiza el almacenamiento local después de calcular el total
-  updateLocalStorage();
 }
 
 updateTotalCost();
 
 //área de validaciones de los checkbox de envío
-  const shippingType = document.querySelector('input[name="envio"]:checked');
-  let shippingPercentage = 0;
-  
-  if (shippingType) {
-    if (shippingType.value === "Premium 2 a 5 días") {
-      shippingPercentage = 15;
-    } else if (shippingType.value === "Express 5 a 8 días") {
-      shippingPercentage = 7;
-    } else if (shippingType.value === "Standard 12 a 15 días") {
-      shippingPercentage = 5;
-    }
+const shippingType = document.querySelector('input[name="envio"]:checked');
+let shippingPercentage = 0;
+
+if (shippingType) {
+  if (shippingType.value === "Premium 2 a 5 días") {
+    shippingPercentage = 15;
+  } else if (shippingType.value === "Express 5 a 8 días") {
+    shippingPercentage = 7;
+  } else if (shippingType.value === "Standard 12 a 15 días") {
+    shippingPercentage = 5;
   }
+}
 
-  const shippingCost = (newTotalCost * shippingPercentage) / 100;
-  const totalToPay = newTotalCost + shippingCost;
+const shippingCost = (newTotalCost * shippingPercentage) / 100;
+const totalToPay = newTotalCost + shippingCost;
 
 
-  //const subtotalGeneralHtml = document.getElementById("subtotalGeneral");
-  const shippingCostHtml = document.getElementById("shippingCost");
-  const totalToPayHtml = document.getElementById("totalToPay");
+//const subtotalGeneralHtml = document.getElementById("subtotalGeneral");
+const shippingCostHtml = document.getElementById("shippingCost");
+const totalToPayHtml = document.getElementById("totalToPay");
 
-  //subtotalGeneralHtml.textContent = `$${subtotalGeneral.toFixed(2)}`;
-  shippingCostHtml.textContent = `$${shippingCost.toFixed(2)}`;
-  totalToPayHtml.textContent = `$${totalToPay.toFixed(2)}`;
+//subtotalGeneralHtml.textContent = `$${subtotalGeneral.toFixed(2)}`;
+shippingCostHtml.textContent = `$${shippingCost.toFixed(2)}`;
+totalToPayHtml.textContent = `$${totalToPay.toFixed(2)}`;
 
 updateTotalCost();
 
@@ -272,13 +269,13 @@ transferRadio.addEventListener("change", () => {
           event.preventDefault()
           event.stopPropagation()
         } else {
-          successAlert.style.display = 'block' ;
-          
+          successAlert.style.display = 'block';
+
         }
 
         form.classList.add('was-validated')
       }, false)
-      
+
       form.addEventListener('click', function (event) {
         if (event.target.classList.contains('remove-item')) {
           event.preventDefault();
