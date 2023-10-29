@@ -154,7 +154,33 @@ function updateTotalCost() {
 
 updateTotalCost();
 
+//área de validaciones de los checkbox de envío
+  const shippingType = document.querySelector('input[name="envio"]:checked');
+  let shippingPercentage = 0;
+  
+  if (shippingType) {
+    if (shippingType.value === "Premium 2 a 5 días") {
+      shippingPercentage = 15;
+    } else if (shippingType.value === "Express 5 a 8 días") {
+      shippingPercentage = 7;
+    } else if (shippingType.value === "Standard 12 a 15 días") {
+      shippingPercentage = 5;
+    }
+  }
 
+  const shippingCost = (subtotalGeneral * shippingPercentage) / 100;
+  const totalToPay = subtotalGeneral + shippingCost;
+
+  const subtotalGeneralHtml = document.getElementById("subtotalGeneral");
+  const shippingCostHtml = document.getElementById("shippingCost");
+  const totalToPayHtml = document.getElementById("totalToPay");
+
+  subtotalGeneralHtml.textContent = `$${subtotalGeneral.toFixed(2)}`;
+  shippingCostHtml.textContent = `$${shippingCost.toFixed(2)}`;
+  totalToPayHtml.textContent = `$${totalToPay.toFixed(2)}`;
+}
+
+updateTotalCost();
 
 //Función para aplicar el "dark-mode"
 function enableDarkMode() {
