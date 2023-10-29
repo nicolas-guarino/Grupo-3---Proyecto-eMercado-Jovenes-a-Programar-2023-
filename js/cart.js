@@ -184,20 +184,14 @@ shippingType.forEach(function (radio) {
       shippingCost = (newTotalCost * shippingPercentage) / 100;
       totalToPay = newTotalCost + shippingCost;
 
-      // Actualiza los elementos HTML con los nuevos valores
-      updateShippingCost();
+      const shippingCostHtml = document.getElementById("shippingCost");
+      const totalToPayHtml = document.getElementById("totalToPay");
+
+      shippingCostHtml.textContent = `$${shippingCost.toFixed(2)}`;
+      totalToPayHtml.textContent = `$${totalToPay.toFixed(2)}`;
     }
   });
 });
-function updateShippingCost() {
-  const shippingCostHtml = document.getElementById("shippingCost");
-  const totalToPayHtml = document.getElementById("totalToPay");
-
-  shippingCostHtml.textContent = `$${shippingCost.toFixed(2)}`;
-  totalToPayHtml.textContent = `$${totalToPay.toFixed(2)}`;
-}
-
-updateShippingCost()
 updateTotalCost();
 //Función para aplicar el "dark-mode"
 function enableDarkMode() {
