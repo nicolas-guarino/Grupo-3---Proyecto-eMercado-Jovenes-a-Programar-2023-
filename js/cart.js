@@ -5,7 +5,7 @@ let preloadedItem = [];
 let main_body = document.body;
 let checkbox = document.getElementById("checkitem");
 let totalCost = 0;
-
+const conversionRate = 43; // 1 USD = 43 UYU
 
 async function getCartItems() {
   try {
@@ -20,6 +20,10 @@ async function getCartItems() {
       if (existingArticle) {
         existingArticle.cartCount += 1;
       } else {
+        if (localCart[i].currency === "UYU") {
+          localCart[i].currency = "USD"; 
+          localCart[i].cost = Math.round(localCart[i].cost / conversionRate);
+        }
         localCart[i].cartCount = 1;
         cart.push(localCart[i]);
       }
@@ -35,6 +39,7 @@ async function getCartItems() {
     </tr>`;
 
     for (let i = 1; i < cart.length; i++) {
+      
       cartHTML += `
     <tr>
       <td><img src="${cart[i].images[0]}" width="80px" class="cartImg"></td>
