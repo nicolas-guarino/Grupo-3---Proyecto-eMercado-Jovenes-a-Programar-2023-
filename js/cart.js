@@ -122,8 +122,13 @@ function removeItemFromCart(index) {
       cart.splice(index, 1);
 
       updateTotalCost();
+      updateLocalStorage()
     }
   }
+}
+
+function updateLocalStorage() {
+  localStorage.setItem("cart", JSON.stringify(cart));
 }
 
 function updateCartDisplay() {
