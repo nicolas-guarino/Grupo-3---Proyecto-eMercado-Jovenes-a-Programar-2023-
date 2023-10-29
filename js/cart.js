@@ -267,6 +267,12 @@ transferRadio.addEventListener("change", () => {
 
         form.classList.add('was-validated')
       }, false)
+      
+      form.addEventListener('click', function (event) {
+        if (event.target.classList.contains('remove-item')) {
+          event.preventDefault();
+        }
+      });
     })
 })();
 
