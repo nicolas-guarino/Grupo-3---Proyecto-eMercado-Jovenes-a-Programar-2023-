@@ -6,6 +6,7 @@ let main_body = document.body;
 let checkbox = document.getElementById("checkitem");
 let totalCost = 0;
 const conversionRate = 43; // 1 USD = 43 UYU
+let newTotalCost = 0;
 
 async function getCartItems() {
   try {
@@ -140,7 +141,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 function updateTotalCost() {
-  let newTotalCost = 0;
   for (let i = 0; i < cart.length; i++) {
     const subTotalElement = document.getElementById(`cartSub${cart[i].id}`);
     const subTotalValue = parseFloat(subTotalElement.textContent.replace(`${cart[i].currency} `, ''));
