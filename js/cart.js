@@ -36,7 +36,7 @@ async function getCartItems() {
       <td>${cart[0].currency} ${cart[0].unitCost}</td>
       <td><input type="number" id="cartCount" min="1" value="${cart[0].count}" class="cartCant" required></td>
       <td id ="cartSub${cart[0].id}">${cart[0].currency} ${(cart[0].unitCost * cart[0].count)}</td>
-       <td><button class="btn btn-danger remove-item" data-index="${i}">Eliminar</button></td>
+       <td><button class="btn btn-danger remove-item" data-index="${0}">Eliminar</button></td>
     </tr>`;
 
     for (let i = 1; i < cart.length; i++) {
