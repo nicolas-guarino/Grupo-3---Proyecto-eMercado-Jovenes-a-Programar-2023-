@@ -178,7 +178,6 @@ updateTotalCost();
   subtotalGeneralHtml.textContent = `$${subtotalGeneral.toFixed(2)}`;
   shippingCostHtml.textContent = `$${shippingCost.toFixed(2)}`;
   totalToPayHtml.textContent = `$${totalToPay.toFixed(2)}`;
-}
 
 updateTotalCost();
 
