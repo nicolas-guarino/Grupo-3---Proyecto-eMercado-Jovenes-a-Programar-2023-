@@ -56,16 +56,6 @@ async function getCartItems() {
     cartHTML += "</table>";
     document.getElementById("cartList").innerHTML += cartHTML;
 
-    // Esto se activa después de generar la tabla del carrito.
-const removeButtons = document.querySelectorAll(".remove-item");
-
-removeButtons.forEach((button) => {
-  button.addEventListener("click", (event) => {
-    const index = event.target.getAttribute("data-index");
-    removeItemFromCart(index);
-  });
-});
-
 function removeItemFromCart(index) {
   // Aquí se elimina el artículo del carrito en la posición 'index'
   cart.splice(index, 1);
@@ -75,6 +65,9 @@ function removeItemFromCart(index) {
 
   // Aquí actualizamos el total
   updateTotalCost();
+
+  //Aquí se actualiza el almacenamiento local
+  updateLocalStorage();
 }
 
 function updateCartDisplay() {
@@ -139,8 +132,22 @@ document.addEventListener("DOMContentLoaded", function () {
   getCartItems();
 });
 
+function updateLocalStorage() {
+  localStorage.setItem("cart", JSON.stringify(cart));
+}
+
+  // Esto se activa después de generar la tabla del carrito.
+const removeButtons = document.querySelectorAll(".remove-item");
+
+removeButtons.forEach((button) => {
+  button.addEventListener("click", (event) => {
+    const index = event.target.getAttribute("data-index");
+    removeItemFromCart(index);
+  });
+});
 
 function updateTotalCost() {
+  newTotalCost = 0;
   for (let i = 0; i < cart.length; i++) {
     const subTotalElement = document.getElementById(`cartSub${cart[i].id}`);
     const subTotalValue = parseFloat(subTotalElement.textContent.replace(`${cart[i].currency} `, ''));
@@ -150,6 +157,9 @@ function updateTotalCost() {
 
   const totalCostHtml = document.getElementById("subtotalGeneral");
   totalCostHtml.textContent = `Total: $${newTotalCost.toFixed(2)}`;
+
+    // Actualiza el almacenamiento local después de calcular el total
+  updateLocalStorage();
 }
 
 updateTotalCost();
