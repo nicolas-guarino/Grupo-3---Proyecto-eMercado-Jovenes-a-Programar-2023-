@@ -168,14 +168,15 @@ updateTotalCost();
     }
   }
 
-  const shippingCost = (subtotalGeneral * shippingPercentage) / 100;
-  const totalToPay = subtotalGeneral + shippingCost;
+  const shippingCost = (newTotalCost * shippingPercentage) / 100;
+  const totalToPay = newTotalCost + shippingCost;
 
-  const subtotalGeneralHtml = document.getElementById("subtotalGeneral");
+
+  //const subtotalGeneralHtml = document.getElementById("subtotalGeneral");
   const shippingCostHtml = document.getElementById("shippingCost");
   const totalToPayHtml = document.getElementById("totalToPay");
 
-  subtotalGeneralHtml.textContent = `$${subtotalGeneral.toFixed(2)}`;
+  //subtotalGeneralHtml.textContent = `$${subtotalGeneral.toFixed(2)}`;
   shippingCostHtml.textContent = `$${shippingCost.toFixed(2)}`;
   totalToPayHtml.textContent = `$${totalToPay.toFixed(2)}`;
 
