@@ -1,59 +1,36 @@
 const cartList = document.getElementById("cartList");
+const shippingType = document.querySelectorAll('input[name="envio"]');
 let cart = [];
-let localCart = JSON.parse(localStorage.getItem("cart")) || [];
-let preloadedItem = [];
 let main_body = document.body;
 let checkbox = document.getElementById("checkitem");
 let totalCost = 0;
-const conversionRate = 43; // 1 USD = 43 UYU
+
 let newTotalCost = 0;
 
 async function getCartItems() {
   try {
     let response = await fetch("https://japceibal.github.io/emercado-api/user_cart/25801.json");
     let info = await response.json();
-    preloadedItem = info.articles;
+    let preloadedItem = info.articles;
+    let cartHTML = "" 
+    cart = JSON.parse(localStorage.getItem("cart")) || [];
 
     cart.unshift(preloadedItem[0]);
+    
 
-    for (let i = 0; i < localCart.length; i++) {
-      const existingArticle = cart.find((item) => item.id === localCart[i].id);
-      if (existingArticle) {
-        existingArticle.cartCount += 1;
-      } else {
-        if (localCart[i].currency === "UYU") {
-          localCart[i].currency = "USD";
-          localCart[i].cost = Math.round(localCart[i].cost / conversionRate);
-        }
-        localCart[i].cartCount = 1;
-        cart.push(localCart[i]);
-      }
-    }
-
-    let cartHTML = `
-    <tr>
-      <td><img src="${cart[0].image}" width="80px" class="cartImg"></td>
-      <td>${cart[0].name}</td>
-      <td>${cart[0].currency} ${cart[0].unitCost}</td>
-      <td><input type="number" id="cartCount" min="1" value="${cart[0].count}" class="cartCant" required></td>
-      <td id ="cartSub${cart[0].id}">${cart[0].currency} ${(cart[0].unitCost * cart[0].count)}</td>
-       <td><button class="btn btn-danger remove-item" data-index="${0}">Eliminar</button></td>
-    </tr>`;
-
-    for (let i = 1; i < cart.length; i++) {
+    for (let i = 0; i < cart.length; i++) {
 
       cartHTML += `
-    <tr id="cartRow${cart[i].id}">
-      <td><img src="${cart[i].images[0]}" width="80px" class="cartImg"></td>
-      <td>${cart[i].name}</td>
-      <td>${cart[i].currency} ${cart[i].cost}</td>
-      <td><input type="number" id="cartCount${cart[i].id}" value="${1}" class="cartCant" data-index="${i}" min="1" required></td>
-      <td id ="cartSub${cart[i].id}">${cart[i].currency} ${(cart[i].cost)}</td>
-       <td><button class="btn btn-danger remove-item" data-index="${i}">Eliminar</button></td>
-    </tr>`;
+      <tr id="cartRow${cart[i].id}">
+        <td><img src="${cart[i].image}" width="80px" class="cartImg"></td>
+        <td>${cart[i].name}</td>
+        <td>${cart[i].currency} ${cart[i].unitCost}</td>
+        <td><input type="number" id="cartCount${cart[i].id}" value="${cart[i].count}" class="cartCant" data-index="${i}" min="1" required></td>
+        <td id ="cartSub${cart[i].id}">${cart[i].currency} ${(cart[i].unitCost * cart[i].count)}</td>
+        <td><button class="btn btn-danger remove-item" data-index="${i}">Eliminar</button></td>
+      </tr>`;
     }
 
-    cartHTML += "</table>";
     document.getElementById("cartList").innerHTML += cartHTML;
 
 
@@ -68,47 +45,50 @@ async function getCartItems() {
       });
     });
 
-    const cartCount = document.getElementById('cartCount');
-
-    cartCount.addEventListener('input', function () {
-      const cartSubtotal = document.getElementById(`cartSub${cart[0].id}`);
-      let newCount = parseInt(cartCount.value);
-      if (newCount < 0) {
-        newCount = 0;
-      }
-      const newUnitCost = cart[0].unitCost;
-
-      cartSubtotal.textContent = `${cart[0].currency} ${newCount * newUnitCost}`;
-      updateTotalCost();
-    });
-
-
     function updateSubtotal(event) {
       const input = event.target;
       const index = input.getAttribute('data-index');
       const cant = document.getElementById(`cartCount${cart[index].id}`);
       const subTotal = document.getElementById(`cartSub${cart[index].id}`);
+      
 
       let count = parseInt(cant.value);
       if (count < 0) {
         count = 0;
       }
-      const unitCost = cart[index].cost;
-
+      const unitCost = cart[index].unitCost;
+    
       subTotal.textContent = `${cart[index].currency} ${count * unitCost}`;
       cant.value = count;
+      cart[index].count = count;
 
-      updateTotalCost()
+      updateLocalStorage()
+      updateTotalCost();
     }
 
-    for (let i = 1; i < cart.length; i++) {
+    for (let i = 0; i < cart.length; i++) {
       const cant = document.getElementById(`cartCount${cart[i].id}`);
       cant.addEventListener('input', updateSubtotal);
     }
 
+    updateTotalCost();
+
   } catch (error) {
     console.error("Error al obtener los detalles del producto:", error);
   }
+}
+
+
+function updateTotalCost() {
+  newTotalCost = 0;
+
+  for (let i = 0; i < cart.length; i++) {
+    newTotalCost += (cart[i].unitCost * cart[i].count);
+  }
+  totalCost = newTotalCost;
+
+  const totalCostHtml = document.getElementById("subtotalGeneral");
+  totalCostHtml.textContent = `Total: $${newTotalCost.toFixed(2)}`;
 }
 
 function removeItemFromCart(index) {
@@ -122,13 +102,18 @@ function removeItemFromCart(index) {
       cart.splice(index, 1);
 
       updateTotalCost();
-      updateLocalStorage()
+      updateLocalStorage();
     }
   }
 }
 
 function updateLocalStorage() {
-  localStorage.setItem("cart", JSON.stringify(cart));
+  let localCart = [];
+  for (let i = 1; i < cart.length; i++) {
+    localCart.push(cart[i]);
+    
+  }
+  localStorage.setItem("cart", JSON.stringify(localCart));
 }
 
 function updateCartDisplay() {
@@ -147,28 +132,17 @@ function updateCartDisplay() {
 }
 
 
-document.addEventListener("DOMContentLoaded", function () {
-  getCartItems();
+document.addEventListener("DOMContentLoaded", async function () {
+  await getCartItems();
 });
 
 
-function updateTotalCost() {
-  newTotalCost = 0;
-  for (let i = 0; i < cart.length; i++) {
-    const subTotalElement = document.getElementById(`cartSub${cart[i].id}`);
-    const subTotalValue = parseFloat(subTotalElement.textContent.replace(`${cart[i].currency} `, ''));
-    newTotalCost += subTotalValue;
-  }
-  totalCost = newTotalCost;
 
-  const totalCostHtml = document.getElementById("subtotalGeneral");
-  totalCostHtml.textContent = `Total: $${newTotalCost.toFixed(2)}`;
-}
 
 updateTotalCost();
 
 //área de validaciones de los checkbox de envío
-const shippingType = document.querySelectorAll('input[name="envio"]');
+
 
 shippingType.forEach(function (radio) {
   radio.addEventListener('change', function () {
@@ -194,40 +168,7 @@ shippingType.forEach(function (radio) {
 });
 updateTotalCost();
 //Función para aplicar el "dark-mode"
-function enableDarkMode() {
-  main_body.classList.toggle("dark");
-  localStorage.setItem("checkbox-status", checkbox.checked);
 
-  //En caso de querer confirmar si el checkbox está "checked"
-  if (document.getElementById("checkitem").checked) {
-    console.log("checked");
-  } else {
-    console.log("Not checked");
-  }
-
-  //Guardamos el modo en localStorage
-  if (main_body.classList.contains("dark")) {
-    localStorage.setItem("dark-mode", "true");
-  } else {
-    localStorage.setItem("dark-mode", "false");
-  }
-}
-
-// Obtenemos el estado del checkbox guardado en localStorage
-const checkboxStatus = localStorage.getItem("checkbox-status");
-if (checkboxStatus === "true") {
-  checkbox.checked = true;
-} else {
-  checkbox.checked = false;
-}
-
-//Obtener el modo actual
-if (localStorage.getItem("dark-mode") === "true") {
-  main_body.classList.add("dark");
-} else {
-  main_body.classList.remove("dark");
-}
-enableDarkMode;
 
 const creditCardRadio = document.getElementById("creditCard");
 const transferRadio = document.getElementById("bankTransfer");

@@ -7,6 +7,7 @@ const CART_INFO_URL = "https://japceibal.github.io/emercado-api/user_cart/";
 const CART_BUY_URL = "https://japceibal.github.io/emercado-api/cart/buy.json";
 const EXT_TYPE = ".json";
 
+
 let showSpinner = function(){
   document.getElementById("spinner-wrapper").style.display = "block";
 }
@@ -40,6 +41,45 @@ let getJSONData = function(url){
     });
 }
 
+function enableDarkMode() {
+  let main_body = document.body;
+let checkbox = document.getElementById("checkitem");
+  main_body.classList.toggle("dark");
+  localStorage.setItem("checkbox-status", checkbox.checked);
+
+  //En caso de querer confirmar si el checkbox está "checked"
+  if (document.getElementById("checkitem").checked) {
+    console.log("checked");
+  } else {
+    console.log("Not checked");
+  }
+
+  //Guardamos el modo en localStorage
+  if (main_body.classList.contains("dark")) {
+    localStorage.setItem("dark-mode", "true");
+  } else {
+    localStorage.setItem("dark-mode", "false");
+  }
+
+  const checkboxStatus = localStorage.getItem("checkbox-status");
+if (checkboxStatus === "true") {
+  checkbox.checked = true;
+} else {
+  checkbox.checked = false;
+}
+
+//Obtener el modo actual
+if (localStorage.getItem("dark-mode") === "true") {
+  main_body.classList.add("dark");
+} else {
+  main_body.classList.remove("dark");
+}
+}
+
+// Obtenemos el estado del checkbox guardado en localStorage
+
+
+
 document.addEventListener("DOMContentLoaded", () => {
   const loggedUser = localStorage.getItem("loggedUser");
   const displayUser = document.getElementById("userDisplayed");
@@ -57,4 +97,7 @@ document.addEventListener("DOMContentLoaded", () => {
       localStorage.removeItem('loggedUser');
       window.location.href = 'index.html';
   });
+
+  enableDarkMode;
+
 });

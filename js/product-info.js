@@ -165,20 +165,36 @@ document.addEventListener("DOMContentLoaded", function () {
 
     document.getElementById("addToCart").addEventListener("click", function () {
         const prodID = localStorage.getItem("prodID");
+        const cart = JSON.parse(localStorage.getItem("cart")) || [];
+        const conversionRate = 43; // 1 USD = 43 UYU
         if (prodID !== null) {
+
             // Aquí obtenemos información del producto
             const URL = `${URL_BASE}${prodID}.json`;
             fetch(URL)
                 .then((response) => response.json())
                 .then((article) => {
+                    
+                    const newItem = {id: prodID, name: article.name, count: 1, unitCost: article.cost, currency: article.currency, image: article.images[0]};
+                    
+                    if (newItem.currency === "UYU") {
+                        newItem.currency = "USD";
+                        newItem.unitCost = Math.round(newItem.unitCost / conversionRate);
+                    }
+                    const index = cart.findIndex(item => item.id === newItem.id);
+            
+                    if (index !== -1) {
+                        cart[index].count += 1;
+                    } else {
+                        cart.push(newItem);
+                    }
                     // Agregamos el producto al carrito
-                    const cart = JSON.parse(localStorage.getItem("cart")) || [];
-                    cart.push(article);
                     localStorage.setItem("cart", JSON.stringify(cart));
-                      // Redirige al usuario a la página del carrito
-                     window.location.href = "cart.html";
+                    // Redirige al usuario a la página del carrito
+                    window.location.href = "cart.html";
                     // Desplegamos un mensaje de confirmación
                     document.getElementById("addToCartMessage").style.display = "block";
+
                 })
                 .catch((error) => {
                     console.error("Error al obtener detalles del producto:", error);
