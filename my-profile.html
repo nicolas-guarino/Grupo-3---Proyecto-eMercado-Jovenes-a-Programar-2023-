@@ -64,11 +64,45 @@
     </div>
   </nav>
   <main>
+     <title>Perfil de Usuario</title>
+  
     <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
-      </div>
+        <h1 class="mt-5" id="perfil-title">Perfil</h1>
+        <hr id="profile-hr">
+        <form id="profile-form">
+            <div class="form-group row">
+                <div class="col-6">
+                    <label for="nombre" class="form-label text-secondary">Primer Nombre*:</label>
+                    <input type="text" class="form-control" id="nombre" required>
+                </div>
+                <div class="col-6">
+                    <label for="segundo-nombre" class="form-label text-secondary">Segundo Nombre:</label>
+                    <input type="text" class="form-control" id="segundo-nombre">
+                </div>
+                <div class="col-6">
+                    <label for="apellido" class="form-label text-secondary"> Primer Apellido*:</label>
+                    <input type="text" class="form-control" id="apellido" required>
+                </div>
+                <div class="col-6">
+                    <label for="segundo-apellido" class="form-label text-secondary">Segundo Apellido:</label>
+                    <input type="text" class="form-control" id="segundo-apellido">
+                </div>
+                <div class="col-6">
+                    <label for="email" class="form-label text-secondary">E-mail:</label>
+                    <input type="email" class="form-control" id="email" required>
+                    
+                </div>
+                <div class="col-6">
+                    <label for="telefono" class="form-label text-secondary">Teléfono de Contacto*:</label>
+                    <input type="tel" class="form-control" id="telefono" required>
+                </div>
+            </div>
+            <hr>
+            
+            <button class="btn btn-primary" id="guardar">Guardar Cambios</button>
+        </form>
     </div>
+    
   </main>
   <footer class="text-muted">
     <div class="container">
