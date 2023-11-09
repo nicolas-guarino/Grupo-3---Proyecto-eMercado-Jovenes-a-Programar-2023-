@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function () {
         userProfileImage.src = storedImage;
       } else {
         // Mostramos el ícono de usuario por defecto
-        userProfileImage.src = '../img/user.png'; 
+        userProfileImage.src = 'img/user.png'; 
       }
   
     // Aqui se maneja el cambio de imagen cuando se selecciona un nuevo archivo
