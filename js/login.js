@@ -26,4 +26,37 @@ registerBtn.addEventListener('click', (e) => {
         localStorage.setItem('email', email);
         window.location.href = 'index.html';
     }
+            // Función para guardar el perfil en el almacenamiento local
+        function guardarPerfil() {
+            // Obtener los valores de los campos
+            var nombre = document.getElementById('nombre').value;
+            var correo = document.getElementById('correo').value;
+            var contrasena = document.getElementById('contrasena').value;
+
+            // Crear un objeto con los datos del usuario
+            var perfil = {
+                nombre: nombre,
+                correo: correo,
+                contrasena: contrasena
+            };
+
+            
+            localStorage.setItem('perfilUsuario', JSON.stringify(perfil));
+
+            alert('Perfil guardado exitosamente');
+        }
+
+        
+        window.onload = function() {
+            // Obtener el perfil almacenado en localStorage
+            var perfilGuardado = localStorage.getItem('perfilUsuario');
+
+            
+            if (perfilGuardado) {
+                var perfil = JSON.parse(perfilGuardado);
+                document.getElementById('nombre').value = perfil.nombre;
+                document.getElementById('correo').value = perfil.correo;
+                document.getElementById('contrasena').value = perfil.contrasena;
+            }
+        };
 });
