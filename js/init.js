@@ -96,6 +96,7 @@ document.addEventListener("DOMContentLoaded", () => {
   logoutBtn.addEventListener('click', function () {
       localStorage.removeItem('loggedUser');
       localStorage.removeItem('email');
+      localStorage.removeItem('userProfileImage');
       window.location.href = 'index.html';
   });
 

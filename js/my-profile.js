@@ -43,8 +43,3 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
 });
-
-// Función para cerrar sesión y borrar la imagen del localStorage
-function logout() {
-    localStorage.removeItem('userProfileImage');
-  }
