@@ -23,7 +23,6 @@ registerBtn.addEventListener('click', (e) => {
         alert('La constraseña debe contener al menos 6 caracteres')
     } else {
         localStorage.setItem('loggedUser', username);
-        localStorage.setItem('email', email);
         window.location.href = 'index.html';
     }
 });

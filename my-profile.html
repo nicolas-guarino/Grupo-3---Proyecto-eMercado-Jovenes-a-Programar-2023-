@@ -8,9 +8,7 @@
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
-   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-</head>
-  
+  <script src="https://kit.fontawesome.com/8308ddd231.js" crossorigin="anonymous"></script>
   <style>
     .bd-placeholder-img {
       font-size: 1.125rem;
@@ -66,47 +64,44 @@
     </div>
   </nav>
   <main>
-    
-      <div id="navbar-container"></div>
-  <div class="container mt-5">
-    <h1 id="perfil-title">Perfil</h1>
-    <hr id="profile-hr">
-    <form id="profile-form">
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label for="nombre" class="form-label text-secondary">Primer Nombre*:</label>
-                <input type="text" class="form-control" id="nombre" required>
+     <title>Perfil de Usuario</title>
+  
+    <div class="container">
+        <h1 class="mt-5" id="perfil-title">Perfil</h1>
+        <hr id="profile-hr">
+        <form id="profile-form">
+            <div class="form-group row">
+                <div class="col-6">
+                    <label for="nombre" class="form-label text-secondary">Primer Nombre*:</label>
+                    <input type="text" class="form-control" id="nombre" required>
+                </div>
+                <div class="col-6">
+                    <label for="segundo-nombre" class="form-label text-secondary">Segundo Nombre:</label>
+                    <input type="text" class="form-control" id="segundo-nombre">
+                </div>
+                <div class="col-6">
+                    <label for="apellido" class="form-label text-secondary"> Primer Apellido*:</label>
+                    <input type="text" class="form-control" id="apellido" required>
+                </div>
+                <div class="col-6">
+                    <label for="segundo-apellido" class="form-label text-secondary">Segundo Apellido:</label>
+                    <input type="text" class="form-control" id="segundo-apellido">
+                </div>
+                <div class="col-6">
+                    <label for="email" class="form-label text-secondary">E-mail*:</label>
+                    <input type="email" class="form-control" id="email" required>
+                    
+                </div>
+                <div class="col-6">
+                    <label for="telefono" class="form-label text-secondary">Teléfono de Contacto:</label>
+                    <input type="tel" class="form-control" id="telefono">
+                </div>
             </div>
-            <div class="form-group col-md-6">
-                <label for="segundo-nombre" class="form-label text-secondary">Segundo Nombre:</label>
-                <input type="text" class="form-control" id="segundo-nombre">
-            </div>
-        </div>
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label for="apellido" class="form-label text-secondary">Primer Apellido*:</label>
-                <input type="text" class="form-control" id="apellido" required>
-            </div>
-            <div class="form-group col-md-6">
-                <label for="segundo-apellido" class="form-label text-secondary">Segundo Apellido:</label>
-                <input type="text" class="form-control" id="segundo-apellido">
-            </div>
-        </div>
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label for="email" class="form-label text-secondary">E-mail:</label>
-                <input type="email" class="form-control" id="email">
-            </div>
-            <div class="form-group col-md-6">
-                <label for="telefono" class="form-label text-secondary">Teléfono de Contacto*:</label>
-                <input type="tel" class="form-control" id="telefono" required>
-            </div>
-        </div>
-        <hr>
-        <button class="btn btn-primary" id="guardar">Guardar Cambios</button>
-    </form>
-</div>
-
+            <hr>
+            
+            <button class="btn btn-primary" id="guardar">Guardar Cambios</button>
+        </form>
+    </div>
     
   </main>
   <footer class="text-muted">
@@ -117,13 +112,9 @@
       <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a></p>
     </div>
   </footer>
-  <script src="https://kit.fontawesome.com/8308ddd231.js" crossorigin="anonymous"></script>
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/init.js"></script>
   <script src="js/my-profile.js"></script>
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </body>
 
 </html>
