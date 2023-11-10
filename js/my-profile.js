@@ -121,7 +121,7 @@ document.addEventListener('DOMContentLoaded', function () {
         showSuccess(email);
       }
 
-      if (!valid) {
+      if (check < 0) {
         event.preventDefault();
       }
       if (check == 1) {
