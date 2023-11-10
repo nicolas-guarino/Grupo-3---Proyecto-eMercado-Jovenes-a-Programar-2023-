@@ -784,4 +784,5 @@ td{
 
 #userProfileImage{
   max-width: 80px;
+  border-radius: 50%;
 }
