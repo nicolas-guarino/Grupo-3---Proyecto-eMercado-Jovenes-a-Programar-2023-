@@ -770,3 +770,20 @@ td{
 #perfil-title{
   margin-left: 130px;
 }
+
+
+@media (max-width: 767px) {
+  .navbar-nav {
+    flex-direction: column;
+  }
+}
+@media (max-width: 767px) {
+  .col-6 {
+    width: 100%;
+  }
+}
+@media (max-width: 767px) {
+  #userProfileImage {
+    max-width: 100%;
+  }
+}
