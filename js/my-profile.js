@@ -5,39 +5,25 @@ document.addEventListener('DOMContentLoaded', () => {
         emailProfile.value = email;
     }
 
-    let nombre = localStorage.getItem('nombre')
-    let nombreProfile = document.getElementById('nombre')
-    if (nombre) {
-        nombreProfile.value = nombre;
-    }
-
-    let segundoNombre = localStorage.getItem('segundoNombre')
-    let segundoNombreProfile = document.getElementById('segundo-nombre')
-    if (segundoNombre) {
-        segundoNombreProfile.value = segundoNombre}
-
-    let apellido = localStorage.getItem('apellido')
-    let apellidoProfile = document.getElementById('apellido')
-    if (apellido) {
-        apellidoProfile.value = apellido;
-    }
-
-    let segundoApellido = localStorage.getItem('segundoApellido')
-    let segundoApellidoProfile = document.getElementById('segundo-apellido')
-    if (segundoApellido) {
-        segundoApellidoProfile.value = segundoApellido;
-    }
-
-    let telefono = localStorage.getItem('telefono')
-    let telefonoProfile = document.getElementById('telefono')
-    if (telefono) {
-        telefonoProfile.value = telefono;
-    }
-})
-
-/*área para la selección de la imagen de usuario*/
-
 document.addEventListener('DOMContentLoaded', function () {
+    const form = document.getElementById('profile-form');
+    const guardarButton = document.getElementById('guardar');
+
+    // Agregamos eventos de escucha para la validación en tiempo real
+    Array.from(form.elements).forEach((element) => {
+      if (element.required) {
+        element.addEventListener('input', function () {
+          if (element.checkValidity()) {
+            element.classList.remove('is-invalid');
+            element.classList.add('is-valid');
+          } else {
+            element.classList.remove('is-valid');
+            element.classList.add('is-invalid');
+          }
+        });
+      }
+    });
+
     // Aquí se carga la imagen de perfil almacenada en localStorage al cargar la página
     const storedImage = localStorage.getItem('userProfileImage');
     const userProfileImage = document.getElementById('userProfileImage');
@@ -50,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function () {
         userProfileImage.src = storedImage;
       } else {
         // Mostramos el ícono de usuario por defecto
-        userProfileImage.src = 'img/user.png'; 
+        userProfileImage.src = '../img/user.png'; 
       }
   
     // Aqui se maneja el cambio de imagen cuando se selecciona un nuevo archivo
@@ -71,68 +57,34 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
 
+    guardarButton.addEventListener('click', function (event) {
+        event.preventDefault(); // Con esto prevenimos el envío del formulario por defecto
+    
+        // Validamos los campos requeridos al hacer clic en "Guardar Cambios"
+        Array.from(form.elements).forEach((element) => {
+          if (element.required) {
+            if (element.checkValidity()) {
+              element.classList.remove('is-invalid');
+              element.classList.add('is-valid');
+            } else {
+              element.classList.remove('is-valid');
+              element.classList.add('is-invalid');
+            }
+          }
+        });
+         // Verifica si todos los campos requeridos están válidos
+        const allFieldsValid = Array.from(form.elements).every((element) => {
+       return !element.required || element.checkValidity();
+        });
+
+    if (allFieldsValid) {
+    // Recargamos la página
+      window.location.reload();
+  }
+    });
 });
 
-// VALIDACIONES //
-document.addEventListener('DOMContentLoaded', function () {
-    const form = document.querySelector('form');
-  
-    form.addEventListener('submit', function (event) {
-      let valid = true;
-  
-      function showError(element, message) {
-        element.classList.add('is-invalid');
-        element.nextElementSibling.innerText = message;
-        valid = false;
-      };
-  
-      function showSuccess(element) {
-        element.classList.remove('is-invalid');
-        element.classList.add('is-valid');
-        element.nextElementSibling.innerText = '';
-      };
-  
-      const nombre = document.getElementById('nombre');
-      const segundoNombre = document.getElementById('segundo-nombre');
-      const apellido = document.getElementById('apellido');
-      const segundoApellido = document.getElementById('segundo-apellido');
-      const email = document.getElementById('email');
-      const telefono = document.getElementById('telefono');
-      let check = 0;
-
-      if (nombre.value.trim() === '') {
-        showError(nombre, 'Este campo no puede estar vacío.');
-      } else {
-        showSuccess(nombre)
-        check = 1;
-      }
-  
-      if (apellido.value.trim() === '') {
-        showError(apellido, 'Este campo no puede estar vacío.');
-        check -= 1;
-      } else {
-        showSuccess(apellido);
-      }
-
-      if (email.value.trim() === '') {
-        showError(email, 'Este campo no puede estar vacío.');
-        check -= 1;
-      } else {
-        showSuccess(email);
-      }
-
-      if (!valid) {
-        event.preventDefault();
-      }
-      if (check == 1) {
-        // ALMACENAR LOS DATOS EN LOCALSTORAGE //
-        localStorage.setItem('nombre', nombre.value);
-        localStorage.setItem('segundoNombre', segundoNombre.value);
-        localStorage.setItem('apellido', apellido.value);
-        localStorage.setItem('segundoApellido', segundoApellido.value);
-        localStorage.setItem('email', email.value);
-        localStorage.setItem('telefono', telefono.value);
-        alert("Cambios guardados");
-      }
-    });
-  })
+// Función para cerrar sesión y borrar la imagen del localStorage
+function logout() {
+    localStorage.removeItem('userProfileImage');
+  }  
