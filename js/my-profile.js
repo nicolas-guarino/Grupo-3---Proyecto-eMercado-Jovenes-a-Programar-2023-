@@ -72,21 +72,21 @@ document.addEventListener('DOMContentLoaded', function () {
       let check = 0;
 
       if (nombre.value.trim() === '') {
-        showError(nombre, 'Este campo no puede estar vacio');
+        showError(nombre, 'Este campo no puede estar vacío.');
       } else {
         showSuccess(nombre)
         check = 1;
       }
   
       if (apellido.value.trim() === '') {
-        showError(apellido, 'Este campo no puede estar vacio');
+        showError(apellido, 'Este campo no puede estar vacío.');
         check -= 1;
       } else {
         showSuccess(apellido);
       }
 
       if (email.value.trim() === '') {
-        showError(email, 'Este campo no puede estar vacio');
+        showError(email, 'Este campo no puede estar vacío.');
         check -= 1;
       } else {
         showSuccess(email);
