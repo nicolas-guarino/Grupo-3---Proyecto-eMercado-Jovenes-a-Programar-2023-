@@ -82,14 +82,16 @@ document.addEventListener('DOMContentLoaded', function () {
   
       function showError(element, message) {
         element.classList.add('is-invalid');
-        element.nextElementSibling.innerText = message;
+        const errorElement = document.getElementById(element.id + "-error");
+        errorElement.innerText = message;
         valid = false;
       };
   
       function showSuccess(element) {
         element.classList.remove('is-invalid');
         element.classList.add('is-valid');
-        element.nextElementSibling.innerText = '';
+        const errorElement = document.getElementById(element.id + "-error");
+        errorElement.innerText = '';
       };
   
       const nombre = document.getElementById('nombre');
