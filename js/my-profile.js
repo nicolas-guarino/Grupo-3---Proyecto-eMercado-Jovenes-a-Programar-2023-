@@ -1,8 +1,37 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const email = localStorage.getItem('email')
-    const emailProfile = document.getElementById('emailProfile')
+  let email = localStorage.getItem('email')
+    let emailProfile = document.getElementById('email')
     if (email) {
         emailProfile.value = email;
+    }
+
+    let nombre = localStorage.getItem('nombre')
+    let nombreProfile = document.getElementById('nombre')
+    if (nombre) {
+        nombreProfile.value = nombre;
+    }
+
+    let segundoNombre = localStorage.getItem('segundoNombre')
+    let segundoNombreProfile = document.getElementById('segundo-nombre')
+    if (segundoNombre) {
+        segundoNombreProfile.value = segundoNombre}
+
+    let apellido = localStorage.getItem('apellido')
+    let apellidoProfile = document.getElementById('apellido')
+    if (apellido) {
+        apellidoProfile.value = apellido;
+    }
+
+    let segundoApellido = localStorage.getItem('segundoApellido')
+    let segundoApellidoProfile = document.getElementById('segundo-apellido')
+    if (segundoApellido) {
+        segundoApellidoProfile.value = segundoApellido;
+    }
+
+    let telefono = localStorage.getItem('telefono')
+    let telefonoProfile = document.getElementById('telefono')
+    if (telefono) {
+        telefonoProfile.value = telefono;
     }
 })
 
