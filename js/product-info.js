@@ -73,16 +73,16 @@ function createStarRating(rating) {
     return starHTML;
 }
 
-function redirectRelProd(prodID){
+function redirectRelProd(prodID) {
     localStorage.setItem("prodID", prodID);
     window.location = "product-info.html"
 }
 
-function getRelatedProducts(relProds){
+function getRelatedProducts(relProds) {
     let relProdsHTML = "";
     for (let i = 0; i < relProds.length; i++) {
-            relProdsHTML += ` <div id="relProd" onclick="redirectRelProd(${relProds[i].id})"><p><img id="imgRelProds" src="${relProds[i].image}"> ${relProds[i].name}</p></div>`
-       
+        relProdsHTML += ` <div id="relProd" onclick="redirectRelProd(${relProds[i].id})"><p><img id="imgRelProds" src="${relProds[i].image}"> ${relProds[i].name}</p></div>`
+
     }
     document.getElementById("relatedContainer").innerHTML = relProdsHTML;
 }
@@ -137,7 +137,7 @@ async function getProductComments(prodID) {
                 </div>
             `;
         }
-        
+
 
         document.getElementById("container-comments").innerHTML = productscommentsHTML;
     } catch (error) {
@@ -151,7 +151,7 @@ async function getProductComments(prodID) {
 document.addEventListener("DOMContentLoaded", function () {
     const prodID = localStorage.getItem("prodID");
 
-    
+
     if (prodID !== null) {
         getProductDetails(prodID);
         getProductComments(prodID);
@@ -160,45 +160,45 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 
- 
+
 // Sección para agregar producto al carrito
 
-    document.getElementById("addToCart").addEventListener("click", function () {
-        const prodID = localStorage.getItem("prodID");
-        const cart = JSON.parse(localStorage.getItem("cart")) || [];
-        const conversionRate = 43; // 1 USD = 43 UYU
-        if (prodID !== null) {
+document.getElementById("addToCart").addEventListener("click", function () {
+    const prodID = localStorage.getItem("prodID");
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const conversionRate = 43; // 1 USD = 43 UYU
+    if (prodID !== null) {
 
-            // Aquí obtenemos información del producto
-            const URL = `${URL_BASE}${prodID}.json`;
-            fetch(URL)
-                .then((response) => response.json())
-                .then((article) => {
-                    
-                    const newItem = {id: prodID, name: article.name, count: 1, unitCost: article.cost, currency: article.currency, image: article.images[0]};
-                    
-                    if (newItem.currency === "UYU") {
-                        newItem.currency = "USD";
-                        newItem.unitCost = Math.round(newItem.unitCost / conversionRate);
-                    }
-                    const index = cart.findIndex(item => item.id === newItem.id);
-            
-                    if (index !== -1) {
-                        cart[index].count += 1;
-                    } else {
-                        cart.push(newItem);
-                    }
-                    // Agregamos el producto al carrito
-                    localStorage.setItem("cart", JSON.stringify(cart));
-                    // Redirige al usuario a la página del carrito
-                    window.location.href = "cart.html";
-                    // Desplegamos un mensaje de confirmación
-                    document.getElementById("addToCartMessage").style.display = "block";
+        // Aquí obtenemos información del producto
+        const URL = `${URL_BASE}${prodID}.json`;
+        fetch(URL)
+            .then((response) => response.json())
+            .then((article) => {
 
-                })
-                .catch((error) => {
-                    console.error("Error al obtener detalles del producto:", error);
-                });
-        }
-    });
+                const newItem = { id: prodID, name: article.name, count: 1, unitCost: article.cost, currency: article.currency, image: article.images[0] };
+
+                if (newItem.currency === "UYU") {
+                    newItem.currency = "USD";
+                    newItem.unitCost = Math.round(newItem.unitCost / conversionRate);
+                }
+                const index = cart.findIndex(item => item.id === newItem.id);
+
+                if (index !== -1) {
+                    cart[index].count += 1;
+                } else {
+                    cart.push(newItem);
+                }
+                // Agregamos el producto al carrito
+                localStorage.setItem("cart", JSON.stringify(cart));
+                // Redirige al usuario a la página del carrito
+                window.location.href = "cart.html";
+                // Desplegamos un mensaje de confirmación
+                document.getElementById("addToCartMessage").style.display = "block";
+
+            })
+            .catch((error) => {
+                console.error("Error al obtener detalles del producto:", error);
+            });
+    }
+});
 

@@ -20,7 +20,7 @@ async function getProducts() { //Función para obtener los productos de la API
         let response = await fetch(URL);
         let info = await response.json();
         catName = info.catName;
-        let array = info.products;   
+        let array = info.products;
         //Obtenemos los productos y devolvemos el array
         return array;
     } catch (error) {
@@ -32,12 +32,12 @@ async function getProducts() { //Función para obtener los productos de la API
 
 
 function setProdID(id) { //Función que almacena el valor del id de un producto y redirige a product-info
-    localStorage.setItem("prodID", id); 
+    localStorage.setItem("prodID", id);
     window.location = "product-info.html"
 }
 
 
-function generateHTML(id, image, name, currency, cost, desc, soldCount){ //Función para generar el HTML que muestra los productos
+function generateHTML(id, image, name, currency, cost, desc, soldCount) { //Función para generar el HTML que muestra los productos
     //Con el atributo onclick nos aseguramos de que al hacer click se llame a la función setProdID, con el id del producto correspondiente como parámetro
     return `
     <div onclick="setProdID(${id})" class="list-group-item list-group-item-action"> 
@@ -127,14 +127,14 @@ document.getElementById("clearRangeFilter").addEventListener("click", function (
 });
 
 
-search.addEventListener("input", function(){ //Funcionalidad para la barra de 
+search.addEventListener("input", function () { //Funcionalidad para la barra de 
     const searchTerm = search.value.toLowerCase();
     for (const article of article_list) { //Con un for recorremos los productos
         //Obtenemos el título y descripción de cada producto
-        const title = article.querySelector('h4').textContent.toLowerCase(); 
+        const title = article.querySelector('h4').textContent.toLowerCase();
         const description = article.querySelector('p').textContent.toLowerCase();
         if (title.includes(searchTerm) || description.includes(searchTerm)) { //Verificamos si el nombre o descripción del producto coincide con la búsqueda
-            article.style.display = 'block'; 
+            article.style.display = 'block';
         } else { //Si coincide, mostramos el producto, y si no, lo ocultamos
             article.style.display = 'none';
         }

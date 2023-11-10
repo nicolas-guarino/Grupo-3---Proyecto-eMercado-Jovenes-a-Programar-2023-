@@ -1,4 +1,5 @@
-:root {  font-size: 100%;
+:root {
+  font-size: 100%;
   font-size: 16px;
   line-height: 1.5;
   --primary-yellow: #e7b511;
@@ -52,26 +53,29 @@ nav a {
   }
 }
 
-.jumbotron { 
-  min-width: 100vh; 
-  margin: 0 auto; 
-  height: 50vh; 
-  padding: 5em inherit; 
-  margin-bottom: 0; 
-  background-color: #53C0FB; 
-  background: url('../img/cover_back.png'); 
-  background-size: contain; 
-  background-position: center; 
-  background-repeat: no-repeat; 
-  color: black; font-weight: bold; } 
+.jumbotron {
+  min-width: 100vh;
+  margin: 0 auto;
+  height: 50vh;
+  padding: 5em inherit;
+  margin-bottom: 0;
+  background-color: #53C0FB;
+  background: url('../img/cover_back.png');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: black;
+  font-weight: bold;
+}
 
 @media screen and (max-width: 768px) {
   .jumbotron {
     min-width: 100%;
-    height: 15vh; 
-    background-size: cover; 
-    padding-top: 2rem; 
-    padding-bottom: 2rem; } 
+    height: 15vh;
+    background-size: cover;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
 }
 
 .jumbotron p:last-child {
@@ -311,7 +315,6 @@ form input[type="tel"],
   padding: 1em;
   margin-bottom: 1.25rem;
   font-size: 0.875rem;
-
 }
 
 label {
@@ -397,14 +400,15 @@ a.custom-card:hover {
   text-align: center;
   padding: 10px;
 }
-#new-comment{
+
+#new-comment {
   max-width: 100%;
   margin-bottom: 16px;
   font-family: sans-serif;
   font-size: 20px;
   padding: 10px;
   border: 1px rgb(174, 174, 174) solid;
-  border-radius: 5px; 
+  border-radius: 5px;
 }
 
 #rates {
@@ -414,7 +418,7 @@ a.custom-card:hover {
   padding: 5px;
 }
 
-#comment-submit{
+#comment-submit {
   font-size: 20px;
   font-family: sans-serif;
   margin-top: 16px;
@@ -425,24 +429,26 @@ a.custom-card:hover {
   border: 2px transparent solid;
   border-radius: 5px;
 }
+
 .containerProduct {
   width: 90%;
   margin: 0 auto;
 }
 
 @media (max-width: 768px) {
-.containerProduct {
+  .containerProduct {
     font-size: 16px;
   }
 }
 
-.imgsProductFlex{
+.imgsProductFlex {
   max-width: 100%;
   display: flex;
   gap: 30px;
   justify-content: start;
 }
-.pComment{
+
+.pComment {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 20px;
   margin: 0;
@@ -460,12 +466,12 @@ a.custom-card:hover {
 
 @media (max-width: 768px) {
   .imgsProduct {
-  max-width: 100%;
-  width: 400px;
-  height: 225px;
-  border-radius: 5px;
-  border: 1px solid gray;
-  margin: 15px auto;
+    max-width: 100%;
+    width: 400px;
+    height: 225px;
+    border-radius: 5px;
+    border: 1px solid gray;
+    margin: 15px auto;
   }
 }
 
@@ -477,17 +483,18 @@ a.custom-card:hover {
 }
 
 @media (max-width: 768px) {
-.pTitle {
+  .pTitle {
     font-size: 22px;
   }
 }
-.pProducts{
+
+.pProducts {
   font-family: sans-serif;
   font-size: 20px;
 }
 
 @media (max-width: 768px) {
-.pProducts {
+  .pProducts {
     font-size: 16px;
   }
 }
@@ -499,16 +506,16 @@ a.custom-card:hover {
 }
 
 @media (max-width: 768px) {
-.pTitle span{
+  .pTitle span {
     font-size: 22px;
   }
 }
 
 @media (max-width: 768px) {
-.pProducts span {
-  font-size: 16px;
-  font-weight: bold;
-  color: black;
+  .pProducts span {
+    font-size: 16px;
+    font-weight: bold;
+    color: black;
   }
 }
 
@@ -520,8 +527,8 @@ a.custom-card:hover {
 }
 
 @media (max-width: 768px) {
-.commentsTitle {
-  font-size: 17px;
+  .commentsTitle {
+    font-size: 17px;
   }
 }
 
@@ -540,12 +547,12 @@ a.custom-card:hover {
 }
 
 @media (max-width: 768px) {
-.commentSubtitle {
-  font-size: 17px;
+  .commentSubtitle {
+    font-size: 17px;
   }
 }
-  
-.rates{
+
+.rates {
   font-size: 20px;
 }
 
@@ -595,18 +602,19 @@ input[type="checkbox"]:checked::before {
   justify-content: space-between;
   align-content: flex-start;
 }
+
 #imgRelProds {
   max-width: 100%;
 }
 
-#relProd{
+#relProd {
   width: 200px;
   height: 150px;
   border: 1px solid rgb(172, 172, 172);
   text-align: center;
 }
 
-#relatedContainer{
+#relatedContainer {
   display: flex;
   justify-content: start;
   gap: 30px;
@@ -616,44 +624,46 @@ input[type="checkbox"]:checked::before {
   background-color: #212529;
 }
 
-#containerCart{
+#containerCart {
   display: flex;
   justify-content: center;
   font-family: 'Verdana', serif !important;
 
 }
-#containerCartList{
+
+#containerCartList {
   padding-top: 30px;
   width: 50%;
   margin: 0 auto;
 }
 
 
-#cartList{
+#cartList {
   width: 100%;
   font-family: 'Verdana', serif !important;
 }
 
-#cartList th{
+#cartList th {
   border-bottom: 1px solid black;
 }
 
-td{
+td {
   border-style: none;
   padding-top: 10px;
   padding-bottom: 20px;
 }
-.cartImg{
+
+.cartImg {
   width: 90px;
   border-radius: 2px;
 
 }
 
-.cartCant{
+.cartCant {
   width: 40px;
 }
 
-.buy-button{
+.buy-button {
   background-color: rgb(70, 126, 87);
   color: white;
   border: none;
@@ -661,17 +671,17 @@ td{
   padding: 5px 10px;
   font-size: 16px;
   position: absolute;
-  top: 65px; 
+  top: 65px;
   right: 90px
 }
 
 @media (max-width: 768px) {
-.buy-button {
-  padding: 4px 8px;
-  font-size: 14px;
-  position: absolute;
-  top: 50px; 
-  right: 15px
+  .buy-button {
+    padding: 4px 8px;
+    font-size: 14px;
+    position: absolute;
+    top: 50px;
+    right: 15px
   }
 }
 
@@ -699,12 +709,13 @@ td{
   background-color: #e7b511;
 }
 
-@media(max-width: 786px){
+@media(max-width: 786px) {
   .shipping {
     width: 65%;
   }
 }
-@media(max-width: 500px){
+
+@media(max-width: 500px) {
   .shipping {
     width: 95%;
   }
@@ -719,10 +730,11 @@ td{
   padding: 10px;
 }
 
-#envio{
+#envio {
   font-size: 18px;
 }
-#direccion{
+
+#direccion {
   font-size: 18px;
 }
 
@@ -730,6 +742,7 @@ td{
   width: 50%;
   margin: 0 auto;
 }
+
 .containerform2 {
   display: flex;
   gap: 25px;
@@ -740,33 +753,34 @@ td{
   transition: opacity 5s ease-in-out;
 }
 
-@media(max-width: 786px){
+@media(max-width: 786px) {
   .containerform {
     width: 65%;
   }
 }
-@media(max-width: 500px){
+
+@media(max-width: 500px) {
   .containerform {
     width: 95%;
   }
 }
 
-.paymethod{
+.paymethod {
   padding-top: 30px;
   width: 50%;
   margin: 0 auto
 }
 
-#profile-form{
+#profile-form {
   margin: 0 15px;
 
 }
 
-#profile-hr{
+#profile-hr {
   margin: 0 15px;
 }
 
-#perfil-title{
+#perfil-title {
   margin-left: 15px;
 }
 
@@ -776,13 +790,14 @@ td{
     flex-direction: column;
   }
 }
+
 @media (max-width: 767px) {
   .col-6 {
     width: 100%;
   }
 }
 
-#userProfileImage{
+#userProfileImage {
   max-width: 80px;
   border-radius: 50%;
 }

@@ -12,11 +12,11 @@ async function getCartItems() {
     let response = await fetch("https://japceibal.github.io/emercado-api/user_cart/25801.json");
     let info = await response.json();
     let preloadedItem = info.articles;
-    let cartHTML = "" 
+    let cartHTML = ""
     cart = JSON.parse(localStorage.getItem("cart")) || [];
 
     cart.unshift(preloadedItem[0]);
-    
+
 
     for (let i = 0; i < cart.length; i++) {
 
@@ -50,14 +50,14 @@ async function getCartItems() {
       const index = input.getAttribute('data-index');
       const cant = document.getElementById(`cartCount${cart[index].id}`);
       const subTotal = document.getElementById(`cartSub${cart[index].id}`);
-      
+
 
       let count = parseInt(cant.value);
       if (count < 0) {
         count = 0;
       }
       const unitCost = cart[index].unitCost;
-    
+
       subTotal.textContent = `${cart[index].currency} ${count * unitCost}`;
       cant.value = count;
       cart[index].count = count;
@@ -111,7 +111,7 @@ function updateLocalStorage() {
   let localCart = [];
   for (let i = 1; i < cart.length; i++) {
     localCart.push(cart[i]);
-    
+
   }
   localStorage.setItem("cart", JSON.stringify(localCart));
 }
