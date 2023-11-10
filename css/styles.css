@@ -783,5 +783,18 @@ td{
 @media (max-width: 767px) {
   #userProfileImage {
     max-width: 100%;
+    padding: 4px 8px;
+    font-size: 14px;
+    position: absolute;
+    top: 50px; 
+    right: 15px
   }
+}
+
+#userProfileImage{
+    padding: 4px 8px;
+    font-size: 14px;
+    position: absolute;
+    top: 50px; 
+    right: 240px;
 }
