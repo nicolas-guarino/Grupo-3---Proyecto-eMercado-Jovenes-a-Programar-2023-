@@ -1,14 +1,38 @@
-const cartList = document.getElementById("cartList");
 const shippingType = document.querySelectorAll('input[name="envio"]');
+const creditCardRadio = document.getElementById("creditCard");
+const transferRadio = document.getElementById("bankTransfer");
+const card = document.getElementById("card");
+const code = document.getElementById("code");
+const date = document.getElementById("date");
+const transferField = document.getElementById("cardNumber");
 let cart = [];
-let main_body = document.body;
-let checkbox = document.getElementById("checkitem");
-let totalCost = 0;
-
 let newTotalCost = 0;
 
-async function getCartItems() {
+
+function updateLocalStorage() { //Función para actualizar el carrito del local storage
+  let localCart = [];
+  for (let i = 1; i < cart.length; i++) { //Recorremos el carrito y le vamos cargando los items al carrito del local storage
+    localCart.push(cart[i]);
+    
+  }
+  localStorage.setItem("cart", JSON.stringify(localCart));
+}
+
+function updateTotalCost() { //Función para actualizar el costo total de todos los productos
+  let totalCost = 0;
+  newTotalCost = 0;
+  for (let i = 0; i < cart.length; i++) {  //Recorremos el carrito y vamos incrementando el monto total según el subtotal de cada producto
+    newTotalCost += (cart[i].unitCost * cart[i].count);
+  }
+  totalCost = newTotalCost;
+
+  const totalCostHtml = document.getElementById("subtotalGeneral");
+  totalCostHtml.textContent = `Total: $${newTotalCost.toFixed(2)}`;
+}
+
+async function getCartItems() { //Función para obtener los items del carrito
   try {
+    
     let response = await fetch("https://japceibal.github.io/emercado-api/user_cart/25801.json");
     let info = await response.json();
     let preloadedItem = info.articles;
@@ -17,9 +41,7 @@ async function getCartItems() {
 
     cart.unshift(preloadedItem[0]);
 
-
-    for (let i = 0; i < cart.length; i++) {
-
+    for (let i = 0; i < cart.length; i++) { //Recorremos los productos del carrito y generamos una fila para cada producto
       cartHTML += `
       <tr id="cartRow${cart[i].id}">
         <td><img src="${cart[i].image}" width="80px" class="cartImg"></td>
@@ -33,19 +55,31 @@ async function getCartItems() {
 
     document.getElementById("cartList").innerHTML += cartHTML;
 
-
-    const removeButtons = document.querySelectorAll(".remove-item");
+    const removeButtons = document.querySelectorAll(".remove-item"); //Obtenemos los botones para eliminar los productos
 
     removeButtons.forEach((button) => {
       button.addEventListener("click", (event) => {
         const index = event.target.getAttribute("data-index");
-
+        console.log(index);
+        console.log(cart.length);
+        console.log(cart);
         // Elimina la fila de la tabla con el índice correspondiente
-        removeItemFromCart(index);
+        if (index >= 0 && index < cart.length) {
+          // Elimina la fila de la tabla
+          const row = document.getElementById(`cartRow${cart[index].id}`);
+          if (row) {
+            row.remove();
+      
+            cart.splice(index, 1);
+      
+            updateTotalCost();
+            updateLocalStorage();
+          }
+        }
       });
     });
 
-    function updateSubtotal(event) {
+    function updateSubtotal(event) { //Función para actualizar el subtotal de cada producto
       const input = event.target;
       const index = input.getAttribute('data-index');
       const cant = document.getElementById(`cartCount${cart[index].id}`);
@@ -66,7 +100,7 @@ async function getCartItems() {
       updateTotalCost();
     }
 
-    for (let i = 0; i < cart.length; i++) {
+    for (let i = 0; i < cart.length; i++) { //Recorremos los inputs de cantidad de cada elemento para añadirle el escuchador de eventos
       const cant = document.getElementById(`cartCount${cart[i].id}`);
       cant.addEventListener('input', updateSubtotal);
     }
@@ -77,6 +111,7 @@ async function getCartItems() {
     console.error("Error al obtener los detalles del producto:", error);
   }
 }
+
 
 
 function updateTotalCost() {
@@ -91,21 +126,6 @@ function updateTotalCost() {
   totalCostHtml.textContent = `Total: $${newTotalCost.toFixed(2)}`;
 }
 
-function removeItemFromCart(index) {
-  // Verifica que el índice sea válido
-  if (index >= 0 && index < cart.length) {
-    // Elimina la fila de la tabla
-    const row = document.getElementById(`cartRow${cart[index].id}`);
-    if (row) {
-      row.remove();
-
-      cart.splice(index, 1);
-
-      updateTotalCost();
-      updateLocalStorage();
-    }
-  }
-}
 
 function updateLocalStorage() {
   let localCart = [];
@@ -116,20 +136,6 @@ function updateLocalStorage() {
   localStorage.setItem("cart", JSON.stringify(localCart));
 }
 
-function updateCartDisplay() {
-  for (let i = 1; i < cart.length; i++) {
-
-    cartHTML += `
-    <tr id="cartRow${cart[i].id}">
-      <td><img src="${cart[i].images[0]}" width="80px" class="cartImg"></td>
-      <td>${cart[i].name}</td>
-      <td>${cart[i].currency} ${cart[i].cost}</td>
-      <td><input type="number" id="cartCount${cart[i].id}" value="${1}" class="cartCant" data-index="${i}" min="1" required></td>
-      <td id ="cartSub${cart[i].id}">${cart[i].currency} ${(cart[i].cost)}</td>
-       <td><button class="btn btn-danger remove-item" data-index="${i}">Eliminar</button></td>
-    </tr>`;
-  }
-}
 
 
 document.addEventListener("DOMContentLoaded", async function () {
@@ -137,15 +143,12 @@ document.addEventListener("DOMContentLoaded", async function () {
 });
 
 
-
-
-updateTotalCost();
-
-//área de validaciones de los checkbox de envío
-
-
+//Área de validaciones de los checkbox de envío
 shippingType.forEach(function (radio) {
   radio.addEventListener('change', function () {
+    const shippingCostHtml = document.getElementById("shippingCost");
+    const totalToPayHtml = document.getElementById("totalToPay");
+
     if (radio.checked) {
       if (radio.value === "Premium 2 a 5 días") {
         shippingPercentage = 15;
@@ -155,29 +158,19 @@ shippingType.forEach(function (radio) {
         shippingPercentage = 5;
       }
 
-      shippingCost = (newTotalCost * shippingPercentage) / 100;
-      totalToPay = newTotalCost + shippingCost;
+      //Calculamos el costo de envío y luego el total a pagar
+      shippingCost = (newTotalCost * shippingPercentage) / 100; 
+      totalToPay = newTotalCost + shippingCost; 
 
-      const shippingCostHtml = document.getElementById("shippingCost");
-      const totalToPayHtml = document.getElementById("totalToPay");
-
-      shippingCostHtml.textContent = `$${shippingCost.toFixed(2)}`;
+      shippingCostHtml.textContent = `$${shippingCost.toFixed(2)}`; 
       totalToPayHtml.textContent = `$${totalToPay.toFixed(2)}`;
     }
   });
 });
-updateTotalCost();
-//Función para aplicar el "dark-mode"
 
 
-const creditCardRadio = document.getElementById("creditCard");
-const transferRadio = document.getElementById("bankTransfer");
-const card = document.getElementById("card");
-const code = document.getElementById("code");
-const date = document.getElementById("date");
-const transferField = document.getElementById("cardNumber");
 
-// Add change event listeners to the radio buttons
+//Nos aseguramos de que los campos de la opción no seleccionada se desactiven
 creditCardRadio.addEventListener("change", () => {
   if (creditCardRadio.checked) {
     transferField.disabled = true;
@@ -196,27 +189,71 @@ transferRadio.addEventListener("change", () => {
   }
 });
 
-//Función y validaciones para finalizar compra
-// Example starter JavaScript for disabling form submissions if there are invalid fields
+
+
+function checkModalValidity(){
+  const invalid = document.getElementById("modal-invalid-feedback");
+  const valid = document.getElementById("modal-valid-feedback");
+  const selectPayment = document.getElementById("selectedPayment");
+  //Dependiendo de si se eligió tarjeta de crédito o transferencia, validamos los campos correspondientes
+  if (creditCardRadio.checked){
+    if (!card.value && !code.value && !date.value){
+      invalid.style.display= "block";
+      valid.style.display= "none";
+      selectPayment.innerHTML= 'No ha seleccionado <a href="#paymentModal" data-bs-toggle="modal">Seleccionar</a>';
+      return false;
+    } else {
+      valid.style.display= "block";
+      invalid.style.display= "none";
+      selectPayment.innerHTML = 'Tarjeta de Crédito <a href="#paymentModal" data-bs-toggle="modal">Seleccionar</a>';
+      return true;
+    }
+  } else if (transferRadio.checked) {
+      if(!transferField.value){
+        invalid.style.display= "block";
+        valid.style.display= "none";
+        selectPayment.innerHTML= 'No ha seleccionado <a href="#paymentModal" data-bs-toggle="modal">Seleccionar</a>';
+        return false;
+      } else{
+        valid.style.display= "block";
+        invalid.style.display= "none";
+        selectPayment.innerHTML= 'Transferencia <a href="#paymentModal" data-bs-toggle="modal">Seleccionar</a>';
+        return true;
+      }
+  } else {
+    invalid.style.display= "block";
+    valid.style.display= "none";
+    return false;
+  }
+  
+} 
+
+
+
 (function () {
   'use strict'
+  const forms = document.querySelectorAll('.needs-validation');
+  const successAlert = document.getElementById('success-alert');
 
-  // Fetch all the forms we want to apply custom Bootstrap validation styles to
-  var forms = document.querySelectorAll('.needs-validation');
-  var successAlert = document.getElementById('success-alert');
-
-  // Loop over them and prevent submission
   Array.prototype.slice.call(forms)
     .forEach(function (form) {
       form.addEventListener('submit', function (event) {
+        //Validamos el form y el modal
+        console.log(form.checkValidity());
+
         if (!form.checkValidity()) {
+          console.log("a");
           event.preventDefault()
           event.stopPropagation()
+          checkModalValidity();
+          //Validamos el modal cada vez que se cierre
+          document.getElementById("modalClose").addEventListener("click", checkModalValidity);
+          
         } else {
+          //Si es válido, envía una alerta de éxito
+          console.log("b");
           successAlert.style.display = 'block';
-
         }
-
         form.classList.add('was-validated')
       }, false)
 
@@ -227,6 +264,3 @@ transferRadio.addEventListener("change", () => {
       });
     })
 })();
-
-
-

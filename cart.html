@@ -142,7 +142,9 @@
 
       <div class="paymethod">
         <p id="formaDePago">Forma de pago</p>
-        <p>No ha seleccionado <a href="#paymentModal" data-bs-toggle="modal">Seleccionar</a></p>
+        <p id="selectedPayment">No ha seleccionado <a href="#paymentModal" data-bs-toggle="modal">Seleccionar</a></p>
+        <div id="modal-valid-feedback" class="text-success" style="display: none">Todo bien!</div>
+        <div id="modal-invalid-feedback" class="text-danger" style="display: none">Debe seleccionar un método de pago</div>
       </div>
 
       <div class="card-body">
@@ -184,7 +186,7 @@
                 </div>
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" id="modalClose"class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
               </div>
             </div>
           </div>
