@@ -77,25 +77,21 @@
 
           <div class="col-6">
             <label for="nombre" class="form-label text-secondary">Primer Nombre*:</label>
-            <input type="text" class="form-control" id="nombre" autocomplete="off"
-              onkeypress="return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122))">
+            <input type="text" class="form-control" id="nombre" autocomplete="off" oninput="validateLetters(this)">
             <span class="invalid-feedback"></span>
           </div>
           <div class="col-6">
             <label for="segundo-nombre" class="form-label text-secondary">Segundo Nombre:</label>
-            <input type="text" class="form-control" id="segundo-nombre" autocomplete="off"
-              onkeypress="return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122))">
+            <input type="text" class="form-control" id="segundo-nombre" autocomplete="off" oninput="validateLetters(this)">
           </div>
           <div class="col-6">
             <label for="apellido" class="form-label text-secondary"> Primer Apellido*:</label>
-            <input type="text" class="form-control" id="apellido" autocomplete="off"
-              onkeypress="return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122))">
+            <input type="text" class="form-control" id="apellido" autocomplete="off" oninput="validateLetters(this)">
             <span class="invalid-feedback"></span>
           </div>
           <div class="col-6">
             <label for="segundo-apellido" class="form-label text-secondary">Segundo Apellido:</label>
-            <input type="text" class="form-control" id="segundo-apellido" autocomplete="off"
-              onkeypress="return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122))">
+            <input type="text" class="form-control" id="segundo-apellido" autocomplete="off" oninput="validateLetters(this)">
           </div>
           <div class="col-6">
             <label for="email" class="form-label text-secondary">E-mail*:</label>
