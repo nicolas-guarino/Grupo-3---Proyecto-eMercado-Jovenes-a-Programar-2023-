@@ -74,6 +74,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
 });
 
+function validateLetters(input) {
+  // Aquí obtendremos el valor actual del campo de texto
+  let value = input.value;
+
+  // Con esto, logramos filtrar cualquier carácter que no sea una letra
+  value = value.replace(/[^a-zA-Z]/g, '');
+
+  // Actualizamos el valor del campo de texto
+  input.value = value;
+}
+
 // VALIDACIONES //
 document.addEventListener('DOMContentLoaded', function () {
   const form = document.querySelector('form');
